@@ -68,8 +68,7 @@ export function Header() {
                     px-2.5 py-1 
                     text-sm font-medium 
                     ${isInHero ? 'text-white' : 'text-gray-700'} 
-                    hover:text-white 
-                    hover:bg-white/20
+                    ${isInHero ? 'hover:text-white hover:bg-white/20' : 'hover:text-brand-600 hover:bg-gray-100'} 
                     rounded-full
                     transition-all duration-200
                   `}
