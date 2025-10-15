@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "question": "Como funciona o processo de implantação?",
+    "answer": "Iniciamos com um diagnóstico detalhado do ambiente, seguido de proposta técnica e comercial. Após aprovação, executamos o projeto em fases com acompanhamento contínuo, testes rigorosos e treinamento da equipe."
+  },
+  {
+    "id": "2",
+    "question": "Qual o prazo médio de entrega dos projetos?",
+    "answer": "Varia conforme a complexidade. Projetos de automação e software levam de 4 a 12 semanas. Infraestrutura de rede e segurança entre 2 e 8 semanas. Fornecemos cronograma detalhado na proposta."
+  },
+  {
+    "id": "3",
+    "question": "Vocês fazem integração com sistemas legados?",
+    "answer": "Sim. Temos vasta experiência em integração via APIs REST, SOAP, bancos de dados diretos e até RPA quando necessário. Avaliamos a melhor abordagem para cada caso."
+  },
+  {
+    "id": "4",
+    "question": "Como funciona o suporte após a implantação?",
+    "answer": "Oferecemos contratos de suporte com SLA definido, monitoramento 24/7 e atendimento via ticket, WhatsApp ou telefone. Atualizações e melhorias contínuas fazem parte do pacote."
+  },
+  {
+    "id": "5",
+    "question": "As soluções estão adequadas à LGPD?",
+    "answer": "Absolutamente. Todos os nossos sistemas seguem as melhores práticas de segurança e privacidade. Implementamos controles de acesso, criptografia, logs de auditoria e políticas de retenção de dados conforme LGPD."
+  },
+  {
+    "id": "6",
+    "question": "Como é definido o investimento?",
+    "answer": "Trabalhamos com modelos flexíveis: CAPEX (investimento único), OPEX (mensalidade) ou híbrido. Após o diagnóstico, apresentamos proposta detalhada com todas as opções e ROI estimado."
+  }
+]

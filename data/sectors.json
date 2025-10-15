@@ -1,0 +1,93 @@
+[
+  {
+    "id": "ti",
+    "name": "Simplex TI",
+    "title": "Infraestrutura e Tecnologia da Informação",
+    "description": "Soluções completas de infraestrutura de TI, servidores, redes e suporte técnico especializado para manter sua operação funcionando 24/7.",
+    "benefits": [
+      "Infraestrutura de TI robusta e escalável",
+      "Gerenciamento de servidores e datacenters",
+      "Suporte técnico especializado N1, N2 e N3",
+      "Monitoramento proativo de sistemas"
+    ],
+    "cta": "Falar com Especialista",
+    "angle": 270,
+    "logo": "/images/sectors/simplex-ti.png"
+  },
+  {
+    "id": "ip",
+    "name": "Simplex IP",
+    "title": "Telefonia IP e Comunicação Unificada",
+    "description": "Modernize sua comunicação empresarial com telefonia IP, ramais virtuais e integração com múltiplos canais de atendimento.",
+    "benefits": [
+      "Sistema de telefonia IP escalável e redundante",
+      "Integração com WhatsApp, SMS e e-mail",
+      "Gravação de chamadas e relatórios detalhados",
+      "Ramais virtuais e mobilidade corporativa"
+    ],
+    "cta": "Falar com Especialista",
+    "angle": 150,
+    "logo": "/images/sectors/simplex-ip.png"
+  },
+  {
+    "id": "eagle",
+    "name": "Simplex Eagle",
+    "title": "Consultoria e Gestão de\nProjetos",
+    "description": "Assessoria estratégica, gestão de projetos e garantia de qualidade para assegurar o sucesso das suas iniciativas de TI e transformação digital.",
+    "benefits": [
+      "Consultoria estratégica em tecnologia e transformação digital",
+      "Gestão de projetos com metodologias ágeis (PMO)",
+      "Quality Assurance e testes automatizados",
+      "Auditoria e compliance de sistemas"
+    ],
+    "cta": "Falar com Especialista",
+    "angle": 330,
+    "logo": "/images/sectors/simplex-eagle.png"
+  },
+  {
+    "id": "dev",
+    "name": "Simplex Dev",
+    "title": "Desenvolvimento de Software sob Medida",
+    "description": "Desenvolvemos soluções personalizadas que atendem às necessidades específicas do seu negócio, com integração completa de APIs e tecnologias modernas.",
+    "benefits": [
+      "Desenvolvimento de aplicações web e mobile customizadas",
+      "Integração com APIs de terceiros e sistemas legados",
+      "Arquitetura escalável e código de qualidade",
+      "Manutenção e evolução contínua de sistemas"
+    ],
+    "cta": "Falar com Especialista",
+    "angle": 210,
+    "logo": "/images/sectors/simplex-dev.png"
+  },
+  {
+    "id": "ia",
+    "name": "Simplex IA",
+    "title": "Inteligência Artificial e Automação",
+    "description": "Soluções de IA generativa, automação inteligente, chatbots e processamento de linguagem natural para otimizar processos e melhorar a experiência do cliente.",
+    "benefits": [
+      "Chatbots e voicebots com IA conversacional",
+      "Automação de processos com RPA e machine learning",
+      "Análise preditiva e business intelligence",
+      "Integração de IA generativa (GPT, Claude, etc)"
+    ],
+    "cta": "Falar com Especialista",
+    "angle": 30,
+    "logo": "/images/sectors/simplex-ia.png"
+  },
+  {
+    "id": "chat",
+    "name": "SPX Chat",
+    "title": "Atendimento Multicanal Inteligente",
+    "description": "Plataforma completa de atendimento omnichannel com IA integrada, unificando WhatsApp, Instagram, Facebook, Telegram e mais em um único lugar. Automatize, organize e escale seu atendimento ao cliente.",
+    "benefits": [
+      "Atendimento omnichannel unificado (WhatsApp, Instagram, Facebook, Telegram, E-mail)",
+      "Chatbot com IA conversacional e respostas automáticas inteligentes",
+      "Gestão de tickets, distribuição automática e filas de atendimento",
+      "Relatórios completos, métricas de desempenho e dashboards em tempo real",
+      "Integrações com CRMs, ERPs e APIs customizadas"
+    ],
+    "cta": "Conhecer SPX Chat",
+    "angle": 90,
+    "logo": "/images/sectors/logospx.png"
+  }
+]

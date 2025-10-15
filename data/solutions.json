@@ -1,0 +1,56 @@
+[
+  {
+    "id": "connectivity",
+    "title": "Conectividade",
+    "icon": "Network",
+    "points": [
+      "Redes FTTx, Wi-Fi corporativo e IoT",
+      "Redundância e alta disponibilidade"
+    ]
+  },
+  {
+    "id": "security",
+    "title": "Segurança",
+    "icon": "Shield",
+    "points": [
+      "CFTV inteligente e controle de acesso",
+      "Firewall e proteção de perímetro"
+    ]
+  },
+  {
+    "id": "automation",
+    "title": "Automação com IA",
+    "icon": "Sparkles",
+    "points": [
+      "Workflows automatizados e bots inteligentes",
+      "Integração de sistemas legados"
+    ]
+  },
+  {
+    "id": "omnichannel",
+    "title": "Atendimento Omnichannel",
+    "icon": "MessageSquare",
+    "points": [
+      "Chat - SPX com múltiplos canais",
+      "Roteamento inteligente e relatórios"
+    ]
+  },
+  {
+    "id": "observability",
+    "title": "Observabilidade & Suporte",
+    "icon": "Activity",
+    "points": [
+      "Monitoramento 24/7 com Zabbix/Grafana",
+      "Gestão de ativos e chamados (GLPI)"
+    ]
+  },
+  {
+    "id": "development",
+    "title": "Desenvolvimento sob Medida",
+    "icon": "Code",
+    "points": [
+      "Aplicações web e mobile customizadas",
+      "APIs e integrações com IA"
+    ]
+  }
+]

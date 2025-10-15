@@ -1,0 +1,38 @@
+[
+  {
+    "id": "alojamento-castanhal",
+    "title": "Alojamento Castanhal",
+    "category": "Segurança e Rede",
+    "description": "Implantação completa de infraestrutura de CFTV com 64 câmeras IP, rede estruturada e controle de acesso biométrico.",
+    "metrics": [
+      { "label": "Câmeras instaladas", "value": "64" },
+      { "label": "Pontos de rede", "value": "120+" },
+      { "label": "Uptime", "value": "99.8%" }
+    ],
+    "image": "/images/case-alojamento.jpg"
+  },
+  {
+    "id": "telecom-provider",
+    "title": "Provedor Regional",
+    "category": "Network e Automação",
+    "description": "Modernização de NOC com Zabbix, Grafana e automação de provisionamento, reduzindo tempo de atendimento em 60%.",
+    "metrics": [
+      { "label": "Redução no tempo de resposta", "value": "60%" },
+      { "label": "Clientes monitorados", "value": "5.000+" },
+      { "label": "Tickets automatizados", "value": "40%" }
+    ],
+    "image": "/images/case-telecom.jpg"
+  },
+  {
+    "id": "retail-chain",
+    "title": "Rede de Varejo",
+    "category": "Atendimento Omnichannel",
+    "description": "Implantação do Chat - SPX integrando WhatsApp, Instagram e chat web, centralizando atendimento de 12 lojas.",
+    "metrics": [
+      { "label": "Lojas conectadas", "value": "12" },
+      { "label": "Aumento na satisfação", "value": "+35%" },
+      { "label": "Tempo médio de resposta", "value": "< 2min" }
+    ],
+    "image": "/images/case-retail.jpg"
+  }
+]

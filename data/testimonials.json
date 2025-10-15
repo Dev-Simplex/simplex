@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Carlos Mendes",
+    "role": "Diretor de TI",
+    "company": "TechCorp Solutions",
+    "content": "A Simplex transformou nossa infraestrutura de rede. A equipe é extremamente técnica e entrega soluções que realmente funcionam em produção.",
+    "avatar": "/images/avatar-1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Ana Paula Silva",
+    "role": "Gerente de Operações",
+    "company": "Varejo Prime",
+    "content": "O Chat - SPX revolucionou nosso atendimento. Conseguimos centralizar todos os canais e melhorar nossa eficiência em 40%. Suporte impecável.",
+    "avatar": "/images/avatar-2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Roberto Oliveira",
+    "role": "CEO",
+    "company": "Conecta Provedor",
+    "content": "Trabalhar com a Simplex foi decisivo para escalar nossa operação. O monitoramento com Zabbix e as automações reduziram drasticamente nossos custos operacionais.",
+    "avatar": "/images/avatar-3.jpg"
+  }
+]

@@ -1,0 +1,55 @@
+[
+  {
+    "id": "chat-spx",
+    "name": "Chat - SPX",
+    "title": "Plataforma Omnichannel Completa",
+    "description": "Fork personalizado do Chatwoot, otimizado para atendimento 24/7 com recursos avançados de roteamento, histórico unificado e integrações nativas.",
+    "features": [
+      "Atendimento multicanal (WhatsApp, Instagram, Telegram, e-mail, chat web)",
+      "Roteamento inteligente e distribuição automática de conversas",
+      "Histórico centralizado com busca avançada e tags",
+      "Integrações com CRM, ERP e sistemas de terceiros",
+      "Relatórios em tempo real e métricas de performance"
+    ],
+    "ctas": [
+      { "text": "Ver demo", "variant": "default" },
+      { "text": "Falar com especialista", "variant": "outline" }
+    ],
+    "image": "/images/chat-spx-dashboard.jpg"
+  },
+  {
+    "id": "mobile-app",
+    "name": "App Mobile Chat - SPX",
+    "title": "Atendimento no Bolso",
+    "description": "Aplicativo nativo para iOS e Android que permite aos atendentes gerenciar conversas de qualquer lugar, com notificações push e sincronização em tempo real.",
+    "features": [
+      "Interface otimizada para atendimento mobile",
+      "Notificações push inteligentes",
+      "Sincronização em tempo real com a plataforma web",
+      "Suporte offline para leitura de conversas",
+      "Acesso a todo histórico e funcionalidades principais"
+    ],
+    "ctas": [
+      { "text": "Conhecer o app", "variant": "default" }
+    ],
+    "image": "/images/mobile-app.jpg"
+  },
+  {
+    "id": "marketplace",
+    "name": "Marketplace Dashboard",
+    "title": "Hub de Integração Evolution + Chat - SPX",
+    "description": "Dashboard unificado que integra a API Evolution com o Chat - SPX. Autentique instâncias WhatsApp com QR Code e gerencie tudo em um só lugar.",
+    "features": [
+      "Autenticação WhatsApp via QR Code integrado",
+      "Gerenciamento de múltiplas instâncias Evolution",
+      "Sincronização automática com Chat - SPX",
+      "Monitoramento de status e health checks",
+      "Logs detalhados e troubleshooting facilitado"
+    ],
+    "ctas": [
+      { "text": "Solicitar acesso", "variant": "default" }
+    ],
+    "image": "/images/marketplace-dashboard.jpg",
+    "showQR": true
+  }
+]

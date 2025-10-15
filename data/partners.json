@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Zabbix",
+    "logo": "/images/partners/zabbix.svg"
+  },
+  {
+    "name": "Grafana",
+    "logo": "/images/partners/grafana.svg"
+  },
+  {
+    "name": "GLPI",
+    "logo": "/images/partners/glpi.svg"
+  },
+  {
+    "name": "Fortinet",
+    "logo": "/images/partners/fortinet.svg"
+  },
+  {
+    "name": "OPNSense",
+    "logo": "/images/partners/opnsense.svg"
+  },
+  {
+    "name": "Chatwoot",
+    "logo": "/images/partners/chatwoot.svg"
+  },
+  {
+    "name": "WhatsApp Business",
+    "logo": "/images/partners/whatsapp.svg"
+  },
+  {
+    "name": "PostgreSQL",
+    "logo": "/images/partners/postgresql.svg"
+  }
+]
