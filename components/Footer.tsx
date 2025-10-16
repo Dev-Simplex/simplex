@@ -1,18 +1,24 @@
-import { Mail, Phone, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react';
+'use client';
+
+import { motion } from 'framer-motion';
+import { Mail, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
+import Image from 'next/image';
 
 const quickLinks = [
   { label: 'Início', href: '#hero' },
-  { label: 'Setores', href: '#setores' },
+  { label: 'Soluções & Serviços', href: '#solucoes-servicos' },
   { label: 'Produtos', href: '#produtos' },
-  { label: 'Soluções', href: '#solucoes' },
-  { label: 'Cases', href: '#cases' },
+  { label: 'Depoimentos', href: '#depoimentos' },
+  { label: 'Parceiros', href: '#parceiros' },
+  { label: 'FAQ', href: '#faq' },
   { label: 'Contato', href: '#contato' },
 ];
 
 const socialLinks = [
-  { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: Instagram, href: 'https://instagram.com', label: 'Instagram' },
-  { icon: Facebook, href: 'https://facebook.com', label: 'Facebook' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/simplex-solu%C3%A7%C3%B5es-tecnol%C3%B3gicas', label: 'LinkedIn' },
+  { icon: Instagram, href: 'https://www.instagram.com/simplexsolucoes/', label: 'Instagram' },
+  { icon: Facebook, href: 'https://www.facebook.com/simplexsolucoes', label: 'Facebook' },
 ];
 
 export function Footer() {
@@ -24,84 +30,160 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-brand-900 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 className="text-2xl font-bold mb-4">SIMPLEX</h3>
-            <p className="text-white/70 text-sm leading-relaxed">
+    <footer className="relative bg-gradient-to-b from-gray-900 via-[#1a2332] to-black text-white overflow-hidden">
+      {/* Decorative Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+            backgroundSize: '40px 40px',
+          }}
+        />
+      </div>
+
+      {/* Gradient Orbs */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-accent/10 to-transparent rounded-full blur-3xl" />
+
+      {/* Top Border Gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          {/* Logo e Descrição */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="mb-6">
+              <Image
+                src="/logo.png"
+                alt="Simplex Tecnologia"
+                width={160}
+                height={50}
+                className="h-12 w-auto"
+              />
+            </div>
+            <p className="text-white/60 text-sm leading-relaxed">
               Tecnologia que conecta, protege e escala seu negócio. Soluções completas em infraestrutura, segurança e desenvolvimento.
             </p>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4 text-brand-300">Links Rápidos</h4>
-            <ul className="space-y-2">
+          {/* Links Rápidos */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <h4 className="font-bold mb-6 text-white text-lg bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+              Links Rápidos
+            </h4>
+            <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className="text-white/70 hover:text-white text-sm transition-colors"
+                    className="text-white/60 hover:text-white text-sm transition-all duration-300 hover:translate-x-1 inline-block group"
                   >
-                    {link.label}
+                    <span className="relative">
+                      {link.label}
+                      <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-accent to-primary group-hover:w-full transition-all duration-300" />
+                    </span>
                   </button>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4 text-brand-300">Contato</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2 text-white/70">
-                <Phone className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>(11) 9999-9999</span>
+          {/* Contato */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <h4 className="font-bold mb-6 text-white text-lg bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+              Contato
+            </h4>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3 text-white/60 hover:text-white transition-colors group">
+                <div className="w-9 h-9 rounded-lg bg-white/5 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:bg-white/10 transition-colors">
+                  <FaWhatsapp className="w-4 h-4 text-accent" />
+                </div>
+                <a 
+                  href="https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es" 
+                  className="hover:text-white transition-colors pt-1.5"
+                >
+                  (66) 9657-1379
+                </a>
               </li>
-              <li className="flex items-start gap-2 text-white/70">
-                <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>contato@simplexsolucoes.com.br</span>
+              <li className="flex items-start gap-3 text-white/60 hover:text-white transition-colors group">
+                <div className="w-9 h-9 rounded-lg bg-white/5 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:bg-white/10 transition-colors">
+                  <Mail className="w-4 h-4 text-accent" />
+                </div>
+                <a 
+                  href="mailto:sup@simplexsolucoes.com.br" 
+                  className="hover:text-white transition-colors pt-1.5 break-all"
+                >
+                  sup@simplexsolucoes.com.br
+                </a>
               </li>
-              <li className="flex items-start gap-2 text-white/70">
-                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>São Paulo, SP</span>
+              <li className="flex items-start gap-3 text-white/60 group">
+                <div className="w-9 h-9 rounded-lg bg-white/5 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:bg-white/10 transition-colors">
+                  <MapPin className="w-4 h-4 text-accent" />
+                </div>
+                <span className="pt-1.5">Sinop, Mato Grosso</span>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="font-semibold mb-4 text-brand-300">Redes Sociais</h4>
+          {/* Redes Sociais */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <h4 className="font-bold mb-6 text-white text-lg bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+              Redes Sociais
+            </h4>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
-                <a
+                <motion.a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="p-2 bg-white/10 hover:bg-white/20 rounded-md transition-colors"
+                  className="relative p-3 bg-white/5 backdrop-blur-sm hover:bg-white/10 rounded-xl transition-all duration-300 group overflow-hidden"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <social.icon className="w-5 h-5" />
-                </a>
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <social.icon className="w-5 h-5 relative z-10 text-white/80 group-hover:text-white transition-colors" />
+                </motion.a>
               ))}
             </div>
-            <a
-              href="https://portal.simplexsolucoes.com.br"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-4 text-sm text-brand-300 hover:text-white transition-colors"
-            >
-              Portal do Cliente →
-            </a>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/60">
-          <p>© {new Date().getFullYear()} Simplex Soluções Tecnológicas. Todos os direitos reservados.</p>
-          <div className="flex gap-6">
-            <button className="hover:text-white transition-colors">Política de Privacidade</button>
-            <button className="hover:text-white transition-colors">Termos de Uso</button>
-          </div>
-        </div>
+        {/* Copyright Simplificado */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="border-t border-white/10 pt-8 text-center"
+        >
+          <p className="text-sm text-white/50">
+            © {new Date().getFullYear()} Simplex Soluções Tecnológicas. Todos os direitos reservados.
+          </p>
+        </motion.div>
       </div>
     </footer>
   );

@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Quote, Star, Award } from 'lucide-react';
+import { useRef } from 'react';
 
 interface Testimonial {
   id: number;
@@ -21,6 +22,13 @@ interface TestimonialsProps {
 
 export function Testimonials({ testimonials }: TestimonialsProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -33,74 +41,200 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
   const current = testimonials[currentIndex];
 
   return (
-    <section id="depoimentos" className="py-24 bg-white">
-      <div className="container mx-auto px-4">
+    <section 
+      id="depoimentos" 
+      ref={sectionRef}
+      className="py-32 bg-gray-50 relative overflow-hidden"
+    >
+      {/* Background Decorations */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div 
+          style={{ y }}
+          className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-3xl"
+        />
+        <motion.div 
+          style={{ y: useTransform(scrollYProgress, [0, 1], [-100, 100]) }}
+          className="absolute bottom-1/4 -right-32 w-96 h-96 bg-gradient-to-bl from-accent/5 to-primary/5 rounded-full blur-3xl"
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl font-bold mb-4">O Que Dizem Nossos Clientes</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, type: "spring" }}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10 px-5 py-2.5 rounded-full mb-8"
+          >
+            <Award className="w-4 h-4 text-primary" />
+            <span className="text-foreground/80 font-medium text-sm">Aprovado por Clientes</span>
+          </motion.div>
+
+          <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+            O Que Dizem{' '}
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Nossos Clientes
+            </span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Confiança construída através de resultados reais
           </p>
         </motion.div>
 
-        <div className="max-w-4xl mx-auto">
-          <Card className="p-8 md:p-12 relative overflow-hidden shadow-lg">
-            <Quote className="absolute top-8 right-8 w-16 h-16 text-accent/20" />
+        <div className="max-w-5xl mx-auto">
+          {/* Main Testimonial Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative group"
+          >
+            {/* Glow Effect */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl opacity-0 group-hover:opacity-30 blur-2xl transition-opacity duration-700" />
+            
+            <Card className="relative p-10 md:p-16 overflow-hidden bg-white border border-gray-200 shadow-xl">
+              {/* Animated Border */}
+              <div className="absolute inset-0 rounded-2xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
 
-            <AnimatePresence mode="wait">
+              {/* Quote Icon Animado */}
               <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
-                className="relative z-10"
+                animate={{ 
+                  rotate: [0, 5, -5, 0],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+                className="absolute top-8 right-8"
               >
-                <p className="text-lg md:text-xl text-muted-foreground italic leading-relaxed mb-8">
+                <Quote className="w-20 h-20 text-accent/20" />
+              </motion.div>
+
+              {/* Stars Rating */}
+              <motion.div 
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex gap-1 mb-8 relative z-10"
+              >
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    <Star className="w-6 h-6 fill-accent text-accent" />
+                  </motion.div>
+                ))}
+              </motion.div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5, type: "spring" }}
+                  className="relative z-10"
+                >
+                <p className="text-xl md:text-2xl text-foreground/90 italic leading-relaxed mb-10 font-light">
                   "{current.content}"
                 </p>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-accent border-2 border-accent/30 flex items-center justify-center text-white text-xl font-bold">
-                    {current.name.charAt(0)}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-lg">{current.name}</div>
-                    <div className="text-sm text-muted-foreground">
-                      {current.role} • {current.company}
+                <div className="flex items-center gap-5">
+                  {/* Avatar with Pulsing Ring */}
+                  <div className="relative">
+                    <motion.div
+                      className="absolute -inset-2 bg-gradient-to-r from-primary to-accent rounded-full opacity-30 blur-md"
+                      animate={{ 
+                        scale: [1, 1.2, 1],
+                        opacity: [0.2, 0.4, 0.2]
+                      }}
+                      transition={{ 
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatType: "reverse"
+                      }}
+                    />
+                    <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary to-accent border-4 border-white flex items-center justify-center text-white text-2xl font-bold shadow-xl">
+                      {current.name.charAt(0)}
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </Card>
 
-          <div className="flex items-center justify-center gap-4 mt-8">
+                  <div>
+                    <div className="font-bold text-xl mb-1">
+                      {current.name}
+                    </div>
+                    <div className="text-muted-foreground">
+                      {current.role} • <span className="text-accent">{current.company}</span>
+                    </div>
+                  </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Shimmer Effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none">
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* Navigation Controls */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="flex items-center justify-center gap-6 mt-12"
+          >
             <Button
               variant="outline"
               size="icon"
               onClick={prevTestimonial}
               aria-label="Depoimento anterior"
+              className="border-gray-200 hover:border-accent/50 transition-all duration-300 hover:scale-110"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-6 h-6" />
             </Button>
 
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               {testimonials.map((_, index) => (
-                <button
+                <motion.button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all ${
-                    index === currentIndex
-                      ? 'bg-accent w-8'
-                      : 'bg-muted-foreground/30 w-2'
-                  }`}
+                  className="relative group/dot"
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
                   aria-label={`Ir para depoimento ${index + 1}`}
-                />
+                >
+                  {index === currentIndex && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full blur-md opacity-30"
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                  <div className={`relative h-3 rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? 'bg-gradient-to-r from-primary to-accent w-10 shadow-lg shadow-accent/30'
+                      : 'bg-gray-300 w-3 group-hover/dot:bg-gray-400'
+                  }`} />
+                </motion.button>
               ))}
             </div>
 
@@ -109,10 +243,11 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
               size="icon"
               onClick={nextTestimonial}
               aria-label="Próximo depoimento"
+              className="border-gray-200 hover:border-accent/50 transition-all duration-300 hover:scale-110"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-6 h-6" />
             </Button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "suporte-tecnico",
+    "title": "Suporte Técnico",
+    "icon": "Headphones",
+    "points": [
+      "Atendimento especializado para equipe e datacenter",
+      "Gestão completa do ambiente tecnológico",
+      "Garantia de eficiência, segurança e inovação"
+    ]
+  },
+  {
+    "id": "infraestrutura",
+    "title": "Infraestrutura",
+    "icon": "Server",
+    "points": [
+      "Estruturação e gestão de servidores e workstations",
+      "Manutenção de ativos de rede e datacenter",
+      "Desempenho otimizado e monitoramento contínuo"
+    ]
+  },
+  {
+    "id": "projetos",
+    "title": "Projetos",
+    "icon": "Briefcase",
+    "points": [
+      "Planejamento e execução de projetos tecnológicos",
+      "Análise de requisitos e implementação customizada",
+      "Acompanhamento e suporte pós-implantação"
+    ]
+  },
+  {
+    "id": "telefonia-ip",
+    "title": "Telefonia IP",
+    "icon": "Phone",
+    "points": [
+      "Telefonia VOIP de alto padrão e qualidade",
+      "Gravações, call center e estatísticas avançadas",
+      "Controle de QoS e escalabilidade garantida"
+    ]
+  },
+  {
+    "id": "integracao",
+    "title": "Integração",
+    "icon": "Workflow",
+    "points": [
+      "APIs REST, SOAP, JSON, XML e WSDL",
+      "Integração de bancos relacionais e não-relacionais",
+      "Conexão de sistemas sem integração nativa"
+    ]
+  },
+  {
+    "id": "gestao-backup",
+    "title": "Gestão de Backup",
+    "icon": "HardDrive",
+    "points": [
+      "Backup local, em fita (DAT) e na nuvem",
+      "Integração com AWS e Microsoft Azure",
+      "Proteção e disponibilidade contínua dos dados"
+    ]
+  },
+  {
+    "id": "seguranca",
+    "title": "Segurança",
+    "icon": "ShieldCheck",
+    "points": [
+      "Firewall corporativo e antivírus empresarial",
+      "Proteção contra ameaças e ataques cibernéticos",
+      "Monitoramento e resposta a incidentes"
+    ]
+  },
+  {
+    "id": "computacao-nuvem",
+    "title": "Computação em Nuvem",
+    "icon": "Cloud",
+    "points": [
+      "Ambientes virtuais Windows e Linux",
+      "Plataformas Azure e AWS otimizadas",
+      "Flexibilidade, escalabilidade e alta disponibilidade"
+    ]
+  },
+  {
+    "id": "virtualizacao",
+    "title": "Virtualização",
+    "icon": "Box",
+    "points": [
+      "VMware ESXi, Hyper-V e Proxmox",
+      "Virtualização privada em servidores próprios",
+      "Infraestrutura eficiente e de alto desempenho"
+    ]
+  },
+  {
+    "id": "video-monitoramento-ia",
+    "title": "Vídeo Monitoramento com Inteligência Artificial",
+    "icon": "Camera",
+    "points": [
+      "Monitoramento em tempo real com IA",
+      "Detecção automática de atividades suspeitas",
+      "Proteção proativa e alertas inteligentes"
+    ]
+  },
+  {
+    "id": "seguranca-eletronica",
+    "title": "Segurança Eletrônica",
+    "icon": "Video",
+    "points": [
+      "Câmeras IP e analógicas de alta resolução",
+      "Projeto completo de CFTV e monitoramento",
+      "Soluções integradas de segurança física"
+    ]
+  },
+  {
+    "id": "organizacao-estrategica",
+    "title": "Organização Estratégica",
+    "icon": "Folders",
+    "points": [
+      "Active Directory e GPO (Group Policy)",
+      "Administração centralizada de infraestrutura",
+      "Políticas de segurança e governança de TI"
+    ]
+  }
+]

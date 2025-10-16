@@ -2,54 +2,62 @@
   {
     "id": "chat-spx",
     "name": "Chat - SPX",
-    "title": "Plataforma Omnichannel Completa",
-    "description": "Fork personalizado do Chatwoot, otimizado para atendimento 24/7 com recursos avançados de roteamento, histórico unificado e integrações nativas.",
+    "title": "Atenda Todos Seus Clientes em Um Só Lugar",
+    "simpleBenefit": "WhatsApp, Instagram, Facebook e e-mail centralizados. Sua equipe responde tudo de uma tela só.",
+    "description": "Plataforma completa para atendimento multicanal com recursos avançados de roteamento e histórico unificado.",
+    "badges": ["Fácil de usar", "Suporte incluído", "LGPD OK"],
     "features": [
-      "Atendimento multicanal (WhatsApp, Instagram, Telegram, e-mail, chat web)",
-      "Roteamento inteligente e distribuição automática de conversas",
-      "Histórico centralizado com busca avançada e tags",
-      "Integrações com CRM, ERP e sistemas de terceiros",
-      "Relatórios em tempo real e métricas de performance"
+      "WhatsApp, Instagram, Telegram e mais",
+      "Equipe vê histórico completo do cliente",
+      "Relatórios simples de entender",
+      "Funciona em qualquer lugar",
+      "Sem mensalidades escondidas"
     ],
     "ctas": [
-      { "text": "Ver demo", "variant": "default" },
-      { "text": "Falar com especialista", "variant": "outline" }
+      { "text": "Ver site e preços", "variant": "default", "link": "https://www.chatspx.com.br/" },
+      { "text": "Falar com especialista", "variant": "outline", "link": "https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20Chat-SPX" }
     ],
-    "image": "/images/chat-spx-dashboard.jpg"
+    "image": "/chatspx.png"
   },
   {
     "id": "mobile-app",
     "name": "App Mobile Chat - SPX",
-    "title": "Atendimento no Bolso",
-    "description": "Aplicativo nativo para iOS e Android que permite aos atendentes gerenciar conversas de qualquer lugar, com notificações push e sincronização em tempo real.",
+    "title": "Atenda Clientes de Qualquer Lugar",
+    "simpleBenefit": "App para celular que permite sua equipe responder clientes a qualquer momento, mesmo fora do escritório.",
+    "description": "Aplicativo nativo para iOS e Android com interface otimizada e sincronização em tempo real.",
+    "badges": ["iOS e Android", "Gratuito", "Sincronização automática"],
     "features": [
-      "Interface otimizada para atendimento mobile",
-      "Notificações push inteligentes",
-      "Sincronização em tempo real com a plataforma web",
-      "Suporte offline para leitura de conversas",
-      "Acesso a todo histórico e funcionalidades principais"
+      "Funciona no celular e tablet",
+      "Notificações quando cliente manda mensagem",
+      "Tudo sincronizado automaticamente",
+      "Lê conversas mesmo sem internet",
+      "Mesmo histórico da versão web"
     ],
     "ctas": [
-      { "text": "Conhecer o app", "variant": "default" }
+      { "text": "Ver site e preços", "variant": "default", "link": "https://www.chatspx.com.br/" },
+      { "text": "Falar com especialista", "variant": "outline", "link": "https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20App%20Mobile%20Chat-SPX" }
     ],
-    "image": "/images/mobile-app.jpg"
+    "image": "/mobile.mp4",
+    "isVideo": true
   },
   {
     "id": "marketplace",
     "name": "Marketplace Dashboard",
-    "title": "Hub de Integração Evolution + Chat - SPX",
-    "description": "Dashboard unificado que integra a API Evolution com o Chat - SPX. Autentique instâncias WhatsApp com QR Code e gerencie tudo em um só lugar.",
+    "title": "Conecte WhatsApp com 1 Clique",
+    "simpleBenefit": "Painel simples para conectar WhatsApp ao Chat-SPX. Só escanear QR Code e pronto - tudo funcionando.",
+    "description": "Dashboard unificado para integrar WhatsApp Business com autenticação via QR Code.",
+    "badges": ["Setup em 5 minutos", "QR Code fácil", "Múltiplas contas"],
     "features": [
-      "Autenticação WhatsApp via QR Code integrado",
-      "Gerenciamento de múltiplas instâncias Evolution",
-      "Sincronização automática com Chat - SPX",
-      "Monitoramento de status e health checks",
-      "Logs detalhados e troubleshooting facilitado"
+      "Conecta WhatsApp escaneando QR Code",
+      "Gerencia várias contas WhatsApp",
+      "Conecta automaticamente com Chat-SPX",
+      "Mostra se tudo está funcionando",
+      "Histórico de conexões"
     ],
     "ctas": [
-      { "text": "Solicitar acesso", "variant": "default" }
+      { "text": "Ver site e preços", "variant": "default", "link": "https://www.chatspx.com.br/" },
+      { "text": "Falar com especialista", "variant": "outline", "link": "https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20Marketplace%20Dashboard" }
     ],
-    "image": "/images/marketplace-dashboard.jpg",
-    "showQR": true
+    "image": "/marketplace.png"
   }
 ]

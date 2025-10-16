@@ -1,20 +1,22 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { motion } from 'framer-motion';
-import { QRPreview } from '@/components/QRPreview';
-import { ExternalLink, Play } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
+import { useRef } from 'react';
+import { ProductsCarousel } from '@/components/ProductsCarousel';
 
 interface Product {
   id: string;
   name: string;
   title: string;
+  simpleBenefit: string;
   description: string;
+  badges: string[];
   features: string[];
-  ctas: { text: string; variant: 'default' | 'outline' }[];
+  ctas: { text: string; variant: 'default' | 'outline'; link?: string }[];
   image: string;
   showQR?: boolean;
+  isVideo?: boolean;
 }
 
 interface ProductsProps {
@@ -22,92 +24,72 @@ interface ProductsProps {
 }
 
 export function Products({ products }: ProductsProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
   return (
-    <section id="produtos" className="py-24 bg-white">
-      <div className="container mx-auto px-4">
+    <section 
+      id="produtos" 
+      ref={sectionRef}
+      className="py-32 bg-white relative overflow-hidden"
+    >
+      {/* Subtle Gradient Orbs */}
+      <motion.div 
+        style={{ 
+          y: useTransform(scrollYProgress, [0, 1], [0, 200]),
+          opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.2, 0.1])
+        }}
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+      />
+      <motion.div 
+        style={{ 
+          y: useTransform(scrollYProgress, [0, 1], [0, -150]),
+          opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.2, 0.1])
+        }}
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl font-bold mb-4">Nossos Produtos</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, type: "spring" }}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10 px-5 py-2.5 rounded-full mb-8"
+          >
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span className="text-foreground/80 font-medium text-sm">Produtos Premium</span>
+          </motion.div>
+
+          <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+            Nossos{' '}
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              Produtos
+            </span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Soluções completas de atendimento omnichannel, desenvolvidas para escalar seu negócio
           </p>
         </motion.div>
 
-        <div className="space-y-16">
-          {products.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <Card className="overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="grid lg:grid-cols-2 gap-8">
-                  <div className={`p-8 lg:p-12 ${index % 2 === 0 ? 'order-1' : 'order-2'}`}>
-                    <div className="inline-block px-3 py-1 bg-accent/10 text-accent border border-accent/20 rounded-full text-sm font-medium mb-4">
-                      {product.name}
-                    </div>
-                    <h3 className="text-3xl font-bold mb-4">{product.title}</h3>
-                    <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-                      {product.description}
-                    </p>
-
-                    <div className="space-y-3 mb-8">
-                      {product.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 flex-shrink-0" />
-                          <p className="text-sm leading-relaxed">{feature}</p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="flex flex-wrap gap-3">
-                      {product.ctas.map((cta, idx) => (
-                        <Button
-                          key={idx}
-                          variant={cta.variant}
-                          onClick={() => {
-                            if (cta.text.includes('demo') || cta.text.includes('Demo')) {
-                              window.open('https://demo.simplexsolucoes.com.br', '_blank');
-                            } else if (cta.text.includes('acesso')) {
-                              window.open('https://wa.me/5511999999999', '_blank');
-                            } else {
-                              window.open('https://wa.me/5511999999999', '_blank');
-                            }
-                          }}
-                        >
-                          {cta.text.includes('demo') || cta.text.includes('Demo') ? (
-                            <Play className="w-4 h-4 mr-2" />
-                          ) : (
-                            <ExternalLink className="w-4 h-4 mr-2" />
-                          )}
-                          {cta.text}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className={`bg-muted p-8 flex items-center justify-center ${index % 2 === 0 ? 'order-2' : 'order-1'}`}>
-                    {product.showQR ? (
-                      <QRPreview />
-                    ) : (
-                      <div className="w-full aspect-video bg-gradient-to-br from-primary/20 to-accent/20 border border-accent/20 rounded-xl shadow-lg flex items-center justify-center">
-                        <div className="text-muted-foreground/40 text-4xl font-bold">
-                          {product.name}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
+          <ProductsCarousel products={products} />
+        </motion.div>
       </div>
     </section>
   );

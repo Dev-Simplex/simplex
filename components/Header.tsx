@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,10 +31,10 @@ export function Header() {
   };
 
   const navItems = [
+    { href: '#solucoes-servicos', label: 'Soluções' },
     { href: '#produtos', label: 'Produtos' },
-    { href: '#solucoes', label: 'Soluções' },
-    { href: '#setores', label: 'Setores' },
     { href: '#depoimentos', label: 'Depoimentos' },
+    { href: '#parceiros', label: 'Parceiros' },
     { href: '#faq', label: 'FAQ' },
     { href: '#contato', label: 'Contato' },
   ];
@@ -62,19 +63,17 @@ export function Header() {
           <ul className="flex items-center justify-center gap-1 md:gap-2 lg:gap-6 flex-wrap">
             {navItems.map((item) => (
               <li key={item.href}>
-                <button
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => scrollToSection(item.href)}
                   className={`
-                    px-2.5 py-1 
-                    text-sm font-medium 
-                    ${isInHero ? 'text-white' : 'text-gray-700'} 
-                    ${isInHero ? 'hover:text-white hover:bg-white/20' : 'hover:text-brand-600 hover:bg-gray-100'} 
                     rounded-full
-                    transition-all duration-200
+                    ${isInHero ? 'text-white hover:text-white hover:bg-white/20' : 'text-gray-700 hover:text-brand-600 hover:bg-gray-100'} 
                   `}
                 >
                   {item.label}
-                </button>
+                </Button>
               </li>
             ))}
           </ul>

@@ -18,26 +18,26 @@
 
 @layer base {
   :root {
-    /* Tema Claro Corporativo B2B */
-    --background: 220 100% 98%;
+    /* Tema Empresarial Premium B2B */
+    --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 217 100% 52%;
+    --primary: 224 71% 46%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 220 100% 98%;
+    --secondary: 220 15% 95%;
     --secondary-foreground: 222 47% 11%;
-    --muted: 220 26% 94%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 189 96% 48%;
+    --muted: 220 15% 94%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 217 75% 52%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 217 100% 52%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71% 46%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -52,19 +52,19 @@
     --card-foreground: 220 100% 98%;
     --popover: 224 71% 15%;
     --popover-foreground: 220 100% 98%;
-    --primary: 217 100% 52%;
+    --primary: 224 71% 46%;
     --primary-foreground: 0 0% 100%;
     --secondary: 222 47% 18%;
     --secondary-foreground: 220 100% 98%;
     --muted: 217 33% 17%;
     --muted-foreground: 215 20% 65%;
-    --accent: 189 96% 48%;
+    --accent: 217 75% 52%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 220 100% 98%;
     --border: 217 33% 17%;
     --input: 217 33% 17%;
-    --ring: 217 100% 52%;
+    --ring: 224 71% 46%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;

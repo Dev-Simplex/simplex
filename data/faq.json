@@ -2,31 +2,43 @@
   {
     "id": "1",
     "question": "Como funciona o processo de implantação?",
-    "answer": "Iniciamos com um diagnóstico detalhado do ambiente, seguido de proposta técnica e comercial. Após aprovação, executamos o projeto em fases com acompanhamento contínuo, testes rigorosos e treinamento da equipe."
+    "answer": "Conversamos sobre seu negócio, fazemos um diagnóstico detalhado e criamos uma proposta personalizada. Após aprovação, executamos o projeto em etapas com acompanhamento total, testes e treinamento da sua equipe.",
+    "category": "processo",
+    "icon": "ClipboardList"
   },
   {
     "id": "2",
     "question": "Qual o prazo médio de entrega dos projetos?",
-    "answer": "Varia conforme a complexidade. Projetos de automação e software levam de 4 a 12 semanas. Infraestrutura de rede e segurança entre 2 e 8 semanas. Fornecemos cronograma detalhado na proposta."
+    "answer": "Depende da complexidade. Apps e automações levam de 1 a 3 meses. Infraestrutura e redes entre 2 semanas e 2 meses. Sempre apresentamos cronograma detalhado na proposta para você acompanhar.",
+    "category": "prazo",
+    "icon": "Clock"
   },
   {
     "id": "3",
-    "question": "Vocês fazem integração com sistemas legados?",
-    "answer": "Sim. Temos vasta experiência em integração via APIs REST, SOAP, bancos de dados diretos e até RPA quando necessário. Avaliamos a melhor abordagem para cada caso."
+    "question": "Vocês fazem integração com sistemas que já temos?",
+    "answer": "Sim! Conectamos com praticamente qualquer sistema que você já usa. Fazemos integração via APIs, bancos de dados e até automação quando necessário. Avaliamos a melhor forma para seu caso específico.",
+    "category": "integracao",
+    "icon": "Link"
   },
   {
     "id": "4",
     "question": "Como funciona o suporte após a implantação?",
-    "answer": "Oferecemos contratos de suporte com SLA definido, monitoramento 24/7 e atendimento via ticket, WhatsApp ou telefone. Atualizações e melhorias contínuas fazem parte do pacote."
+    "answer": "Oferecemos suporte completo: monitoramento 24/7, atendimento por WhatsApp/telefone e contratos com SLA definido. Atualizações e melhorias contínuas fazem parte do pacote.",
+    "category": "suporte",
+    "icon": "Headphones"
   },
   {
     "id": "5",
     "question": "As soluções estão adequadas à LGPD?",
-    "answer": "Absolutamente. Todos os nossos sistemas seguem as melhores práticas de segurança e privacidade. Implementamos controles de acesso, criptografia, logs de auditoria e políticas de retenção de dados conforme LGPD."
+    "answer": "Com certeza! Todos nossos sistemas seguem as melhores práticas de segurança e privacidade. Implementamos controles de acesso, criptografia e políticas de proteção de dados conforme a LGPD.",
+    "category": "seguranca",
+    "icon": "Shield"
   },
   {
     "id": "6",
     "question": "Como é definido o investimento?",
-    "answer": "Trabalhamos com modelos flexíveis: CAPEX (investimento único), OPEX (mensalidade) ou híbrido. Após o diagnóstico, apresentamos proposta detalhada com todas as opções e ROI estimado."
+    "answer": "Trabalhamos com opções flexíveis: investimento único, mensalidade ou misto. Após o diagnóstico, apresentamos proposta detalhada com todas as opções e retorno estimado do investimento.",
+    "category": "investimento",
+    "icon": "DollarSign"
   }
 ]
