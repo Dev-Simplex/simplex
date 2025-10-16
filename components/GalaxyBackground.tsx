@@ -8,7 +8,7 @@ export function GalaxyBackground() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(https://i.ibb.co/87GbbFP/2799006.jpg)',
+            backgroundImage: 'url(https://1yiyuhrfy1frfhlm.public.blob.vercel-storage.com/background.png)',
           }}
         />
         <div 
