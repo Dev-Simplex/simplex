@@ -136,7 +136,8 @@ export function Contact() {
               description: 'Atendimento direto e personalizado',
               link: 'https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20especialista',
               linkText: '(66) 9657-1379',
-              delay: 0.1
+              delay: 0.1,
+              subText: undefined as string | undefined
             },
             {
               icon: Mail,
@@ -144,7 +145,8 @@ export function Contact() {
               description: 'Para propostas e parcerias',
               link: 'mailto:sup@simplexsolucoes.com.br',
               linkText: 'sup@simplexsolucoes.com.br',
-              delay: 0.2
+              delay: 0.2,
+              subText: undefined as string | undefined
             },
           ].map((item, index) => (
             <motion.div
