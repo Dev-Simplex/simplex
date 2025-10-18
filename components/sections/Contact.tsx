@@ -217,7 +217,7 @@ export function Contact() {
         >
           <div className="grid md:grid-cols-2 gap-8 items-start">
             {/* Informações de Endereço */}
-            <Card className="p-8 bg-white border border-gray-200 shadow-lg">
+            <Card className="p-8 bg-white border border-gray-200 shadow-lg relative z-10">
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-6 h-6 text-accent" />
@@ -256,7 +256,8 @@ export function Contact() {
                 href="https://www.google.com/maps?q=-11.854281,-55.509909&z=17"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-full mt-6 px-4 py-2 border border-accent/30 rounded-md text-sm font-medium hover:border-accent hover:bg-accent/5 transition-all duration-300 group/maps"
+                style={{ pointerEvents: 'auto' }}
+                className="inline-flex items-center justify-center w-full mt-6 px-4 py-2 border border-accent/30 rounded-md text-sm font-medium hover:border-accent hover:bg-accent/5 transition-all duration-300 group/maps cursor-pointer relative z-20"
               >
                 <MapPin className="w-4 h-4 mr-2 text-accent" />
                 Abrir no Google Maps
@@ -265,18 +266,18 @@ export function Contact() {
             </Card>
 
             {/* Google Maps Iframe */}
-            <Card className="p-2 bg-white border border-gray-200 shadow-lg overflow-hidden">
-              <div className="rounded-lg overflow-hidden">
+            <Card className="p-2 bg-white border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="rounded-lg overflow-hidden relative z-10">
                 <iframe
                   src="https://maps.google.com/maps?q=-11.854281,-55.509909&hl=pt-BR&z=17&output=embed"
                   width="100%"
                   height="400"
-                  style={{ border: 0 }}
+                  style={{ border: 0, pointerEvents: 'auto' }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Localização Simplex Soluções - Sinop, MT"
-                  className="w-full"
+                  className="w-full cursor-pointer relative z-10"
                 ></iframe>
               </div>
             </Card>
