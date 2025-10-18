@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 
-export function Header() {
+export const Header = memo(function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [isInHero, setIsInHero] = useState(true);
 
@@ -19,16 +19,16 @@ export function Header() {
         setIsInHero(heroBottom > 100); // Se Hero ainda visível
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = useCallback((href: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
   const navItems = [
     { href: '#solucoes-servicos', label: 'Soluções' },
@@ -81,4 +81,4 @@ export function Header() {
       </div>
     </motion.header>
   );
-}
+});

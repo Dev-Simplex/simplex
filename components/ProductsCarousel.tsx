@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo, memo } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { ExternalLink, CheckCircle2 } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -26,12 +26,17 @@ interface ProductsCarouselProps {
   products: Product[];
 }
 
-export function ProductsCarousel({ products }: ProductsCarouselProps) {
+export const ProductsCarousel = memo(function ProductsCarousel({ products }: ProductsCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const controls = useAnimation();
-  const duplicatedProducts = [...products, ...products, ...products, ...products];
+  
+  // Memoizar produtos duplicados para evitar re-criação em cada render
+  const duplicatedProducts = useMemo(() => 
+    [...products, ...products, ...products, ...products],
+    [products]
+  );
 
   const handleCardClick = useCallback((absoluteIndex: number) => {
     if (isDragging) return; // Ignora click se estiver arrastando
@@ -338,5 +343,5 @@ export function ProductsCarousel({ products }: ProductsCarouselProps) {
       </div>
     </div>
   );
-}
+});
 

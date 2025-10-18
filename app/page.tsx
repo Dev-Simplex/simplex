@@ -1,14 +1,9 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/sections/Hero';
-import { Products } from '@/components/sections/Products';
-import { SolutionsServices } from '@/components/sections/SolutionsServices';
-import { Testimonials } from '@/components/sections/Testimonials';
-import { Partners } from '@/components/sections/Partners';
-import { FAQ } from '@/components/sections/FAQ';
-import { Contact } from '@/components/sections/Contact';
 
 import productsData from '@/data/products.json';
 import solutionsData from '@/data/solutions.json';
@@ -17,6 +12,31 @@ import testimonialsData from '@/data/testimonials.json';
 import partnersData from '@/data/partners.json';
 import faqData from '@/data/faq.json';
 import { Product } from '@/types/products';
+
+// Lazy loading de seções pesadas para melhor performance
+const SolutionsServices = dynamic(() => import('@/components/sections/SolutionsServices').then(mod => ({ default: mod.SolutionsServices })), {
+  ssr: true
+});
+
+const Products = dynamic(() => import('@/components/sections/Products').then(mod => ({ default: mod.Products })), {
+  ssr: true
+});
+
+const Testimonials = dynamic(() => import('@/components/sections/Testimonials').then(mod => ({ default: mod.Testimonials })), {
+  ssr: true
+});
+
+const Partners = dynamic(() => import('@/components/sections/Partners').then(mod => ({ default: mod.Partners })), {
+  ssr: true
+});
+
+const FAQ = dynamic(() => import('@/components/sections/FAQ').then(mod => ({ default: mod.FAQ })), {
+  ssr: true
+});
+
+const Contact = dynamic(() => import('@/components/sections/Contact').then(mod => ({ default: mod.Contact })), {
+  ssr: true
+});
 
 export default function Home() {
   return (

@@ -8,13 +8,28 @@ const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'] }
 export const metadata: Metadata = {
   title: 'Simplex Soluções Tecnológicas | Tecnologia que Conecta, Protege e Escala',
   description: 'Soluções completas em infraestrutura de rede, segurança, automação, desenvolvimento de software e atendimento omnichannel. Transforme seu negócio com a Simplex.',
-  keywords: ['tecnologia', 'infraestrutura', 'segurança', 'automação', 'software', 'omnichannel', 'Simplex'],
+  keywords: ['tecnologia', 'infraestrutura', 'segurança', 'automação', 'software', 'omnichannel', 'Simplex', 'TI', 'desenvolvimento', 'redes', 'whatsapp'],
   authors: [{ name: 'Simplex Soluções Tecnológicas' }],
   openGraph: {
-    title: 'Simplex Soluções Tecnológicas',
-    description: 'Tecnologia que conecta, protege e escala seu negócio',
+    title: 'Simplex Soluções Tecnológicas | Tecnologia que Conecta, Protege e Escala',
+    description: 'Soluções completas em infraestrutura de rede, segurança, automação, desenvolvimento de software e atendimento omnichannel. Transforme seu negócio com a Simplex.',
     type: 'website',
     locale: 'pt_BR',
+    siteName: 'Simplex Soluções Tecnológicas',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Simplex Soluções Tecnológicas',
+    description: 'Tecnologia que conecta, protege e escala seu negócio',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
   },
 };
 

@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { QrCode } from 'lucide-react';
 
-export function QRPreview() {
+export const QRPreview = memo(function QRPreview() {
   return (
     <div className="flex flex-col items-center justify-center p-8 bg-white dark:bg-card rounded-lg border-2 border-dashed border-border">
       <div className="w-48 h-48 bg-gradient-to-br from-brand-50 to-brand-300/20 rounded-lg flex items-center justify-center mb-4">
@@ -11,4 +12,4 @@ export function QRPreview() {
       </p>
     </div>
   );
-}
+});

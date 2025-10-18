@@ -7,8 +7,12 @@ import { motion } from 'framer-motion';
 import { SimplexOrbit } from '@/components/SimplexOrbit';
 import { GalaxyBackground } from '@/components/GalaxyBackground';
 import sectorsData from '@/data/sectors.json';
+import { useState, useRef } from 'react';
 
 export function Hero() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const sectionRef = useRef<HTMLElement>(null);
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -16,12 +20,34 @@ export function Hero() {
     }
   };
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
     <section
       id="hero"
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <GalaxyBackground />
+      
+      {/* Spotlight Effect */}
+      <motion.div
+        className="absolute w-96 h-96 rounded-full pointer-events-none z-[1]"
+        style={{
+          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
+          left: mousePosition.x - 192,
+          top: mousePosition.y - 192,
+        }}
+        transition={{ type: "spring", damping: 30, stiffness: 200 }}
+      />
 
       <div className="container mx-auto px-4 py-32 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -57,23 +83,64 @@ export function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                onClick={() => scrollToSection('#contato')}
-                className="bg-primary hover:bg-primary/90 text-white shadow-2xl shadow-primary/30"
+              {/* Botão Agendar Diagnóstico com animações */}
+              <motion.div
+                whileHover={{ 
+                  y: -6,
+                  scale: 1.05,
+                  transition: { duration: 0.3, type: "spring", stiffness: 300 }
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="relative group"
+                style={{ perspective: 1000 }}
               >
-                <Calendar className="w-5 h-5 mr-2" />
-                Agendar Diagnóstico
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => scrollToSection('#solucoes-servicos')}
-                className="bg-white/10 hover:bg-white/20 text-white border-white/30"
+                {/* Glow Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-accent/50 rounded-lg opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500 -z-10" />
+                
+                <Button
+                  size="lg"
+                  onClick={() => scrollToSection('#contato')}
+                  className="relative bg-primary hover:bg-primary/90 text-white shadow-2xl shadow-primary/30 overflow-hidden border border-primary/50 group-hover:border-accent/50 transition-colors duration-300"
+                >
+                  {/* Shimmer Effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                  </div>
+                  
+                  <Calendar className="w-5 h-5 mr-2 relative z-10" />
+                  <span className="relative z-10">Agendar Diagnóstico</span>
+                </Button>
+              </motion.div>
+
+              {/* Botão Ver Soluções com animações */}
+              <motion.div
+                whileHover={{ 
+                  y: -6,
+                  scale: 1.05,
+                  transition: { duration: 0.3, type: "spring", stiffness: 300 }
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="relative group"
+                style={{ perspective: 1000 }}
               >
-                Ver Soluções
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+                {/* Glow Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-white/30 to-accent/30 rounded-lg opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500 -z-10" />
+                
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => scrollToSection('#solucoes-servicos')}
+                  className="relative bg-white/10 hover:bg-white/20 text-white border-white/30 group-hover:border-white/50 overflow-hidden transition-colors duration-300"
+                >
+                  {/* Shimmer Effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                  </div>
+                  
+                  <span className="relative z-10">Ver Soluções</span>
+                  <ArrowRight className="w-5 h-5 ml-2 relative z-10" />
+                </Button>
+              </motion.div>
             </div>
           </motion.div>
 

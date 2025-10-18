@@ -1,44 +1,60 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { X, Check, MessageCircle } from 'lucide-react';
+import { X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { SectorIcon } from '@/components/SectorIcons';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+interface SectionItem {
+  icon: string;
+  subtitle: string;
+  description: string;
+}
+
+interface Section {
+  title: string;
+  items: SectionItem[];
+}
 
 interface Sector {
   id: string;
   name: string;
   title: string;
-  description: string;
-  benefits: string[];
-  cta: string;
-  angle: number;
   logo: string;
+  angle: number;
+  cta: string;
+  sections: Section[];
 }
 
 interface SimplexOrbitProps {
   sectors: Sector[];
 }
 
-export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
+export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbitProps) {
   const [selectedSector, setSelectedSector] = useState<Sector | null>(null);
   const [hoveredSector, setHoveredSector] = useState<string | null>(null);
   const [clickedPosition, setClickedPosition] = useState<{x: number, y: number} | null>(null);
 
-  const handleSectorClick = (sector: Sector) => {
+  const handleSectorClick = useCallback((sector: Sector) => {
     setSelectedSector(sector);
-  };
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setSelectedSector(null);
-  };
+  }, []);
 
-  // Configurações para o novo layout baseado no SVG (MENOR)
-  const containerSize = 500; // Diminuído de 600 para 500
-  const centerX = containerSize / 2; // 250
-  const centerY = containerSize / 2; // 250
-  const orbitRadius = 180; // Aumentado de 150 para 180 (afastar pétalas)
+  // Configurações para o novo layout baseado no SVG (MENOR) - memoizadas
+  const orbitConfig = useMemo(() => ({
+    containerSize: 500,
+    centerX: 250,
+    centerY: 250,
+    orbitRadius: 180
+  }), []);
+
+  const { containerSize, centerX, centerY, orbitRadius } = orbitConfig;
 
   return (
     <div className="w-full h-full flex items-center justify-center min-h-[500px]">
@@ -56,6 +72,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
             src="/images/sectors/orbit.svg"
             alt="Simplex Orbit"
             fill
+            priority
             className="object-contain"
           />
         </div>
@@ -82,6 +99,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
             alt="Simplex"
             width={140}
             height={140}
+            priority
             className="object-contain"
           />
         </div>
@@ -222,7 +240,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
               }}
               className="fixed right-0 top-0 h-screen w-full sm:w-[90%] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] z-[9999] flex flex-col"
               style={{ zIndex: 9999 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
               <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl">
                 {/* Header Fixo RESTAURADO */}
@@ -271,48 +289,92 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
 
                 {/* Conteúdo Scrollável */}
                 <div className="flex-1 overflow-y-auto p-4 sm:p-6">
-                  {/* Descrição */}
-                  <div className="mb-6">
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {selectedSector.description}
-                  </p>
-                  </div>
-
-                  {/* Benefícios */}
-                  <div className="mb-6">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-1 h-6 bg-gradient-to-b from-brand-600 to-brand-700 rounded-full"></div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                        Principais Benefícios
-                      </h3>
-                    </div>
-                    <ul className="space-y-3">
-                    {selectedSector.benefits.map((benefit, index) => (
-                        <motion.li
-                        key={index}
-                          initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-start gap-3"
-                      >
-                          <div className="w-5 h-5 bg-gradient-to-br from-brand-600 to-brand-700 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <Check className="w-3 h-3 text-white" />
+                  {selectedSector.id === 'ia' ? (
+                    /* Sistema de Abas para Simplex IA */
+                    <Tabs defaultValue="VENDAS" className="w-full">
+                      <TabsList className="grid w-full grid-cols-3 mb-6">
+                        {selectedSector.sections.map((section, index) => (
+                          <TabsTrigger key={section.title} value={section.title}>
+                            {section.title}
+                          </TabsTrigger>
+                        ))}
+                      </TabsList>
+                      {selectedSector.sections.map((section) => (
+                        <TabsContent key={section.title} value={section.title} className="space-y-4">
+                          <div className="space-y-4">
+                            {section.items.map((item, itemIndex) => (
+                              <motion.div
+                                key={itemIndex}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: itemIndex * 0.1 }}
+                                className="flex items-start gap-3"
+                              >
+                                <div className="flex-shrink-0 mt-1">
+                                  <SectorIcon name={item.icon} className="w-10 h-10" />
+                                </div>
+                                <div className="flex-1">
+                                  <h4 className="text-[#0A62FF] font-bold uppercase text-sm mb-1">
+                                    {item.subtitle}
+                                  </h4>
+                                  <p className="text-gray-600 uppercase text-xs leading-relaxed">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </motion.div>
+                            ))}
                           </div>
-                          <span className="text-gray-700 dark:text-gray-300 text-sm">
-                            {benefit}
-                          </span>
-                        </motion.li>
+                        </TabsContent>
                       ))}
-                    </ul>
-                  </div>
-                  </div>
+                    </Tabs>
+                  ) : (
+                    /* Layout padrão para outros setores */
+                    <div className="space-y-6">
+                      {selectedSector.sections.map((section, sectionIndex) => (
+                        <motion.div
+                          key={section.title}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: sectionIndex * 0.1 }}
+                          className="space-y-4"
+                        >
+                          <h3 className="text-[#0A62FF] font-bold uppercase text-lg">
+                            {section.title}
+                          </h3>
+                          <div className="space-y-3">
+                            {section.items.map((item, itemIndex) => (
+                              <motion.div
+                                key={itemIndex}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: (sectionIndex * 0.1) + (itemIndex * 0.05) }}
+                                className="flex items-start gap-3"
+                              >
+                                <div className="flex-shrink-0 mt-1">
+                                  <SectorIcon name={item.icon} className="w-10 h-10" />
+                                </div>
+                                <div className="flex-1">
+                                  <h4 className="text-[#0A62FF] font-bold uppercase text-sm mb-1">
+                                    {item.subtitle}
+                                  </h4>
+                                  <p className="text-gray-600 uppercase text-xs leading-relaxed">
+                                    {item.description}
+                                  </p>
+                                </div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
                 {/* Footer Fixo */}
                 <div className="p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
                   <Button
                     onClick={() => window.open('https://wa.me/5511999999999', '_blank')}
-                    className="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-                    size="lg"
+                    className="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 text-white shadow-lg hover:shadow-xl transition-all duration-300 h-12"
                   >
                     <MessageCircle className="w-5 h-5 mr-2" />
                     {selectedSector.cta}
@@ -325,4 +387,4 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
       </AnimatePresence>
     </div>
   );
-}
+});

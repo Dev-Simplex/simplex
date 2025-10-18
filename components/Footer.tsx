@@ -1,5 +1,6 @@
 'use client';
 
+import { memo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -21,13 +22,13 @@ const socialLinks = [
   { icon: Facebook, href: 'https://www.facebook.com/simplexsolucoes', label: 'Facebook' },
 ];
 
-export function Footer() {
-  const scrollToSection = (href: string) => {
+export const Footer = memo(function Footer() {
+  const scrollToSection = useCallback((href: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
   return (
     <footer className="relative bg-gradient-to-b from-gray-900 via-[#1a2332] to-black text-white overflow-hidden">
@@ -187,4 +188,4 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+});

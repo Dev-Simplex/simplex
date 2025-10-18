@@ -1,6 +1,8 @@
 'use client';
 
-export function GalaxyBackground() {
+import { memo } from 'react';
+
+export const GalaxyBackground = memo(function GalaxyBackground() {
   return (
     <>
       {/* Background galáxia com overlay escuro */}
@@ -8,7 +10,7 @@ export function GalaxyBackground() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(https://1yiyuhrfy1frfhlm.public.blob.vercel-storage.com/background.png)',
+            backgroundImage: 'url(https://1yiyuhrfy1frfhlm.public.blob.vercel-storage.com/testee.jpg)',
           }}
         />
         <div 
@@ -88,4 +90,4 @@ export function GalaxyBackground() {
       `}</style>
     </>
   );
-}
+});
