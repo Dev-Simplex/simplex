@@ -70,13 +70,28 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
     setSelectedSector(null);
   }, []);
 
-  // Configurações para o novo layout baseado no SVG (MENOR) - memoizadas
-  const orbitConfig = useMemo(() => ({
-    containerSize: 500,
-    centerX: 250,
-    centerY: 250,
-    orbitRadius: 180
-  }), []);
+  // Configurações para o novo layout baseado no SVG - Responsivas
+  const orbitConfig = useMemo(() => {
+    // Ajusta tamanho baseado no viewport
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 768;
+      const size = isMobile ? 350 : 500;
+      const center = size / 2;
+      const radius = isMobile ? 130 : 180;
+      return {
+        containerSize: size,
+        centerX: center,
+        centerY: center,
+        orbitRadius: radius
+      };
+    }
+    return {
+      containerSize: 500,
+      centerX: 250,
+      centerY: 250,
+      orbitRadius: 180
+    };
+  }, []);
 
   const { containerSize, centerX, centerY, orbitRadius } = orbitConfig;
 
@@ -87,8 +102,8 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
         className={`
           transition-all duration-500 ease-in-out
           ${isModalOpen
-            ? 'fixed -left-20 sm:-left-10 md:left-4 lg:left-8 xl:left-12 top-[20%] md:top-[25%] -translate-y-1/2 scale-[0.5] sm:scale-[0.6] md:scale-[0.7] lg:scale-75 z-[10000]'
-            : 'relative w-full h-full flex items-center justify-center min-h-[500px]'
+            ? 'fixed left-4 top-[15%] md:-left-20 md:left-4 lg:left-8 xl:left-12 md:top-[20%] -translate-y-1/2 scale-[0.4] sm:scale-[0.5] md:scale-[0.6] lg:scale-75 z-[10000]'
+            : 'relative w-full h-full flex items-center justify-center min-h-[300px] md:min-h-[400px] lg:min-h-[500px]'
           }
         `}
         animate={isModalOpen ? {
@@ -279,12 +294,12 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                 opacity: { duration: 0.4 },
                 scale: { duration: 0.5 }
               }}
-              className="fixed right-0 top-0 h-screen w-full md:w-[60%] lg:w-[55%] xl:w-[50%] z-[9999] flex flex-col"
+              className="fixed right-0 top-0 h-screen w-full sm:w-[85%] md:w-[65%] lg:w-[55%] xl:w-[50%] z-[9999] flex flex-col"
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
-              <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl border-l-4 border-primary dark:border-accent">
+              <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl border-l-2 md:border-l-4 border-primary dark:border-accent">
                 {/* Header Fixo RESTAURADO */}
-                <div className="relative bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 dark:from-gray-800 dark:via-gray-900 dark:to-black p-4 sm:p-6 text-white flex-shrink-0">
+                <div className="relative bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 dark:from-gray-800 dark:via-gray-900 dark:to-black p-3 sm:p-4 md:p-6 text-white flex-shrink-0">
                   <div className="absolute inset-0 opacity-10">
                     <div
                       className="absolute inset-0"
@@ -295,9 +310,9 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                     />
                   </div>
 
-                  <div className="relative flex items-start gap-4">
+                  <div className="relative flex items-start gap-3 md:gap-4">
                     {/* Logo */}
-                    <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg p-2">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-white rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg p-1.5 md:p-2">
                       <Image
                         src={selectedSector.logo}
                         alt={selectedSector.name}
@@ -307,28 +322,28 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                       />
                     </div>
 
-                    <div className="flex-1 min-w-0 pr-12">
+                    <div className="flex-1 min-w-0 pr-10 md:pr-12">
                       {/* Nome do setor */}
-                      <div className="text-xs font-semibold opacity-80 mb-1 uppercase tracking-wider">
+                      <div className="text-[10px] sm:text-xs font-semibold opacity-80 mb-0.5 md:mb-1 uppercase tracking-wider">
                         {selectedSector.name}
                       </div>
                       {/* Título */}
-                      <h2 className="text-xl sm:text-2xl font-bold leading-tight break-words whitespace-pre-line">{selectedSector.title}</h2>
+                      <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-tight break-words whitespace-pre-line">{selectedSector.title}</h2>
                     </div>
 
                     {/* Botão Fechar */}
                     <button
                       onClick={handleClose}
-                      className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all hover:scale-110 hover:rotate-90"
+                      className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all hover:scale-110 hover:rotate-90"
                       aria-label="Fechar"
                     >
-                      <X className="w-5 h-5" />
+                      <X className="w-4 h-4 md:w-5 md:h-5" />
                     </button>
                   </div>
                 </div>
 
                 {/* Conteúdo Scrollável */}
-                <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-gray-50 dark:bg-gray-950">
+                <div className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 bg-gray-50 dark:bg-gray-950">
                   {selectedSector.id === 'ia' ? (
                     /* Sistema de Abas para Simplex IA */
                     <Tabs defaultValue="VENDAS" className="w-full">
@@ -411,7 +426,7 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                 </div>
 
                 {/* Footer Fixo */}
-                <div className="p-4 sm:p-6 bg-white dark:bg-gray-800 border-t-2 border-gray-200 dark:border-gray-700 flex-shrink-0 shadow-lg dark:shadow-gray-900/50">
+                <div className="p-3 sm:p-4 md:p-6 bg-white dark:bg-gray-800 border-t-2 border-gray-200 dark:border-gray-700 flex-shrink-0 shadow-lg dark:shadow-gray-900/50">
                   <motion.div
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
@@ -422,12 +437,12 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
 
                     <Button
                       onClick={() => window.open('https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20especialista', '_blank')}
-                      className="relative w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 dark:from-accent dark:to-primary dark:hover:from-primary dark:hover:to-accent text-white shadow-lg hover:shadow-xl transition-all duration-300 h-12 overflow-hidden group"
+                      className="relative w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 dark:from-accent dark:to-primary dark:hover:from-primary dark:hover:to-accent text-white shadow-lg hover:shadow-xl transition-all duration-300 h-11 md:h-12 overflow-hidden group text-sm md:text-base"
                     >
                       {/* Shimmer Effect */}
                       <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-                      <MessageCircle className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
+                      <MessageCircle className="w-4 h-4 md:w-5 md:h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
                       <span className="relative z-10">{selectedSector.cta}</span>
                     </Button>
                   </motion.div>

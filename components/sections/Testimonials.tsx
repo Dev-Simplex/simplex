@@ -44,7 +44,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
     <section
       id="depoimentos"
       ref={sectionRef}
-      className="py-32 bg-gray-50 dark:bg-gray-900 relative overflow-hidden transition-colors duration-300"
+      className="py-16 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900 relative overflow-hidden transition-colors duration-300"
     >
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden">
@@ -64,26 +64,26 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-16 lg:mb-20"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-5 py-2.5 rounded-full mb-8"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-4 md:px-5 py-2 md:py-2.5 rounded-full mb-6 md:mb-8"
           >
-            <Award className="w-4 h-4 text-primary dark:text-accent" />
-            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-sm">Aprovado por Clientes</span>
+            <Award className="w-3 h-3 md:w-4 md:h-4 text-primary dark:text-accent" />
+            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-xs md:text-sm">Aprovado por Clientes</span>
           </motion.div>
 
-          <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 px-4">
             O Que Dizem{' '}
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               Nossos Clientes
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
             Confiança construída através de resultados reais
           </p>
         </motion.div>
@@ -100,7 +100,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
             {/* Glow Effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl opacity-0 group-hover:opacity-30 blur-2xl transition-opacity duration-700" />
 
-            <Card className="relative p-10 md:p-16 overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl">
+            <Card className="relative p-6 sm:p-8 md:p-12 lg:p-16 overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl">
               {/* Animated Border */}
               <div className="absolute inset-0 rounded-2xl">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -117,9 +117,9 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                   repeat: Infinity,
                   repeatType: "reverse"
                 }}
-                className="absolute top-8 right-8"
+                className="absolute top-4 right-4 md:top-8 md:right-8"
               >
-                <Quote className="w-20 h-20 text-accent/20" />
+                <Quote className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 text-accent/20" />
               </motion.div>
 
               {/* Stars Rating */}
@@ -127,7 +127,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="flex gap-1 mb-8 relative z-10"
+                className="flex gap-1 mb-6 md:mb-8 relative z-10"
               >
                 {[...Array(5)].map((_, i) => (
                   <motion.div
@@ -137,7 +137,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                   >
-                    <Star className="w-6 h-6 fill-accent text-accent" />
+                    <Star className="w-5 h-5 md:w-6 md:h-6 fill-accent text-accent" />
                   </motion.div>
                 ))}
               </motion.div>
@@ -151,11 +151,11 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                   transition={{ duration: 0.5, type: "spring" }}
                   className="relative z-10"
                 >
-                  <p className="text-xl md:text-2xl text-foreground/90 italic leading-relaxed mb-10 font-light">
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/90 italic leading-relaxed mb-6 md:mb-8 lg:mb-10 font-light">
                     "{current.content}"
                   </p>
 
-                  <div className="flex items-center gap-5">
+                  <div className="flex items-center gap-3 md:gap-5">
                     {/* Avatar with Pulsing Ring */}
                     <div className="relative">
                       <motion.div
@@ -170,16 +170,16 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                           repeatType: "reverse"
                         }}
                       />
-                      <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary to-accent border-4 border-white dark:border-gray-800 flex items-center justify-center text-white text-2xl font-bold shadow-xl">
+                      <div className="relative w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-br from-primary to-accent border-3 md:border-4 border-white dark:border-gray-800 flex items-center justify-center text-white text-xl md:text-2xl font-bold shadow-xl">
                         {current.name.charAt(0)}
                       </div>
                     </div>
 
                     <div>
-                      <div className="font-bold text-xl mb-1">
+                      <div className="font-bold text-base md:text-lg lg:text-xl mb-1">
                         {current.name}
                       </div>
-                      <div className="text-muted-foreground">
+                      <div className="text-muted-foreground text-xs md:text-sm lg:text-base">
                         {current.role} • <span className="text-accent">{current.company}</span>
                       </div>
                     </div>
@@ -199,18 +199,18 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="flex items-center justify-center gap-6 mt-12"
+          transition={{ delay: 0.3 }}
+          className="flex items-center justify-center gap-4 md:gap-6 mt-8 md:mt-12"
+        >
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={prevTestimonial}
+            aria-label="Depoimento anterior"
+            className="border-gray-200 dark:border-gray-700 dark:bg-gray-800 hover:border-accent/50 transition-all duration-300 hover:scale-110 w-10 h-10 md:w-12 md:h-12"
           >
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={prevTestimonial}
-              aria-label="Depoimento anterior"
-              className="border-gray-200 dark:border-gray-700 dark:bg-gray-800 hover:border-accent/50 transition-all duration-300 hover:scale-110"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </Button>
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+          </Button>
 
             <div className="flex gap-3">
               {testimonials.map((_, index) => (
@@ -242,9 +242,9 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
               size="icon"
               onClick={nextTestimonial}
               aria-label="Próximo depoimento"
-              className="border-gray-200 dark:border-gray-700 dark:bg-gray-800 hover:border-accent/50 transition-all duration-300 hover:scale-110"
+              className="border-gray-200 dark:border-gray-700 dark:bg-gray-800 hover:border-accent/50 transition-all duration-300 hover:scale-110 w-10 h-10 md:w-12 md:h-12"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
             </Button>
           </motion.div>
         </div>

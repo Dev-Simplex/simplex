@@ -374,3 +374,52 @@ body.modal-open [data-chatwoot-widget] {
   pointer-events: none !important;
 }
 
+/* Mobile Touch Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Melhor scroll momentum em dispositivos touch */
+  * {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  
+  /* Área de toque mínima de 44px para acessibilidade */
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Feedback visual em touch */
+  button:active,
+  a:active {
+    opacity: 0.7;
+  }
+}
+
+/* Prevenir zoom em inputs no iOS */
+@media screen and (max-width: 767px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+/* Melhor performance em animações mobile */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Safe area para devices com notch */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+

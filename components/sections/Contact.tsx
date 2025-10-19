@@ -18,7 +18,7 @@ export function Contact() {
     <section
       id="contato"
       ref={sectionRef}
-      className="py-32 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 relative overflow-hidden transition-colors duration-300"
+      className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 relative overflow-hidden transition-colors duration-300"
     >
       {/* Decorative Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px]" />
@@ -45,27 +45,27 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-16 lg:mb-20"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-5 py-2.5 rounded-full mb-8"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-4 md:px-5 py-2 md:py-2.5 rounded-full mb-6 md:mb-8"
           >
-            <Zap className="w-4 h-4 text-primary dark:text-accent" />
-            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-sm">Contato Rápido</span>
+            <Zap className="w-3 h-3 md:w-4 md:h-4 text-primary dark:text-accent" />
+            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-xs md:text-sm">Contato Rápido</span>
           </motion.div>
 
-          <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 px-4">
             Pronto para{' '}
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               Transformar
             </span>{' '}
             seu Negócio?
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
             Conecte-se com nossa equipe especializada e descubra como podemos impulsionar seu negócio com tecnologia de ponta
           </p>
         </motion.div>
@@ -76,12 +76,12 @@ export function Contact() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ type: "spring", stiffness: 100 }}
-          className="max-w-5xl mx-auto mb-16 group"
+          className="max-w-5xl mx-auto mb-12 md:mb-16 group"
         >
           {/* Subtle Glow */}
           <div className="absolute -inset-6 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl opacity-0 group-hover:opacity-40 blur-3xl transition-opacity duration-700" />
 
-          <Card className="relative p-10 md:p-12 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl overflow-hidden">
+          <Card className="relative p-6 sm:p-8 md:p-10 lg:p-12 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl overflow-hidden">
             {/* Shimmer/Shine Effect */}
             <motion.div
               className="absolute inset-0 -translate-x-full"
@@ -96,12 +96,12 @@ export function Contact() {
               <div className="h-full w-1/2 bg-gradient-to-r from-transparent via-primary/10 to-transparent skew-x-12" />
             </motion.div>
 
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative z-10">
               <div className="text-center md:text-left flex-1">
-                <h3 className="text-3xl font-bold mb-3">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 md:mb-3">
                   Diagnóstico Técnico Gratuito
                 </h3>
-                <p className="text-muted-foreground text-lg">
+                <p className="text-muted-foreground text-sm md:text-base lg:text-lg">
                   Análise completa da sua infraestrutura com recomendações personalizadas
                 </p>
               </div>
@@ -109,18 +109,19 @@ export function Contact() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="w-full md:w-auto"
               >
                 <Button
                   size="lg"
                   onClick={() => window.open('https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20especialista', '_blank')}
-                  className="relative bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white shadow-2xl shadow-accent/50 px-8 py-6 text-lg font-bold group/btn overflow-hidden"
+                  className="relative w-full md:w-auto bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-white shadow-2xl shadow-accent/50 px-6 py-4 md:px-8 md:py-6 text-base md:text-lg font-bold group/btn overflow-hidden"
                 >
                   {/* Button Inner Shimmer */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
 
-                  <FaWhatsapp className="w-6 h-6 mr-2 relative z-10" />
+                  <FaWhatsapp className="w-5 h-5 md:w-6 md:h-6 mr-2 relative z-10" />
                   <span className="relative z-10">Agendar Agora</span>
-                  <ArrowRight className="w-6 h-6 ml-2 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 md:w-6 md:h-6 ml-2 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
                 </Button>
               </motion.div>
             </div>
@@ -128,7 +129,7 @@ export function Contact() {
         </motion.div>
 
         {/* Cards de Contato */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
           {[
             {
               icon: FaWhatsapp,
@@ -161,24 +162,24 @@ export function Contact() {
               {/* Subtle Glow on Hover */}
               <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-40 blur-xl transition-opacity duration-500" />
 
-              <Card className="relative p-8 h-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 group-hover:border-accent/30 transition-all duration-300 shadow-lg group-hover:shadow-xl">
-                <div className="flex flex-col items-center text-center gap-6">
+              <Card className="relative p-6 md:p-8 h-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 group-hover:border-accent/30 transition-all duration-300 shadow-lg group-hover:shadow-xl">
+                <div className="flex flex-col items-center text-center gap-4 md:gap-6">
                   {/* Animated Icon */}
                   <div className="relative">
                     <motion.div
-                      className="w-20 h-20 bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-accent/20 rounded-2xl flex items-center justify-center relative z-10 group-hover:border-accent/40 transition-colors"
+                      className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-accent/20 rounded-2xl flex items-center justify-center relative z-10 group-hover:border-accent/40 transition-colors"
                       whileHover={{ rotate: 360, scale: 1.1 }}
                       transition={{ duration: 0.6 }}
                     >
-                      <item.icon className="w-10 h-10 text-accent" />
+                      <item.icon className="w-8 h-8 md:w-10 md:h-10 text-accent" />
                     </motion.div>
                   </div>
 
                   <div>
-                    <h3 className="font-bold mb-3 text-xl">
+                    <h3 className="font-bold mb-2 md:mb-3 text-lg md:text-xl">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-4">
+                    <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
                       {item.description}
                     </p>
 
@@ -213,22 +214,22 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="max-w-6xl mx-auto mt-20"
+          className="max-w-6xl mx-auto mt-12 md:mt-16 lg:mt-20"
         >
-          <div className="grid md:grid-cols-2 gap-8 items-start">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-start">
             {/* Informações de Endereço */}
-            <Card className="p-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg relative z-10">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-accent" />
+            <Card className="p-6 md:p-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg relative z-10">
+              <div className="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 md:w-6 md:h-6 text-accent" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">Nossa Localização</h3>
-                  <p className="text-muted-foreground">Venha nos visitar</p>
+                  <h3 className="text-xl md:text-2xl font-bold mb-1 md:mb-2">Nossa Localização</h3>
+                  <p className="text-muted-foreground text-sm md:text-base">Venha nos visitar</p>
                 </div>
               </div>
 
-              <div className="space-y-3 text-muted-foreground">
+              <div className="space-y-2 md:space-y-3 text-muted-foreground text-sm md:text-base">
                 <p className="flex items-start gap-2">
                   <span className="text-accent mt-1">•</span>
                   <span>
@@ -271,13 +272,13 @@ export function Contact() {
                 <iframe
                   src="https://maps.google.com/maps?q=-11.854281,-55.509909&hl=pt-BR&z=17&output=embed"
                   width="100%"
-                  height="400"
+                  height="300"
                   style={{ border: 0, pointerEvents: 'auto' }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Localização Simplex Soluções - Sinop, MT"
-                  className="w-full cursor-pointer relative z-10"
+                  className="w-full cursor-pointer relative z-10 md:h-[400px]"
                 ></iframe>
               </div>
             </Card>
@@ -290,11 +291,11 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="text-center mt-16"
+          className="text-center mt-12 md:mt-16"
         >
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-6 py-3 rounded-full">
+          <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-4 md:px-6 py-2.5 md:py-3 rounded-full">
             <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground text-xs md:text-sm">
               Tempo médio de resposta:{' '}
               <span className="text-accent font-bold">2 horas úteis</span>
             </p>

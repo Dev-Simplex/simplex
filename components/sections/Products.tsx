@@ -34,7 +34,7 @@ export function Products({ products }: ProductsProps) {
     <section
       id="produtos"
       ref={sectionRef}
-      className="py-32 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300"
+      className="py-16 md:py-24 lg:py-32 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300"
     >
       {/* Subtle Gradient Orbs */}
       <motion.div
@@ -58,26 +58,26 @@ export function Products({ products }: ProductsProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-16 lg:mb-20"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-5 py-2.5 rounded-full mb-8"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-4 md:px-5 py-2 md:py-2.5 rounded-full mb-6 md:mb-8"
           >
-            <Sparkles className="w-4 h-4 text-primary dark:text-accent" />
-            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-sm">Produtos Premium</span>
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary dark:text-accent" />
+            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-xs md:text-sm">Produtos Premium</span>
           </motion.div>
 
-          <h2 className="text-5xl lg:text-6xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
             Nossos{' '}
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               Produtos
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-4">
             Soluções completas de atendimento omnichannel, desenvolvidas para escalar seu negócio
           </p>
         </motion.div>

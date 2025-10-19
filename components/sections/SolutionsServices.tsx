@@ -43,7 +43,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
   return (
     <section
       id="solucoes-servicos"
-      className="py-32 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300"
+      className="py-16 md:py-24 lg:py-32 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300"
       onMouseMove={handleMouseMove}
       ref={sectionRef}
     >
@@ -71,7 +71,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-16 lg:mb-20"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -84,13 +84,13 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
             <span className="text-foreground/80 dark:text-foreground/90 font-medium text-sm">Soluções Sob Medida</span>
           </motion.div>
 
-          <h2 className="text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">
             Soluções &{' '}
             <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               Serviços
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Tecnologia que impulsiona o crescimento do seu negócio
           </p>
         </motion.div>
@@ -101,21 +101,21 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="flex items-center justify-center gap-4 mb-16"
+          className="flex items-center justify-center gap-2 md:gap-4 mb-12 md:mb-16 px-4"
         >
-          <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-2 border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
+          <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-xl md:rounded-2xl p-1.5 md:p-2 border border-gray-200/50 dark:border-gray-700/50 shadow-lg w-full max-w-md md:max-w-none md:w-auto">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`relative px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${activeTab === 'overview'
-                  ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
-                  : 'text-muted-foreground hover:text-foreground'
+              className={`relative px-4 py-2.5 md:px-6 lg:px-8 md:py-3 lg:py-4 rounded-lg md:rounded-xl font-semibold transition-all duration-300 text-xs sm:text-sm md:text-base ${activeTab === 'overview'
+                ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
+                : 'text-muted-foreground hover:text-foreground'
                 }`}
             >
-              Visão Geral
-              <span className="ml-2 text-xs opacity-70">6</span>
+              <span className="block sm:inline">Visão Geral</span>
+              <span className="ml-1 md:ml-2 text-[10px] md:text-xs opacity-70">6</span>
               {activeTab === 'overview' && (
                 <motion.div
-                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white dark:bg-accent rounded-full"
+                  className="absolute -bottom-1.5 md:-bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 md:w-2 md:h-2 bg-white dark:bg-accent rounded-full"
                   layoutId="activeTabIndicator"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
@@ -123,16 +123,17 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
             </button>
             <button
               onClick={() => setActiveTab('all')}
-              className={`relative px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${activeTab === 'all'
-                  ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
-                  : 'text-muted-foreground hover:text-foreground'
+              className={`relative px-4 py-2.5 md:px-6 lg:px-8 md:py-3 lg:py-4 rounded-lg md:rounded-xl font-semibold transition-all duration-300 text-xs sm:text-sm md:text-base ${activeTab === 'all'
+                ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
+                : 'text-muted-foreground hover:text-foreground'
                 }`}
             >
-              Todos os Serviços
-              <span className="ml-2 text-xs opacity-70">12</span>
+              <span className="hidden sm:inline">Todos os Serviços</span>
+              <span className="sm:hidden">Todos</span>
+              <span className="ml-1 md:ml-2 text-[10px] md:text-xs opacity-70">12</span>
               {activeTab === 'all' && (
                 <motion.div
-                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white dark:bg-accent rounded-full"
+                  className="absolute -bottom-1.5 md:-bottom-2 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 md:w-2 md:h-2 bg-white dark:bg-accent rounded-full"
                   layoutId="activeTabIndicator"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
@@ -150,7 +151,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto"
             >
               {solutions.map((solution, index) => {
                 const Icon = (Icons[solution.icon as keyof typeof Icons] || Icons.Box) as LucideIcon;
@@ -176,7 +177,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                     style={{ perspective: 1000 }}
                   >
                     {/* Glassmorphism Card */}
-                    <Card className="relative p-8 h-full bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden group-hover:border-accent/30">
+                    <Card className="relative p-4 md:p-6 lg:p-8 h-full bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden group-hover:border-accent/30">
                       {/* Gradient Overlay on Hover */}
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -198,7 +199,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                         </motion.div>
 
                         {/* Title com Gradient no Hover */}
-                        <h3 className="text-2xl font-bold mb-5 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-3 md:mb-4 lg:mb-5 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-accent group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                           {solution.title}
                         </h3>
 
@@ -248,7 +249,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
+              className="grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto"
             >
               {services.map((service, index) => {
                 const Icon = (Icons[service.icon as keyof typeof Icons] || Icons.Box) as LucideIcon;
@@ -274,7 +275,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                     style={{ perspective: 1000 }}
                   >
                     {/* Glassmorphism Card */}
-                    <Card className="relative p-8 h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-gray-200/60 dark:border-gray-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:border-accent/30">
+                    <Card className="relative p-4 md:p-6 lg:p-8 h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-gray-200/60 dark:border-gray-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:border-accent/30">
                       {/* Gradient Overlay on Hover */}
                       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
@@ -296,7 +297,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                         </motion.div>
 
                         {/* Title com Gradient no Hover */}
-                        <h3 className="text-2xl font-bold mb-6 group-hover:bg-gradient-to-r group-hover:from-accent group-hover:to-primary group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                        <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-4 md:mb-5 lg:mb-6 group-hover:bg-gradient-to-r group-hover:from-accent group-hover:to-primary group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                           {service.title}
                         </h3>
 
@@ -348,9 +349,9 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="text-center mt-16"
+          className="text-center mt-12 md:mt-16"
         >
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-sm md:text-base lg:text-lg px-4">
             Cada solução é{' '}
             <span className="font-semibold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               personalizada
