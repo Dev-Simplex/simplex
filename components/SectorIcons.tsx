@@ -63,6 +63,12 @@ export function SectorIcon({ name, className = "w-10 h-10" }: SectorIconProps) {
     'zabbix': '/images/partners/zabbix.svg',
     'grafana': '/images/partners/grafana.svg',
     'glpi': '/images/partners/glpi.svg',
+    'n8n': '/images/partners/n8n.svg',
+    'nodered': '/images/partners/nodered.svg',
+    'n8n-nodered': '/images/partners/n8n.svg', // Usa logo do N8N por padrão
+    'bitdefender': '/images/partners/bitdefender.svg',
+    'fortinet': '/images/partners/fortinet.svg',
+    'opnsense': '/images/partners/opnsense.svg',
   };
 
   // Se for um logo oficial, renderizar imagem

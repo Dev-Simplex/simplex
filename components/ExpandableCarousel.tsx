@@ -67,8 +67,8 @@ export function ExpandableCarousel({ cases }: ExpandableCarouselProps) {
               className={`
                 relative flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer
                 transition-all duration-500 ease-in-out
-                ${isActive 
-                  ? 'w-[270px] md:w-[400px] lg:w-[500px] shadow-2xl' 
+                ${isActive
+                  ? 'w-[270px] md:w-[400px] lg:w-[500px] shadow-2xl'
                   : 'w-[200px] md:w-[260px] lg:w-[320px] shadow-lg hover:shadow-xl'
                 }
                 h-[280px] md:h-[360px] lg:h-[400px]
@@ -87,8 +87,8 @@ export function ExpandableCarousel({ cases }: ExpandableCarouselProps) {
                 className={`
                   absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white z-20
                   transition-transform duration-500 ease-in-out
-                  ${isActive 
-                    ? 'translate-y-0' 
+                  ${isActive
+                    ? 'translate-y-0'
                     : 'translate-y-[calc(100%-54px)] md:translate-y-[calc(100%-62px)]'
                   }
                 `}
@@ -108,8 +108,8 @@ export function ExpandableCarousel({ cases }: ExpandableCarouselProps) {
                   className={`
                     text-sm md:text-base text-gray-200 mb-4 leading-relaxed
                     transition-all duration-500 ease-in-out delay-100
-                    ${isActive 
-                      ? 'opacity-100 translate-y-0' 
+                    ${isActive
+                      ? 'opacity-100 translate-y-0'
                       : 'opacity-0 translate-y-8'
                     }
                   `}
@@ -122,8 +122,8 @@ export function ExpandableCarousel({ cases }: ExpandableCarouselProps) {
                   className={`
                     grid grid-cols-3 gap-2 md:gap-4 mb-4
                     transition-all duration-500 ease-in-out delay-150
-                    ${isActive 
-                      ? 'opacity-100 translate-y-0' 
+                    ${isActive
+                      ? 'opacity-100 translate-y-0'
                       : 'opacity-0 translate-y-8'
                     }
                   `}
@@ -147,14 +147,14 @@ export function ExpandableCarousel({ cases }: ExpandableCarouselProps) {
                   className={`
                     w-full bg-white/10 hover:bg-white/20 border-white/30 text-white
                     transition-all duration-500 ease-in-out delay-200
-                    ${isActive 
-                      ? 'opacity-100 translate-y-0' 
+                    ${isActive
+                      ? 'opacity-100 translate-y-0'
                       : 'opacity-0 translate-y-8 pointer-events-none'
                     }
                   `}
                   onClick={(e) => {
                     e.stopPropagation();
-                    window.open('https://wa.me/5511999999999', '_blank');
+                    window.open('https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es', '_blank');
                   }}
                 >
                   Ver Detalhes

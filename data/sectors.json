@@ -166,9 +166,14 @@
             "description": "GERENCIAMENTO DE CHAMADOS, PROBLEMAS, PROJETOS E ATIVOS"
           },
           {
-            "icon": "n8n-nodered",
-            "subtitle": "N8N | NODERED",
-            "description": "CRIAÇÃO E GERENCIAMENTO DE FLUXOS DE AUTOMAÇÃO"
+            "icon": "n8n",
+            "subtitle": "N8N",
+            "description": "AUTOMAÇÃO DE WORKFLOWS E INTEGRAÇÕES"
+          },
+          {
+            "icon": "nodered",
+            "subtitle": "NODE-RED",
+            "description": "PROGRAMAÇÃO VISUAL DE FLUXOS IOT"
           },
           {
             "icon": "ia",

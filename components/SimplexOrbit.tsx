@@ -379,13 +379,25 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
 
                 {/* Footer Fixo */}
                 <div className="p-4 sm:p-6 bg-white dark:bg-gray-800 border-t-2 border-gray-200 dark:border-gray-700 flex-shrink-0 shadow-lg dark:shadow-gray-900/50">
-                  <Button
-                    onClick={() => window.open('https://wa.me/5511999999999', '_blank')}
-                    className="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 dark:from-accent dark:to-primary dark:hover:from-primary dark:hover:to-accent text-white shadow-lg hover:shadow-xl transition-all duration-300 h-12"
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative group"
                   >
-                    <MessageCircle className="w-5 h-5 mr-2" />
-                    {selectedSector.cta}
-                  </Button>
+                    {/* Glow Effect */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-accent/50 rounded-lg opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
+
+                    <Button
+                      onClick={() => window.open('https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20especialista', '_blank')}
+                      className="relative w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 dark:from-accent dark:to-primary dark:hover:from-primary dark:hover:to-accent text-white shadow-lg hover:shadow-xl transition-all duration-300 h-12 overflow-hidden group"
+                    >
+                      {/* Shimmer Effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                      <MessageCircle className="w-5 h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
+                      <span className="relative z-10">{selectedSector.cta}</span>
+                    </Button>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
