@@ -41,15 +41,15 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
   };
 
   return (
-    <section 
-      id="solucoes-servicos" 
-      className="py-32 bg-white relative overflow-hidden"
+    <section
+      id="solucoes-servicos"
+      className="py-32 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300"
       onMouseMove={handleMouseMove}
       ref={sectionRef}
     >
       {/* Grid Pattern Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px]" />
-      
+
       {/* Spotlight Effect */}
       <motion.div
         className="absolute w-96 h-96 rounded-full pointer-events-none"
@@ -78,10 +78,10 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10 px-5 py-2.5 rounded-full mb-8"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-5 py-2.5 rounded-full mb-8"
           >
-            <Lightbulb className="w-4 h-4 text-primary" />
-            <span className="text-foreground/80 font-medium text-sm">Soluções Sob Medida</span>
+            <Lightbulb className="w-4 h-4 text-primary dark:text-accent" />
+            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-sm">Soluções Sob Medida</span>
           </motion.div>
 
           <h2 className="text-5xl font-bold mb-6">
@@ -103,20 +103,19 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
           transition={{ delay: 0.3 }}
           className="flex items-center justify-center gap-4 mb-16"
         >
-          <div className="relative bg-white/60 backdrop-blur-sm rounded-2xl p-2 border border-gray-200/50 shadow-lg">
+          <div className="relative bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl p-2 border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`relative px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${
-                activeTab === 'overview'
+              className={`relative px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${activeTab === 'overview'
                   ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
                   : 'text-muted-foreground hover:text-foreground'
-              }`}
+                }`}
             >
               Visão Geral
               <span className="ml-2 text-xs opacity-70">6</span>
               {activeTab === 'overview' && (
                 <motion.div
-                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full"
+                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white dark:bg-accent rounded-full"
                   layoutId="activeTabIndicator"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
@@ -124,17 +123,16 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
             </button>
             <button
               onClick={() => setActiveTab('all')}
-              className={`relative px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${
-                activeTab === 'all'
+              className={`relative px-8 py-4 rounded-xl font-semibold transition-all duration-300 ${activeTab === 'all'
                   ? 'bg-gradient-to-r from-primary to-accent text-white shadow-lg'
                   : 'text-muted-foreground hover:text-foreground'
-              }`}
+                }`}
             >
               Todos os Serviços
               <span className="ml-2 text-xs opacity-70">12</span>
               {activeTab === 'all' && (
                 <motion.div
-                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full"
+                  className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white dark:bg-accent rounded-full"
                   layoutId="activeTabIndicator"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
@@ -163,13 +161,13 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    transition={{ 
+                    transition={{
                       delay: index * 0.1,
                       duration: 0.5,
                       type: "spring",
                       stiffness: 100
                     }}
-                    whileHover={{ 
+                    whileHover={{
                       y: -8,
                       rotateY: 5,
                       transition: { duration: 0.3 }
@@ -178,10 +176,10 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                     style={{ perspective: 1000 }}
                   >
                     {/* Glassmorphism Card */}
-                    <Card className="relative p-8 h-full bg-white/60 backdrop-blur-xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden group-hover:border-accent/30">
+                    <Card className="relative p-8 h-full bg-white/60 dark:bg-gray-800/60 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden group-hover:border-accent/30">
                       {/* Gradient Overlay on Hover */}
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
+
                       {/* Glow Effect */}
                       <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-40 blur-lg transition-opacity duration-500 -z-10" />
 
@@ -207,7 +205,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                         {/* Points List */}
                         <ul className="space-y-3">
                           {solution.points.map((point, idx) => (
-                            <motion.li 
+                            <motion.li
                               key={idx}
                               initial={{ opacity: 0, x: -10 }}
                               whileInView={{ opacity: 1, x: 0 }}
@@ -215,7 +213,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                               transition={{ delay: index * 0.1 + idx * 0.05 }}
                               className="flex items-start gap-3 text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300"
                             >
-                              <motion.span 
+                              <motion.span
                                 className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-primary to-accent mt-2 flex-shrink-0"
                                 whileHover={{ scale: 2 }}
                               />
@@ -225,7 +223,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                         </ul>
 
                         {/* Decorative Line */}
-                        <motion.div 
+                        <motion.div
                           className="mt-6 h-1 bg-gradient-to-r from-primary via-accent to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                           initial={{ scaleX: 0 }}
                           whileInView={{ scaleX: 1 }}
@@ -261,13 +259,13 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                     initial={{ opacity: 0, y: 30, scale: 0.95 }}
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    transition={{ 
+                    transition={{
                       delay: index * 0.08,
                       duration: 0.5,
                       type: "spring",
                       stiffness: 100
                     }}
-                    whileHover={{ 
+                    whileHover={{
                       y: -6,
                       rotateY: 3,
                       transition: { duration: 0.3 }
@@ -276,10 +274,10 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                     style={{ perspective: 1000 }}
                   >
                     {/* Glassmorphism Card */}
-                    <Card className="relative p-8 h-full bg-white/70 backdrop-blur-xl border border-gray-200/60 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:border-accent/30">
+                    <Card className="relative p-8 h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-xl border border-gray-200/60 dark:border-gray-700/60 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden group-hover:border-accent/30">
                       {/* Gradient Overlay on Hover */}
                       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
+
                       {/* Glow Effect */}
                       <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-primary/20 rounded-2xl opacity-0 group-hover:opacity-50 blur-lg transition-opacity duration-500 -z-10" />
 
@@ -305,7 +303,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                         {/* Points List */}
                         <ul className="space-y-3">
                           {service.points.map((point, idx) => (
-                            <motion.li 
+                            <motion.li
                               key={idx}
                               initial={{ opacity: 0, x: -10 }}
                               whileInView={{ opacity: 1, x: 0 }}
@@ -313,7 +311,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                               transition={{ delay: index * 0.08 + idx * 0.05 }}
                               className="flex items-start gap-3 text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300"
                             >
-                              <motion.span 
+                              <motion.span
                                 className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-accent to-primary mt-2 flex-shrink-0"
                                 whileHover={{ scale: 2 }}
                               />
@@ -323,7 +321,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                         </ul>
 
                         {/* Decorative Line */}
-                        <motion.div 
+                        <motion.div
                           className="mt-6 h-1 bg-gradient-to-r from-accent via-primary to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                           initial={{ scaleX: 0 }}
                           whileInView={{ scaleX: 1 }}

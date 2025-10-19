@@ -37,7 +37,7 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <GalaxyBackground />
-      
+
       {/* Spotlight Effect */}
       <motion.div
         className="absolute w-96 h-96 rounded-full pointer-events-none z-[1]"
@@ -85,7 +85,7 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               {/* Botão Agendar Diagnóstico com animações */}
               <motion.div
-                whileHover={{ 
+                whileHover={{
                   y: -6,
                   scale: 1.05,
                   transition: { duration: 0.3, type: "spring", stiffness: 300 }
@@ -96,7 +96,7 @@ export function Hero() {
               >
                 {/* Glow Effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-accent/50 rounded-lg opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500 -z-10" />
-                
+
                 <Button
                   size="lg"
                   onClick={() => scrollToSection('#contato')}
@@ -106,7 +106,7 @@ export function Hero() {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                   </div>
-                  
+
                   <Calendar className="w-5 h-5 mr-2 relative z-10" />
                   <span className="relative z-10">Agendar Diagnóstico</span>
                 </Button>
@@ -114,7 +114,7 @@ export function Hero() {
 
               {/* Botão Ver Soluções com animações */}
               <motion.div
-                whileHover={{ 
+                whileHover={{
                   y: -6,
                   scale: 1.05,
                   transition: { duration: 0.3, type: "spring", stiffness: 300 }
@@ -125,7 +125,7 @@ export function Hero() {
               >
                 {/* Glow Effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-white/30 to-accent/30 rounded-lg opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-500 -z-10" />
-                
+
                 <Button
                   size="lg"
                   variant="outline"
@@ -136,7 +136,7 @@ export function Hero() {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
                     <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
                   </div>
-                  
+
                   <span className="relative z-10">Ver Soluções</span>
                   <ArrowRight className="w-5 h-5 ml-2 relative z-10" />
                 </Button>

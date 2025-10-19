@@ -15,24 +15,24 @@ export function Contact() {
   });
 
   return (
-    <section 
-      id="contato" 
+    <section
+      id="contato"
       ref={sectionRef}
-      className="py-32 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden"
+      className="py-32 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 relative overflow-hidden transition-colors duration-300"
     >
       {/* Decorative Background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:40px_40px]" />
 
       {/* Subtle Gradient Orbs */}
-      <motion.div 
-        style={{ 
+      <motion.div
+        style={{
           y: useTransform(scrollYProgress, [0, 1], [0, -200]),
           opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.15, 0.3, 0.15])
         }}
         className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-3xl"
       />
-      <motion.div 
-        style={{ 
+      <motion.div
+        style={{
           y: useTransform(scrollYProgress, [0, 1], [0, 200]),
           opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.15, 0.3, 0.15])
         }}
@@ -52,10 +52,10 @@ export function Contact() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10 px-5 py-2.5 rounded-full mb-8"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-5 py-2.5 rounded-full mb-8"
           >
-            <Zap className="w-4 h-4 text-primary" />
-            <span className="text-foreground/80 font-medium text-sm">Contato Rápido</span>
+            <Zap className="w-4 h-4 text-primary dark:text-accent" />
+            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-sm">Contato Rápido</span>
           </motion.div>
 
           <h2 className="text-5xl lg:text-6xl font-bold mb-6">
@@ -80,8 +80,8 @@ export function Contact() {
         >
           {/* Subtle Glow */}
           <div className="absolute -inset-6 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl opacity-0 group-hover:opacity-40 blur-3xl transition-opacity duration-700" />
-          
-          <Card className="relative p-10 md:p-12 bg-white border border-gray-200 shadow-xl overflow-hidden">
+
+          <Card className="relative p-10 md:p-12 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl overflow-hidden">
             {/* Shimmer/Shine Effect */}
             <motion.div
               className="absolute inset-0 -translate-x-full"
@@ -105,7 +105,7 @@ export function Contact() {
                   Análise completa da sua infraestrutura com recomendações personalizadas
                 </p>
               </div>
-              
+
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -117,7 +117,7 @@ export function Contact() {
                 >
                   {/* Button Inner Shimmer */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
-                  
+
                   <FaWhatsapp className="w-6 h-6 mr-2 relative z-10" />
                   <span className="relative z-10">Agendar Agora</span>
                   <ArrowRight className="w-6 h-6 ml-2 relative z-10 group-hover/btn:translate-x-1 transition-transform" />
@@ -160,8 +160,8 @@ export function Contact() {
             >
               {/* Subtle Glow on Hover */}
               <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl opacity-0 group-hover:opacity-40 blur-xl transition-opacity duration-500" />
-              
-              <Card className="relative p-8 h-full bg-white border border-gray-200 group-hover:border-accent/30 transition-all duration-300 shadow-lg group-hover:shadow-xl">
+
+              <Card className="relative p-8 h-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 group-hover:border-accent/30 transition-all duration-300 shadow-lg group-hover:shadow-xl">
                 <div className="flex flex-col items-center text-center gap-6">
                   {/* Animated Icon */}
                   <div className="relative">
@@ -181,7 +181,7 @@ export function Contact() {
                     <p className="text-sm text-muted-foreground mb-4">
                       {item.description}
                     </p>
-                    
+
                     {item.link ? (
                       <a
                         href={item.link}
@@ -217,7 +217,7 @@ export function Contact() {
         >
           <div className="grid md:grid-cols-2 gap-8 items-start">
             {/* Informações de Endereço */}
-            <Card className="p-8 bg-white border border-gray-200 shadow-lg relative z-10">
+            <Card className="p-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg relative z-10">
               <div className="flex items-start gap-4 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-6 h-6 text-accent" />
@@ -266,7 +266,7 @@ export function Contact() {
             </Card>
 
             {/* Google Maps Iframe */}
-            <Card className="p-2 bg-white border border-gray-200 shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+            <Card className="p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
               <div className="rounded-lg overflow-hidden relative z-10">
                 <iframe
                   src="https://maps.google.com/maps?q=-11.854281,-55.509909&hl=pt-BR&z=17&output=embed"
@@ -292,7 +292,7 @@ export function Contact() {
           transition={{ delay: 0.5 }}
           className="text-center mt-16"
         >
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10 px-6 py-3 rounded-full">
+          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-6 py-3 rounded-full">
             <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
             <p className="text-muted-foreground">
               Tempo médio de resposta:{' '}

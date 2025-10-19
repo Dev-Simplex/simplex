@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useMemo, useCallback, memo } from 'react';
+import { useState, useMemo, useCallback, memo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { SectorIcon } from '@/components/SectorIcons';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useModal } from '@/components/providers/ModalProvider';
 
 interface SectionItem {
   icon: string;
@@ -36,7 +37,13 @@ interface SimplexOrbitProps {
 export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbitProps) {
   const [selectedSector, setSelectedSector] = useState<Sector | null>(null);
   const [hoveredSector, setHoveredSector] = useState<string | null>(null);
-  const [clickedPosition, setClickedPosition] = useState<{x: number, y: number} | null>(null);
+  const [clickedPosition, setClickedPosition] = useState<{ x: number, y: number } | null>(null);
+  const { setIsModalOpen } = useModal();
+
+  // Atualizar o context quando o modal abrir/fechar
+  useEffect(() => {
+    setIsModalOpen(selectedSector !== null);
+  }, [selectedSector, setIsModalOpen]);
 
   const handleSectorClick = useCallback((sector: Sector) => {
     setSelectedSector(sector);
@@ -78,7 +85,7 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
         </div>
 
         {/* Círculo gradiente moderno */}
-        <svg 
+        <svg
           className="absolute inset-0 w-full h-full pointer-events-none"
           viewBox="0 0 500 500"
         >
@@ -125,11 +132,11 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.1, // Reduzido de 1.2 para 1.1
                 zIndex: 30,
                 filter: "drop-shadow(0 5px 10px rgba(200, 200, 200, 0.3))", // Sombra menor
-                transition: { 
+                transition: {
                   type: "spring",
                   stiffness: 300,
                   damping: 15
@@ -150,7 +157,7 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
               )}
 
               {/* Logo centralizada DENTRO da pétala */}
-              <div 
+              <div
                 className="w-full h-full flex items-center justify-center relative z-10"
                 onClick={(e) => {
                   const logoRect = e.currentTarget.getBoundingClientRect();
@@ -195,17 +202,17 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
       {clickedPosition && (
         <motion.div
           className="fixed w-20 h-20 bg-gray-300 rounded-full shadow-2xl z-[10000]"
-          initial={{ 
+          initial={{
             left: clickedPosition.x - 40, // -40 = metade de 80px
             top: clickedPosition.y - 40,  // -40 = metade de 80px
-            scale: 1, 
-            opacity: 1 
+            scale: 1,
+            opacity: 1
           }}
-          animate={{ 
-            left: typeof window !== 'undefined' ? window.innerWidth - 100 : 0, 
-            top: 50, 
-            scale: 0, 
-            opacity: 0 
+          animate={{
+            left: typeof window !== 'undefined' ? window.innerWidth - 100 : 0,
+            top: 50,
+            scale: 0,
+            opacity: 0
           }}
           transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
           onAnimationComplete={() => setClickedPosition(null)}
@@ -232,7 +239,7 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
               initial={{ x: '100%', opacity: 0, scale: 0.9 }}
               animate={{ x: 0, opacity: 1, scale: 1 }}
               exit={{ x: '100%', opacity: 0, scale: 0.9 }}
-              transition={{ 
+              transition={{
                 duration: 1.2,
                 ease: [0.4, 0, 0.2, 1],
                 opacity: { duration: 0.9 },
@@ -242,9 +249,9 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
               style={{ zIndex: 9999 }}
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
-              <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl">
+              <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl border-l-4 border-primary dark:border-accent">
                 {/* Header Fixo RESTAURADO */}
-                <div className="relative bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 p-4 sm:p-6 text-white flex-shrink-0">
+                <div className="relative bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 dark:from-gray-800 dark:via-gray-900 dark:to-black p-4 sm:p-6 text-white flex-shrink-0">
                   <div className="absolute inset-0 opacity-10">
                     <div
                       className="absolute inset-0"
@@ -288,7 +295,7 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                 </div>
 
                 {/* Conteúdo Scrollável */}
-                <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+                <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-gray-50 dark:bg-gray-950">
                   {selectedSector.id === 'ia' ? (
                     /* Sistema de Abas para Simplex IA */
                     <Tabs defaultValue="VENDAS" className="w-full">
@@ -314,10 +321,10 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                                   <SectorIcon name={item.icon} className="w-10 h-10" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="text-[#0A62FF] font-bold uppercase text-sm mb-1">
+                                  <h4 className="text-primary dark:text-accent font-bold uppercase text-sm mb-1">
                                     {item.subtitle}
                                   </h4>
-                                  <p className="text-gray-600 uppercase text-xs leading-relaxed">
+                                  <p className="text-gray-600 dark:text-gray-300 uppercase text-xs leading-relaxed">
                                     {item.description}
                                   </p>
                                 </div>
@@ -338,7 +345,7 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                           transition={{ delay: sectionIndex * 0.1 }}
                           className="space-y-4"
                         >
-                          <h3 className="text-[#0A62FF] font-bold uppercase text-lg">
+                          <h3 className="text-primary dark:text-accent font-bold uppercase text-lg">
                             {section.title}
                           </h3>
                           <div className="space-y-3">
@@ -354,10 +361,10 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                                   <SectorIcon name={item.icon} className="w-10 h-10" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="text-[#0A62FF] font-bold uppercase text-sm mb-1">
+                                  <h4 className="text-primary dark:text-accent font-bold uppercase text-sm mb-1">
                                     {item.subtitle}
                                   </h4>
-                                  <p className="text-gray-600 uppercase text-xs leading-relaxed">
+                                  <p className="text-gray-600 dark:text-gray-300 uppercase text-xs leading-relaxed">
                                     {item.description}
                                   </p>
                                 </div>
@@ -371,10 +378,10 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                 </div>
 
                 {/* Footer Fixo */}
-                <div className="p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
+                <div className="p-4 sm:p-6 bg-white dark:bg-gray-800 border-t-2 border-gray-200 dark:border-gray-700 flex-shrink-0 shadow-lg dark:shadow-gray-900/50">
                   <Button
                     onClick={() => window.open('https://wa.me/5511999999999', '_blank')}
-                    className="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 text-white shadow-lg hover:shadow-xl transition-all duration-300 h-12"
+                    className="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 dark:from-accent dark:to-primary dark:hover:from-primary dark:hover:to-accent text-white shadow-lg hover:shadow-xl transition-all duration-300 h-12"
                   >
                     <MessageCircle className="w-5 h-5 mr-2" />
                     {selectedSector.cta}

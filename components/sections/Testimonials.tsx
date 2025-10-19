@@ -41,18 +41,18 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
   const current = testimonials[currentIndex];
 
   return (
-    <section 
-      id="depoimentos" 
+    <section
+      id="depoimentos"
       ref={sectionRef}
-      className="py-32 bg-gray-50 relative overflow-hidden"
+      className="py-32 bg-gray-50 dark:bg-gray-900 relative overflow-hidden transition-colors duration-300"
     >
       {/* Background Decorations */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
+        <motion.div
           style={{ y }}
           className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-3xl"
         />
-        <motion.div 
+        <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [-100, 100]) }}
           className="absolute bottom-1/4 -right-32 w-96 h-96 bg-gradient-to-bl from-accent/5 to-primary/5 rounded-full blur-3xl"
         />
@@ -71,10 +71,10 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10 px-5 py-2.5 rounded-full mb-8"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-5 py-2.5 rounded-full mb-8"
           >
-            <Award className="w-4 h-4 text-primary" />
-            <span className="text-foreground/80 font-medium text-sm">Aprovado por Clientes</span>
+            <Award className="w-4 h-4 text-primary dark:text-accent" />
+            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-sm">Aprovado por Clientes</span>
           </motion.div>
 
           <h2 className="text-5xl lg:text-6xl font-bold mb-6">
@@ -99,8 +99,8 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
           >
             {/* Glow Effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-3xl opacity-0 group-hover:opacity-30 blur-2xl transition-opacity duration-700" />
-            
-            <Card className="relative p-10 md:p-16 overflow-hidden bg-white border border-gray-200 shadow-xl">
+
+            <Card className="relative p-10 md:p-16 overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl">
               {/* Animated Border */}
               <div className="absolute inset-0 rounded-2xl">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -108,11 +108,11 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
 
               {/* Quote Icon Animado */}
               <motion.div
-                animate={{ 
+                animate={{
                   rotate: [0, 5, -5, 0],
                   scale: [1, 1.1, 1]
                 }}
-                transition={{ 
+                transition={{
                   duration: 4,
                   repeat: Infinity,
                   repeatType: "reverse"
@@ -123,7 +123,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
               </motion.div>
 
               {/* Stars Rating */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -151,38 +151,38 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                   transition={{ duration: 0.5, type: "spring" }}
                   className="relative z-10"
                 >
-                <p className="text-xl md:text-2xl text-foreground/90 italic leading-relaxed mb-10 font-light">
-                  "{current.content}"
-                </p>
+                  <p className="text-xl md:text-2xl text-foreground/90 italic leading-relaxed mb-10 font-light">
+                    "{current.content}"
+                  </p>
 
-                <div className="flex items-center gap-5">
-                  {/* Avatar with Pulsing Ring */}
-                  <div className="relative">
-                    <motion.div
-                      className="absolute -inset-2 bg-gradient-to-r from-primary to-accent rounded-full opacity-30 blur-md"
-                      animate={{ 
-                        scale: [1, 1.2, 1],
-                        opacity: [0.2, 0.4, 0.2]
-                      }}
-                      transition={{ 
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatType: "reverse"
-                      }}
-                    />
-                    <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary to-accent border-4 border-white flex items-center justify-center text-white text-2xl font-bold shadow-xl">
-                      {current.name.charAt(0)}
+                  <div className="flex items-center gap-5">
+                    {/* Avatar with Pulsing Ring */}
+                    <div className="relative">
+                      <motion.div
+                        className="absolute -inset-2 bg-gradient-to-r from-primary to-accent rounded-full opacity-30 blur-md"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          opacity: [0.2, 0.4, 0.2]
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatType: "reverse"
+                        }}
+                      />
+                      <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary to-accent border-4 border-white dark:border-gray-800 flex items-center justify-center text-white text-2xl font-bold shadow-xl">
+                        {current.name.charAt(0)}
+                      </div>
                     </div>
-                  </div>
 
-                  <div>
-                    <div className="font-bold text-xl mb-1">
-                      {current.name}
+                    <div>
+                      <div className="font-bold text-xl mb-1">
+                        {current.name}
+                      </div>
+                      <div className="text-muted-foreground">
+                        {current.role} • <span className="text-accent">{current.company}</span>
+                      </div>
                     </div>
-                    <div className="text-muted-foreground">
-                      {current.role} • <span className="text-accent">{current.company}</span>
-                    </div>
-                  </div>
                   </div>
                 </motion.div>
               </AnimatePresence>
@@ -195,7 +195,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
           </motion.div>
 
           {/* Navigation Controls */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -207,7 +207,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
               size="icon"
               onClick={prevTestimonial}
               aria-label="Depoimento anterior"
-              className="border-gray-200 hover:border-accent/50 transition-all duration-300 hover:scale-110"
+              className="border-gray-200 dark:border-gray-700 dark:bg-gray-800 hover:border-accent/50 transition-all duration-300 hover:scale-110"
             >
               <ChevronLeft className="w-6 h-6" />
             </Button>
@@ -229,11 +229,10 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
                       transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     />
                   )}
-                  <div className={`relative h-3 rounded-full transition-all duration-300 ${
-                    index === currentIndex
+                  <div className={`relative h-3 rounded-full transition-all duration-300 ${index === currentIndex
                       ? 'bg-gradient-to-r from-primary to-accent w-10 shadow-lg shadow-accent/30'
-                      : 'bg-gray-300 w-3 group-hover/dot:bg-gray-400'
-                  }`} />
+                      : 'bg-gray-300 dark:bg-gray-600 w-3 group-hover/dot:bg-gray-400 dark:group-hover/dot:bg-gray-500'
+                    }`} />
                 </motion.button>
               ))}
             </div>
@@ -243,7 +242,7 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
               size="icon"
               onClick={nextTestimonial}
               aria-label="Próximo depoimento"
-              className="border-gray-200 hover:border-accent/50 transition-all duration-300 hover:scale-110"
+              className="border-gray-200 dark:border-gray-700 dark:bg-gray-800 hover:border-accent/50 transition-all duration-300 hover:scale-110"
             >
               <ChevronRight className="w-6 h-6" />
             </Button>

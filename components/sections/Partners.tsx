@@ -19,15 +19,15 @@ export function Partners({ partners }: PartnersProps) {
   const duplicatedPartners = [...partners, ...partners, ...partners];
 
   return (
-    <section id="parceiros" className="py-24 bg-white relative overflow-hidden">
+    <section id="parceiros" className="py-24 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300">
       {/* Top Shadow */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
-      
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent" />
+
       {/* Bottom Shadow */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent" />
 
       {/* Decorative Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/30 to-white" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50/30 to-white dark:from-gray-950 dark:via-gray-900/30 dark:to-gray-950" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -42,10 +42,10 @@ export function Partners({ partners }: PartnersProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10 px-4 py-2 rounded-full mb-6"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-4 py-2 rounded-full mb-6"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground/80">Ecossistema de Tecnologia</span>
+            <Sparkles className="w-4 h-4 text-primary dark:text-accent" />
+            <span className="text-sm font-medium text-foreground/80 dark:text-foreground/90">Ecossistema de Tecnologia</span>
           </motion.div>
 
           <h3 className="text-4xl font-bold mb-4">
@@ -61,8 +61,8 @@ export function Partners({ partners }: PartnersProps) {
 
         <div className="relative">
           {/* Enhanced Gradientes para fade nas bordas */}
-          <div className="absolute left-0 top-0 bottom-0 w-48 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-48 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-48 bg-gradient-to-r from-white dark:from-gray-950 via-white/80 dark:via-gray-950/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-48 bg-gradient-to-l from-white dark:from-gray-950 via-white/80 dark:via-gray-950/80 to-transparent z-10 pointer-events-none" />
 
           {/* Shine Effect que percorre */}
           <motion.div
@@ -107,7 +107,7 @@ export function Partners({ partners }: PartnersProps) {
                 >
                   {/* Glow Effect on Hover */}
                   <div className="absolute -inset-3 bg-gradient-to-r from-primary/30 to-accent/30 rounded-2xl opacity-0 group-hover:opacity-50 blur-xl transition-opacity duration-500" />
-                  
+
                   {/* Reflection Effect */}
                   <div className="absolute -bottom-12 left-0 right-0 h-20 opacity-20 group-hover:opacity-30 transition-opacity duration-300">
                     <div className="w-full h-full bg-gradient-to-b from-gray-300/30 to-transparent rounded-lg blur-sm scale-y-[-1]" />
@@ -115,7 +115,7 @@ export function Partners({ partners }: PartnersProps) {
 
                   {/* Card com Levitação */}
                   <motion.div
-                    className="relative w-40 h-20 bg-white/40 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/50 group-hover:border-accent/40 group-hover:shadow-2xl flex items-center justify-center p-5 transition-all duration-300"
+                    className="relative w-40 h-20 bg-white/40 dark:bg-gray-800/40 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 group-hover:border-accent/40 group-hover:shadow-2xl flex items-center justify-center p-5 transition-all duration-300"
                     animate={
                       hoveredIndex === index
                         ? { y: -8 }
@@ -125,7 +125,7 @@ export function Partners({ partners }: PartnersProps) {
                   >
                     {/* Inner Glow */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 rounded-xl transition-opacity duration-300" />
-                    
+
                     {/* Logo SVG */}
                     <div className="relative z-10 w-full h-full flex items-center justify-center">
                       <Image
@@ -173,7 +173,7 @@ export function Partners({ partners }: PartnersProps) {
             </span>{' '}
             e corporativos de alta performance
           </p>
-          
+
           {/* Stats */}
           <motion.div
             initial={{ opacity: 0 }}

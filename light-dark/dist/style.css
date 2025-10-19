@@ -1,100 +1,38 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+  --scale: 2;
+  color-scheme: light;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  &:has(input:checked) {
+    color-scheme: dark;
   }
 }
 
-@layer base {
-  :root {
-    /* Tema Empresarial Premium B2B */
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    --primary: 224 71% 46%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 15% 95%;
-    --secondary-foreground: 222 47% 11%;
-    --muted: 220 15% 94%;
-    --muted-foreground: 220 9% 46%;
-    --accent: 217 75% 52%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 224 71% 46%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 222 47% 11%;
-    --foreground: 220 100% 98%;
-    --card: 224 71% 15%;
-    --card-foreground: 220 100% 98%;
-    --popover: 224 71% 15%;
-    --popover-foreground: 220 100% 98%;
-    --primary: 224 71% 46%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 222 47% 18%;
-    --secondary-foreground: 220 100% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 75% 52%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 220 100% 98%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 224 71% 46%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
+body {
+  padding: 0;
+  margin: 0;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+.container {
+  background: linear-gradient(
+    135deg,
+    light-dark(#f7faff, #0b1220) 0%,
+    light-dark(#e8f0ff, #15213a) 50%,
+    light-dark(#d8e3ff, #22345a) 100%
+  );
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Theme Toggle Styles */
-.theme-toggle-container {
-  --scale: 1;
-}
-
-.theme-switch {
+.switch {
   position: relative;
   display: inline-block;
   width: calc(var(--scale) * 60px);
   height: calc(var(--scale) * 34px);
 }
 
-.theme-switch #theme-input {
+.switch #input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -121,22 +59,18 @@
   transition: 0.4s;
 }
 
-#theme-input:checked + .slider {
+#input:checked + .slider {
   background-color: black;
 }
 
-#theme-input:focus + .slider {
+#input:focus + .slider {
   box-shadow: 0 0 calc(var(--scale) * 1px) #2196f3;
 }
 
-.slider .sun-moon {
-  animation: rotate-back 0.6s ease-in-out both;
-}
-
-#theme-input:checked + .slider .sun-moon {
+#input:checked + .slider .sun-moon {
   transform: translateX(calc(var(--scale) * 26px));
   background-color: white;
-  animation: rotate-forward 0.6s ease-in-out both;
+  animation: rotate-center 0.6s ease-in-out both;
 }
 
 .moon-dot {
@@ -144,15 +78,13 @@
   transition: 0.4s;
   fill: gray;
 }
-
-#theme-input:checked + .slider .sun-moon .moon-dot {
+#input:checked + .slider .sun-moon .moon-dot {
   opacity: 1;
 }
 
 .slider.round {
   border-radius: calc(var(--scale) * 34px);
 }
-
 .slider.round .sun-moon {
   border-radius: 50%;
 }
@@ -192,21 +124,18 @@
   fill: white;
   opacity: 10%;
 }
-
 #light-ray-1 {
   left: calc(var(--scale) * -8px);
   top: calc(var(--scale) * -8px);
   width: calc(var(--scale) * 43px);
   height: calc(var(--scale) * 43px);
 }
-
 #light-ray-2 {
   left: -50%;
   top: -50%;
   width: calc(var(--scale) * 55px);
   height: calc(var(--scale) * 55px);
 }
-
 #light-ray-3 {
   left: calc(var(--scale) * -18px);
   top: calc(var(--scale) * -18px);
@@ -221,11 +150,9 @@
   animation-duration: 6s;
   animation-iteration-count: infinite;
 }
-
 .cloud-light {
   fill: #eee;
 }
-
 .cloud-dark {
   fill: #ccc;
   animation-delay: 1s;
@@ -236,31 +163,26 @@
   top: calc(var(--scale) * 15px);
   width: calc(var(--scale) * 40px);
 }
-
 #cloud-2 {
   left: calc(var(--scale) * 44px);
   top: calc(var(--scale) * 10px);
   width: calc(var(--scale) * 20px);
 }
-
 #cloud-3 {
   left: calc(var(--scale) * 18px);
   top: calc(var(--scale) * 24px);
   width: calc(var(--scale) * 30px);
 }
-
 #cloud-4 {
   left: calc(var(--scale) * 36px);
   top: calc(var(--scale) * 18px);
   width: calc(var(--scale) * 40px);
 }
-
 #cloud-5 {
   left: calc(var(--scale) * 48px);
   top: calc(var(--scale) * 14px);
   width: calc(var(--scale) * 20px);
 }
-
 #cloud-6 {
   left: calc(var(--scale) * 22px);
   top: calc(var(--scale) * 26px);
@@ -297,7 +219,7 @@
   animation-iteration-count: infinite;
 }
 
-#theme-input:checked + .slider .stars {
+#input:checked + .slider .stars {
   transform: translateY(0);
   opacity: 1;
 }
@@ -308,20 +230,17 @@
   left: calc(var(--scale) * 3px);
   animation-delay: 0.3s;
 }
-
 #star-2 {
   width: calc(var(--scale) * 6px);
   top: calc(var(--scale) * 16px);
   left: calc(var(--scale) * 3px);
 }
-
 #star-3 {
   width: calc(var(--scale) * 12px);
   top: calc(var(--scale) * 20px);
   left: calc(var(--scale) * 10px);
   animation-delay: 0.6s;
 }
-
 #star-4 {
   width: calc(var(--scale) * 18px);
   top: calc(var(--scale) * 0px);
@@ -343,34 +262,3 @@
     transform: scale(1);
   }
 }
-
-@keyframes rotate-forward {
-  0% {
-    transform: translateX(0) rotate(0);
-  }
-  100% {
-    transform: translateX(calc(var(--scale) * 26px)) rotate(360deg);
-  }
-}
-
-@keyframes rotate-back {
-  0% {
-    transform: translateX(calc(var(--scale) * 26px)) rotate(360deg);
-  }
-  100% {
-    transform: translateX(0) rotate(0);
-  }
-}
-
-/* Esconder Chatwoot quando modal estiver aberto */
-body.modal-open .woot-widget-holder,
-body.modal-open .woot-widget-bubble,
-body.modal-open .woot--bubble-holder,
-body.modal-open #chatwoot_live_chat_widget,
-body.modal-open [data-chatwoot-widget] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-

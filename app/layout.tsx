@@ -2,6 +2,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ChatwootWidget } from '@/components/ChatwootWidget';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { ModalProvider } from '@/components/providers/ModalProvider';
 
 const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
@@ -39,10 +41,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className}>
-        {children}
-        <ChatwootWidget />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          storageKey="simplex-theme"
+        >
+          <ModalProvider>
+            {children}
+            <ChatwootWidget />
+          </ModalProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

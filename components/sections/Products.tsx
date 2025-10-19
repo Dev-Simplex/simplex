@@ -31,21 +31,21 @@ export function Products({ products }: ProductsProps) {
   });
 
   return (
-    <section 
-      id="produtos" 
+    <section
+      id="produtos"
       ref={sectionRef}
-      className="py-32 bg-white relative overflow-hidden"
+      className="py-32 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300"
     >
       {/* Subtle Gradient Orbs */}
-      <motion.div 
-        style={{ 
+      <motion.div
+        style={{
           y: useTransform(scrollYProgress, [0, 1], [0, 200]),
           opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.2, 0.1])
         }}
         className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
       />
-      <motion.div 
-        style={{ 
+      <motion.div
+        style={{
           y: useTransform(scrollYProgress, [0, 1], [0, -150]),
           opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.2, 0.1])
         }}
@@ -65,10 +65,10 @@ export function Products({ products }: ProductsProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10 px-5 py-2.5 rounded-full mb-8"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-5 py-2.5 rounded-full mb-8"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-foreground/80 font-medium text-sm">Produtos Premium</span>
+            <Sparkles className="w-4 h-4 text-primary dark:text-accent" />
+            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-sm">Produtos Premium</span>
           </motion.div>
 
           <h2 className="text-5xl lg:text-6xl font-bold mb-6">
