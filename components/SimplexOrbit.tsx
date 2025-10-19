@@ -40,10 +40,27 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
   const [clickedPosition, setClickedPosition] = useState<{ x: number, y: number } | null>(null);
   const { setIsModalOpen } = useModal();
 
+  // Estado para controlar se modal está aberto (para reposicionar pétalas)
+  const isModalOpen = selectedSector !== null;
+
   // Atualizar o context quando o modal abrir/fechar
   useEffect(() => {
-    setIsModalOpen(selectedSector !== null);
-  }, [selectedSector, setIsModalOpen]);
+    setIsModalOpen(isModalOpen);
+  }, [isModalOpen, setIsModalOpen]);
+
+  // Bloquear scroll da página quando modal está aberto
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup ao desmontar
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
 
   const handleSectorClick = useCallback((sector: Sector) => {
     setSelectedSector(sector);
@@ -64,139 +81,157 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
   const { containerSize, centerX, centerY, orbitRadius } = orbitConfig;
 
   return (
-    <div className="w-full h-full flex items-center justify-center min-h-[500px]">
-      {/* Container com tamanho menor */}
-      <div
-        className="relative"
-        style={{
-          width: `${containerSize}px`,
-          height: `${containerSize}px`,
+    <>
+      {/* Container das Pétalas - Fixed, reposiciona quando modal abre */}
+      <motion.div
+        className={`
+          transition-all duration-500 ease-in-out
+          ${isModalOpen
+            ? 'fixed -left-20 sm:-left-10 md:left-4 lg:left-8 xl:left-12 top-[20%] md:top-[25%] -translate-y-1/2 scale-[0.5] sm:scale-[0.6] md:scale-[0.7] lg:scale-75 z-[10000]'
+            : 'relative w-full h-full flex items-center justify-center min-h-[500px]'
+          }
+        `}
+        animate={isModalOpen ? {
+          opacity: 1,
+          x: 0
+        } : {
+          opacity: 1,
+          x: 0
         }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
       >
-        {/* SVG Orbit como fundo - EXATAMENTE como está no arquivo */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/sectors/orbit.svg"
-            alt="Simplex Orbit"
-            fill
-            priority
-            className="object-contain"
-          />
-        </div>
-
-        {/* Círculo gradiente moderno */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          viewBox="0 0 500 500"
+        <div
+          className="relative"
+          style={{
+            width: `${containerSize}px`,
+            height: `${containerSize}px`,
+          }}
         >
-          <defs>
-            <linearGradient id="centerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0A62FF" /> {/* brand-600 - azul vibrante */}
-              <stop offset="50%" stopColor="#123C8A" /> {/* brand-700 - azul médio */}
-              <stop offset="100%" stopColor="#0B1B3B" /> {/* brand-900 - azul escuro */}
-            </linearGradient>
-          </defs>
-          <circle cx="250" cy="250" r="105" fill="url(#centerGradient)" />
-        </svg>
+          {/* SVG Orbit como fundo - EXATAMENTE como está no arquivo */}
+          <div className="absolute inset-0">
+            <Image
+              src="/images/sectors/orbit.svg"
+              alt="Simplex Orbit"
+              fill
+              priority
+              className="object-contain"
+            />
+          </div>
 
-        {/* Logo da Simplex centralizada */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-          <Image
-            src="/logo.png"
-            alt="Simplex"
-            width={140}
-            height={140}
-            priority
-            className="object-contain"
-          />
-        </div>
+          {/* Círculo gradiente moderno */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            viewBox="0 0 500 500"
+          >
+            <defs>
+              <linearGradient id="centerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#0A62FF" /> {/* brand-600 - azul vibrante */}
+                <stop offset="50%" stopColor="#123C8A" /> {/* brand-700 - azul médio */}
+                <stop offset="100%" stopColor="#0B1B3B" /> {/* brand-900 - azul escuro */}
+              </linearGradient>
+            </defs>
+            <circle cx="250" cy="250" r="105" fill="url(#centerGradient)" />
+          </svg>
 
-        {/* Áreas clicáveis das pétalas INTEIRAS (120x120px) */}
-        {sectors.map((sector, index) => {
-          // Calcular posição baseada no ângulo do setor
-          const angle = (sector.angle * Math.PI) / 180;
-          const x = centerX + orbitRadius * Math.cos(angle);
-          const y = centerY + orbitRadius * Math.sin(angle);
-          const isHovered = hoveredSector === sector.id;
+          {/* Logo da Simplex centralizada */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+            <Image
+              src="/logo.png"
+              alt="Simplex"
+              width={140}
+              height={140}
+              priority
+              className="object-contain"
+            />
+          </div>
 
-          return (
-            <motion.div
-              key={sector.id}
-              className="absolute cursor-pointer z-10"
-              style={{
-                left: `${x - 90}px`, // -90 para centralizar (180/2)
-                top: `${y - 90}px`,  // -90 para centralizar (180/2)
-                width: '180px',
-                height: '180px',
-              }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{
-                scale: 1.1, // Reduzido de 1.2 para 1.1
-                zIndex: 30,
-                filter: "drop-shadow(0 5px 10px rgba(200, 200, 200, 0.3))", // Sombra menor
-                transition: {
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 15
-                }
-              }}
-              whileTap={{ scale: 0.95 }}
-              onMouseEnter={() => setHoveredSector(sector.id)}
-              onMouseLeave={() => setHoveredSector(null)}
-            >
-              {/* Brilho no hover */}
-              {isHovered && (
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-200/40 to-gray-300/40 blur-md"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                />
-              )}
+          {/* Áreas clicáveis das pétalas INTEIRAS (120x120px) */}
+          {sectors.map((sector, index) => {
+            // Calcular posição baseada no ângulo do setor
+            const angle = (sector.angle * Math.PI) / 180;
+            const x = centerX + orbitRadius * Math.cos(angle);
+            const y = centerY + orbitRadius * Math.sin(angle);
+            const isHovered = hoveredSector === sector.id;
 
-              {/* Logo centralizada DENTRO da pétala */}
-              <div
-                className="w-full h-full flex items-center justify-center relative z-10"
-                onClick={(e) => {
-                  const logoRect = e.currentTarget.getBoundingClientRect();
-                  const centerX = logoRect.left + logoRect.width / 2;
-                  const centerY = logoRect.top + logoRect.height / 2;
-                  console.log('Clicked sector:', sector.name, 'Position:', centerX, centerY); // Debug
-                  setClickedPosition({ x: centerX, y: centerY });
-                  handleSectorClick(sector);
-                  e.stopPropagation(); // Evitar duplo clique
+            return (
+              <motion.div
+                key={sector.id}
+                className="absolute cursor-pointer z-10"
+                style={{
+                  left: `${x - 90}px`, // -90 para centralizar (180/2)
+                  top: `${y - 90}px`,  // -90 para centralizar (180/2)
+                  width: '180px',
+                  height: '180px',
                 }}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{
+                  scale: 1.1, // Reduzido de 1.2 para 1.1
+                  zIndex: 30,
+                  filter: "drop-shadow(0 5px 10px rgba(200, 200, 200, 0.3))", // Sombra menor
+                  transition: {
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 15
+                  }
+                }}
+                whileTap={{ scale: 0.95 }}
+                onMouseEnter={() => setHoveredSector(sector.id)}
+                onMouseLeave={() => setHoveredSector(null)}
               >
-                {sector.logo ? (
-                  <Image
-                    src={sector.logo}
-                    alt={sector.name}
-                    width={sector.id === 'eagle' ? 130 : 115}
-                    height={sector.id === 'eagle' ? 130 : 115}
-                    className="object-contain"
+                {/* Brilho no hover */}
+                {isHovered && (
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-200/40 to-gray-300/40 blur-md"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                   />
-                ) : (
-                  <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                    <span className="text-gray-600 text-sm font-bold">?</span>
-                  </div>
                 )}
-              </div>
 
-              {/* Animação de hover - círculo pulsante */}
-              {isHovered && (
-                <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-gray-300"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1.05, opacity: 0 }}
-                  transition={{ duration: 1, repeat: Infinity }}
-                />
-              )}
-            </motion.div>
-          );
-        })}
-      </div>
+                {/* Logo centralizada DENTRO da pétala */}
+                <div
+                  className="w-full h-full flex items-center justify-center relative z-10"
+                  onClick={(e) => {
+                    const logoRect = e.currentTarget.getBoundingClientRect();
+                    const centerX = logoRect.left + logoRect.width / 2;
+                    const centerY = logoRect.top + logoRect.height / 2;
+                    console.log('Clicked sector:', sector.name, 'Position:', centerX, centerY); // Debug
+                    setClickedPosition({ x: centerX, y: centerY });
+                    handleSectorClick(sector);
+                    e.stopPropagation(); // Evitar duplo clique
+                  }}
+                >
+                  {sector.logo ? (
+                    <Image
+                      src={sector.logo}
+                      alt={sector.name}
+                      width={sector.id === 'eagle' ? 130 : 115}
+                      height={sector.id === 'eagle' ? 130 : 115}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                      <span className="text-gray-600 text-sm font-bold">?</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Animação de hover - círculo pulsante */}
+                {isHovered && (
+                  <motion.div
+                    className="absolute inset-0 rounded-full border-2 border-gray-300"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1.05, opacity: 0 }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                  />
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+      </motion.div>
 
       {/* Animação de transição da pétala para o modal */}
       {clickedPosition && (
@@ -223,15 +258,14 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
       <AnimatePresence>
         {selectedSector && (
           <>
-            {/* Overlay */}
+            {/* Background preto cobrindo TODA a tela */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.0, ease: "easeOut" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               onClick={handleClose}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]"
-              style={{ zIndex: 9999 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9997]"
             />
 
             {/* Drawer Panel */}
@@ -240,13 +274,12 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
               animate={{ x: 0, opacity: 1, scale: 1 }}
               exit={{ x: '100%', opacity: 0, scale: 0.9 }}
               transition={{
-                duration: 1.2,
+                duration: 0.6,
                 ease: [0.4, 0, 0.2, 1],
-                opacity: { duration: 0.9 },
-                scale: { duration: 0.8 }
+                opacity: { duration: 0.4 },
+                scale: { duration: 0.5 }
               }}
-              className="fixed right-0 top-0 h-screen w-full sm:w-[90%] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] z-[9999] flex flex-col"
-              style={{ zIndex: 9999 }}
+              className="fixed right-0 top-0 h-screen w-full md:w-[60%] lg:w-[55%] xl:w-[50%] z-[9999] flex flex-col"
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
               <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl border-l-4 border-primary dark:border-accent">
@@ -404,6 +437,6 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
           </>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 });
