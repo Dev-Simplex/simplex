@@ -148,7 +148,7 @@ export function Hero() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative flex items-center justify-center h-[300px] md:h-[400px] lg:h-[500px] lg:order-1"
+            className="relative flex items-center justify-center h-[400px] md:h-[550px] lg:h-[700px] lg:order-1"
           >
             <div className="relative z-10 w-full h-full">
               <SimplexOrbit sectors={sectorsData} />

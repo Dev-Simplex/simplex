@@ -6,6 +6,7 @@ import { X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { SectorIcon } from '@/components/SectorIcons';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useModal } from '@/components/providers/ModalProvider';
 
 interface SectionItem {
   icon: string;
@@ -25,6 +26,8 @@ interface Sector {
   logo: string;
   angle: number;
   cta: string;
+  color: string;
+  colorDark: string;
   sections: Section[];
 }
 
@@ -38,8 +41,16 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
   const [isPaused, setIsPaused] = useState(false);
   const [clickedPosition, setClickedPosition] = useState<{ x: number, y: number } | null>(null);
 
+  // Hook para gerenciar estado global do modal
+  const { setIsModalOpen } = useModal();
+
   // Estado para controlar se modal está aberto (para reposicionar pétalas)
   const isModalOpen = selectedSector !== null;
+
+  // Sincronizar estado do modal com o contexto global para esconder o widget Chatwoot
+  useEffect(() => {
+    setIsModalOpen(selectedSector !== null);
+  }, [selectedSector, setIsModalOpen]);
 
   // Bloquear scroll da página quando modal está aberto
   useEffect(() => {
@@ -77,45 +88,45 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
 
   // Calcular posição das logos baseado no ângulo
   const getLogoPosition = (angle: number) => {
-    const radius = 120; // raio ajustado para círculo perfeito
+    const radius = 168; // raio ajustado para círculo perfeito (120 * 1.4)
     const radians = (angle * Math.PI) / 180;
     return {
-      x: 250 + Math.cos(radians) * radius,
-      y: 250 + Math.sin(radians) * radius,
+      x: 350 + Math.cos(radians) * radius,
+      y: 350 + Math.sin(radians) * radius,
     };
   };
 
   // Calcular posição das pétalas baseado no ângulo e dimensões do SVG
   const getPetalPosition = (angle: number, svgWidth: number, svgHeight: number) => {
-    const radius = 120; // raio ajustado para círculo perfeito
+    const radius = 168; // raio ajustado para círculo perfeito (120 * 1.4)
     const radians = (angle * Math.PI) / 180;
     return {
-      left: 250 + Math.cos(radians) * radius - svgWidth / 2,
-      top: 250 + Math.sin(radians) * radius - svgHeight / 2,
+      left: 350 + Math.cos(radians) * radius - svgWidth / 2,
+      top: 350 + Math.sin(radians) * radius - svgHeight / 2,
     };
   };
 
   // Estrutura das pétalas - todas idênticas (SVG da IA) - voltadas para o centro
   // Rotação = (angle + 180) para que o TOPO/BICO (parte vermelha) aponte para o centro
   const petals = [
-    { angle: 270, width: 227, height: 256, sector: 'ti', scale: 0.45 },
-    { angle: 90, width: 227, height: 256, sector: 'chat', scale: 0.45 },
-    { angle: 30, width: 227, height: 256, sector: 'ia', scale: 0.45 },
-    { angle: 210, width: 227, height: 256, sector: 'dev', scale: 0.45 },
-    { angle: 150, width: 227, height: 256, sector: 'ip', scale: 0.45 },
-    { angle: 330, width: 227, height: 256, sector: 'eagle', scale: 0.45 }
+    { angle: 270, width: 227, height: 256, sector: 'ti', scale: 0.63 },
+    { angle: 90, width: 227, height: 256, sector: 'chat', scale: 0.63 },
+    { angle: 30, width: 227, height: 256, sector: 'ia', scale: 0.63 },
+    { angle: 210, width: 227, height: 256, sector: 'dev', scale: 0.63 },
+    { angle: 150, width: 227, height: 256, sector: 'ip', scale: 0.63 },
+    { angle: 330, width: 227, height: 256, sector: 'eagle', scale: 0.63 }
   ];
 
   return (
     <>
       <style>{orbitAnimation}</style>
-    <div className="relative w-[500px] h-[500px]">
+    <div className="relative w-[700px] h-[700px]">
       {/* Círculo Central (Ellipse 1) */}
       <div 
         className="absolute"
         style={{
-          width: 150,
-          height: 150,
+          width: 210,
+          height: 210,
           background: 'radial-gradient(circle, #0A1F44 0%, #000132 100%)',
           borderRadius: '9999px',
           left: '50%',
@@ -129,7 +140,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
         <img 
           src="/images/sectors/SIMPLEX BRANCA.svg"
           alt="Simplex"
-          className="w-20 h-20 object-contain"
+          className="w-28 h-28 object-contain"
         />
       </div>
 
@@ -218,7 +229,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
                 <img 
                   src={sector?.logo} 
                   alt={sector?.name} 
-                  className="w-32 h-32 object-contain"
+                  className="w-36 h-36 object-contain"
                 />
               </motion.div>
             </div>
@@ -278,9 +289,14 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
               className="fixed right-0 top-0 h-screen w-full sm:w-[85%] md:w-[65%] lg:w-[55%] xl:w-[50%] z-[9999] flex flex-col"
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
-              <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl border-l-2 md:border-l-4 border-primary dark:border-accent">
+              <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl border-l-2 md:border-l-4" style={{ borderLeftColor: selectedSector.color }}>
                 {/* Header Fixo */}
-                <div className="relative bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 dark:from-gray-800 dark:via-gray-900 dark:to-black p-3 sm:p-4 md:p-6 text-white flex-shrink-0">
+                <div 
+                  className="relative p-3 sm:p-4 md:p-6 text-white flex-shrink-0"
+                  style={{
+                    background: `linear-gradient(135deg, ${selectedSector.color} 0%, ${selectedSector.colorDark} 100%)`
+                  }}
+                >
                   <div className="absolute inset-0 opacity-10">
                     <div
                       className="absolute inset-0"
@@ -350,7 +366,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
                                   <SectorIcon name={item.icon} className="w-10 h-10" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="text-primary dark:text-accent font-bold uppercase text-sm mb-1">
+                                  <h4 className="font-bold uppercase text-sm mb-1" style={{ color: selectedSector.color }}>
                                     {item.subtitle}
                                   </h4>
                                   <p className="text-gray-600 dark:text-gray-300 uppercase text-xs leading-relaxed">
@@ -374,7 +390,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
                           transition={{ delay: sectionIndex * 0.1 }}
                           className="space-y-4"
                         >
-                          <h3 className="text-primary dark:text-accent font-bold uppercase text-lg">
+                          <h3 className="font-bold uppercase text-lg" style={{ color: selectedSector.color }}>
                             {section.title}
                           </h3>
                           <div className="space-y-3">
@@ -390,7 +406,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
                                   <SectorIcon name={item.icon} className="w-10 h-10" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="text-primary dark:text-accent font-bold uppercase text-sm mb-1">
+                                  <h4 className="font-bold uppercase text-sm mb-1" style={{ color: selectedSector.color }}>
                                     {item.subtitle}
                                   </h4>
                                   <p className="text-gray-600 dark:text-gray-300 uppercase text-xs leading-relaxed">
@@ -414,11 +430,19 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
                     className="relative group"
                   >
                     {/* Glow Effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-accent/50 rounded-lg opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
+                    <div 
+                      className="absolute -inset-1 rounded-lg opacity-0 group-hover:opacity-100 blur transition-opacity duration-300"
+                      style={{
+                        background: `linear-gradient(135deg, ${selectedSector.color}50 0%, ${selectedSector.colorDark}50 100%)`
+                      }}
+                    />
 
                     <Button
                       onClick={() => window.open('https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20especialista', '_blank')}
-                      className="relative w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 dark:from-accent dark:to-primary dark:hover:from-primary dark:hover:to-accent text-white shadow-lg hover:shadow-xl transition-all duration-300 h-11 md:h-12 overflow-hidden group text-sm md:text-base"
+                      className="relative w-full text-white shadow-lg hover:shadow-xl transition-all duration-300 h-11 md:h-12 overflow-hidden group text-sm md:text-base"
+                      style={{
+                        background: `linear-gradient(135deg, ${selectedSector.color} 0%, ${selectedSector.colorDark} 100%)`
+                      }}
                     >
                       {/* Shimmer Effect */}
                       <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />

@@ -6,6 +6,8 @@
     "logo": "/images/sectors/SPX TI AZUL.svg",
     "angle": 270,
     "cta": "Falar com Especialista",
+    "color": "#FF6B35",
+    "colorDark": "#E55A2B",
     "sections": [
       {
         "title": "SERVICE",
@@ -81,6 +83,8 @@
     "logo": "/images/sectors/SPX IP AZUL.svg",
     "angle": 150,
     "cta": "Falar com Especialista",
+    "color": "#3B82F6",
+    "colorDark": "#2563EB",
     "sections": [
       {
         "title": "TELEFONIA IP",
@@ -131,6 +135,8 @@
     "logo": "/images/sectors/SPX EAGLE AZUL.svg",
     "angle": 330,
     "cta": "Falar com Especialista",
+    "color": "#F59E0B",
+    "colorDark": "#D97706",
     "sections": [
       {
         "title": "TELEMETRIA",
@@ -191,6 +197,8 @@
     "logo": "/images/sectors/SPXDEV AZUL.svg",
     "angle": 210,
     "cta": "Falar com Especialista",
+    "color": "#10B981",
+    "colorDark": "#059669",
     "sections": [
       {
         "title": "ANALISE",
@@ -246,6 +254,8 @@
     "logo": "/images/sectors/SPXIA AZUL.svg",
     "angle": 30,
     "cta": "Falar com Especialista",
+    "color": "#EF4444",
+    "colorDark": "#DC2626",
     "sections": [
       {
         "title": "VENDAS",
@@ -331,6 +341,8 @@
     "logo": "/images/sectors/SPX CHAT AZUL.svg",
     "angle": 90,
     "cta": "Conhecer SPX Chat",
+    "color": "#06B6D4",
+    "colorDark": "#0891B2",
     "sections": [
       {
         "title": "FUNCIONALIDADES",
