@@ -3,7 +3,7 @@
     "id": "ti",
     "name": "Simplex TI",
     "title": "Infraestrutura e Tecnologia da Informação",
-    "logo": "/images/sectors/simplex-ti.png",
+    "logo": "/images/sectors/SPX TI AZUL.svg",
     "angle": 270,
     "cta": "Falar com Especialista",
     "sections": [
@@ -78,7 +78,7 @@
     "id": "ip",
     "name": "Simplex IP",
     "title": "Telefonia IP e Comunicação Unificada",
-    "logo": "/images/sectors/simplex-ip.png",
+    "logo": "/images/sectors/SPX IP AZUL.svg",
     "angle": 150,
     "cta": "Falar com Especialista",
     "sections": [
@@ -128,7 +128,7 @@
     "id": "eagle",
     "name": "Simplex Eagle",
     "title": "Consultoria e Gestão de\nProjetos",
-    "logo": "/images/sectors/simplex-eagle.png",
+    "logo": "/images/sectors/SPX EAGLE AZUL.svg",
     "angle": 330,
     "cta": "Falar com Especialista",
     "sections": [
@@ -193,7 +193,7 @@
     "id": "dev",
     "name": "Simplex Dev",
     "title": "Desenvolvimento de Software sob Medida",
-    "logo": "/images/sectors/simplex-dev.png",
+    "logo": "/images/sectors/SPXDEV AZUL.svg",
     "angle": 210,
     "cta": "Falar com Especialista",
     "sections": [
@@ -248,7 +248,7 @@
     "id": "ia",
     "name": "Simplex IA",
     "title": "Inteligência Artificial e Automação",
-    "logo": "/images/sectors/simplex-ia.png",
+    "logo": "/images/sectors/SPXIA AZUL.svg",
     "angle": 30,
     "cta": "Falar com Especialista",
     "sections": [
@@ -333,7 +333,7 @@
     "id": "chat",
     "name": "SPX Chat",
     "title": "Atendimento Multicanal Inteligente",
-    "logo": "/images/sectors/logospx.png",
+    "logo": "/images/sectors/SPX CHAT AZUL.svg",
     "angle": 90,
     "cta": "Conhecer SPX Chat",
     "sections": [
