@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useMemo, useCallback, memo } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import { X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { SectorIcon } from '@/components/SectorIcons';
@@ -33,10 +32,28 @@ interface SimplexOrbitProps {
   sectors: Sector[];
 }
 
-export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbitProps) {
+export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
   const [selectedSector, setSelectedSector] = useState<Sector | null>(null);
   const [hoveredSector, setHoveredSector] = useState<string | null>(null);
-  const [clickedPosition, setClickedPosition] = useState<{x: number, y: number} | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const [clickedPosition, setClickedPosition] = useState<{ x: number, y: number } | null>(null);
+
+  // Estado para controlar se modal está aberto (para reposicionar pétalas)
+  const isModalOpen = selectedSector !== null;
+
+  // Bloquear scroll da página quando modal está aberto
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup ao desmontar
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
 
   const handleSectorClick = useCallback((sector: Sector) => {
     setSelectedSector(sector);
@@ -46,185 +63,205 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
     setSelectedSector(null);
   }, []);
 
-  // Configurações para o novo layout baseado no SVG (MENOR) - memoizadas
-  const orbitConfig = useMemo(() => ({
-    containerSize: 500,
-    centerX: 250,
-    centerY: 250,
-    orbitRadius: 180
-  }), []);
+  // Keyframes de animação para rotação das pétalas
+  const orbitAnimation = `
+    @keyframes orbit-rotation {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  `;
 
-  const { containerSize, centerX, centerY, orbitRadius } = orbitConfig;
+  // Calcular posição das logos baseado no ângulo
+  const getLogoPosition = (angle: number) => {
+    const radius = 120; // raio ajustado para círculo perfeito
+    const radians = (angle * Math.PI) / 180;
+    return {
+      x: 250 + Math.cos(radians) * radius,
+      y: 250 + Math.sin(radians) * radius,
+    };
+  };
+
+  // Calcular posição das pétalas baseado no ângulo e dimensões do SVG
+  const getPetalPosition = (angle: number, svgWidth: number, svgHeight: number) => {
+    const radius = 120; // raio ajustado para círculo perfeito
+    const radians = (angle * Math.PI) / 180;
+    return {
+      left: 250 + Math.cos(radians) * radius - svgWidth / 2,
+      top: 250 + Math.sin(radians) * radius - svgHeight / 2,
+    };
+  };
+
+  // Estrutura das pétalas - todas idênticas (SVG da IA) - voltadas para o centro
+  // Rotação = (angle + 180) para que o TOPO/BICO (parte vermelha) aponte para o centro
+  const petals = [
+    { angle: 270, width: 227, height: 256, sector: 'ti', scale: 0.45 },
+    { angle: 90, width: 227, height: 256, sector: 'chat', scale: 0.45 },
+    { angle: 30, width: 227, height: 256, sector: 'ia', scale: 0.45 },
+    { angle: 210, width: 227, height: 256, sector: 'dev', scale: 0.45 },
+    { angle: 150, width: 227, height: 256, sector: 'ip', scale: 0.45 },
+    { angle: 330, width: 227, height: 256, sector: 'eagle', scale: 0.45 }
+  ];
 
   return (
-    <div className="w-full h-full flex items-center justify-center min-h-[500px]">
-      {/* Container com tamanho menor */}
-      <div
-        className="relative"
+    <>
+      <style>{orbitAnimation}</style>
+    <div className="relative w-[500px] h-[500px]">
+      {/* Círculo Central (Ellipse 1) */}
+      <div 
+        className="absolute"
         style={{
-          width: `${containerSize}px`,
-          height: `${containerSize}px`,
+          width: 150,
+          height: 150,
+          background: 'radial-gradient(circle, #0A1F44 0%, #000132 100%)',
+          borderRadius: '9999px',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}
       >
-        {/* SVG Orbit como fundo - EXATAMENTE como está no arquivo */}
-        <div className="absolute inset-0">
-          <Image
-            src="/images/sectors/orbit.svg"
-            alt="Simplex Orbit"
-            fill
-            priority
-            className="object-contain"
-          />
-        </div>
+        <img 
+          src="/images/sectors/SIMPLEX BRANCA.svg"
+          alt="Simplex"
+          className="w-20 h-20 object-contain"
+        />
+      </div>
 
-        {/* Círculo gradiente moderno */}
-        <svg 
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          viewBox="0 0 500 500"
-        >
-          <defs>
-            <linearGradient id="centerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0A62FF" /> {/* brand-600 - azul vibrante */}
-              <stop offset="50%" stopColor="#123C8A" /> {/* brand-700 - azul médio */}
-              <stop offset="100%" stopColor="#0B1B3B" /> {/* brand-900 - azul escuro */}
-            </linearGradient>
-          </defs>
-          <circle cx="250" cy="250" r="105" fill="url(#centerGradient)" />
-        </svg>
-
-        {/* Logo da Simplex centralizada */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
-          <Image
-            src="/logo.png"
-            alt="Simplex"
-            width={140}
-            height={140}
-            priority
-            className="object-contain"
-          />
-        </div>
-
-        {/* Áreas clicáveis das pétalas INTEIRAS (120x120px) */}
-        {sectors.map((sector, index) => {
-          // Calcular posição baseada no ângulo do setor
-          const angle = (sector.angle * Math.PI) / 180;
-          const x = centerX + orbitRadius * Math.cos(angle);
-          const y = centerY + orbitRadius * Math.sin(angle);
-          const isHovered = hoveredSector === sector.id;
-
-          return (
-            <motion.div
-              key={sector.id}
-              className="absolute cursor-pointer z-10"
+      {/* Container com animação de rotação */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          animation: 'orbit-rotation 60s linear infinite',
+          animationPlayState: isPaused ? 'paused' : 'running'
+        }}
+      >
+      {/* Pétalas posicionadas com trigonometria - todas idênticas (SVG da IA) voltadas para o centro */}
+      {petals.map((petal) => {
+        const position = getPetalPosition(petal.angle, petal.width, petal.height);
+        const sector = sectors.find(s => s.id === petal.sector);
+        const isHovered = hoveredSector === petal.sector;
+        
+        return (
+          <motion.div 
+            key={petal.sector}
+            className="absolute cursor-pointer z-10"
+            style={{
+              left: position.left,
+              top: position.top,
+              width: petal.width,
+              height: petal.height,
+              transformOrigin: 'center center'
+            }}
+            initial={{ scale: petal.scale, rotate: petal.angle + 148 }}
+            whileHover={{ 
+              scale: petal.scale * 1.15,
+              rotate: petal.angle + 148,
+              filter: 'brightness(1.05) drop-shadow(0 4px 12px rgba(10, 98, 255, 0.2))',
+              transition: {
+                type: "spring",
+                stiffness: 300,
+                damping: 20
+              }
+            }}
+            whileTap={{ scale: petal.scale * 0.95 }}
+            onMouseEnter={() => {
+              setHoveredSector(petal.sector);
+              setIsPaused(true);
+            }}
+            onMouseLeave={() => {
+              setHoveredSector(null);
+              setIsPaused(false);
+            }}
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              const centerX = rect.left + rect.width / 2;
+              const centerY = rect.top + rect.height / 2;
+              setClickedPosition({ x: centerX, y: centerY });
+              handleSectorClick(sector!);
+            }}
+          >
+            {/* SVG da pétala */}
+              <svg width="227" height="256" viewBox="0 0 227 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="1.0" d="M119.692 9.86871C136.256 -6.06442 162.914 -1.10976 173.735 19.1668L224.325 113.969C228.306 121.429 226.898 130.626 221.244 136.913C211.067 148.231 195.282 167.466 185.417 187.676C175.607 207.774 166.873 228.837 161.781 241.596C158.894 248.831 151.984 253.704 144.195 253.849L35.9658 255.87C13.0536 256.298 -4.25003 235.54 1.44042 213.342C9.9896 179.992 23.6316 134.517 40.819 103.513C58.2889 71.9991 93.4341 35.1271 119.692 9.86871Z" fill="white"/>
+              </svg>
+            
+            {/* Logo centralizada DENTRO da pétala - MESMA orientação da SPX DEV */}
+            {/* Wrapper externo - compensa rotação do orbit */}
+            <div
+              className="absolute inset-0 pointer-events-none"
               style={{
-                left: `${x - 90}px`, // -90 para centralizar (180/2)
-                top: `${y - 90}px`,  // -90 para centralizar (180/2)
-                width: '180px',
-                height: '180px',
+                animation: 'orbit-rotation 60s linear infinite reverse',
+                animationPlayState: isPaused ? 'paused' : 'running',
               }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ 
-                scale: 1.1, // Reduzido de 1.2 para 1.1
-                zIndex: 30,
-                filter: "drop-shadow(0 5px 10px rgba(200, 200, 200, 0.3))", // Sombra menor
-                transition: { 
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 15
-                }
-              }}
-              whileTap={{ scale: 0.95 }}
-              onMouseEnter={() => setHoveredSector(sector.id)}
-              onMouseLeave={() => setHoveredSector(null)}
             >
-              {/* Brilho no hover */}
-              {isHovered && (
-                <motion.div
-                  className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-200/40 to-gray-300/40 blur-md"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                />
-              )}
-
-              {/* Logo centralizada DENTRO da pétala */}
-              <div 
-                className="w-full h-full flex items-center justify-center relative z-10"
-                onClick={(e) => {
-                  const logoRect = e.currentTarget.getBoundingClientRect();
-                  const centerX = logoRect.left + logoRect.width / 2;
-                  const centerY = logoRect.top + logoRect.height / 2;
-                  console.log('Clicked sector:', sector.name, 'Position:', centerX, centerY); // Debug
-                  setClickedPosition({ x: centerX, y: centerY });
-                  handleSectorClick(sector);
-                  e.stopPropagation(); // Evitar duplo clique
+              {/* Logo interna - compensa rotação da pétala */}
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{
+                  transform: `rotate(${-(petal.angle + 148)}deg)`,
+                }}
+                whileHover={{ 
+                  scale: 1.3,
+                  transition: { 
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }
                 }}
               >
-                {sector.logo ? (
-                  <Image
-                    src={sector.logo}
-                    alt={sector.name}
-                    width={sector.id === 'eagle' ? 130 : 115}
-                    height={sector.id === 'eagle' ? 130 : 115}
-                    className="object-contain"
-                  />
-                ) : (
-                  <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                    <span className="text-gray-600 text-sm font-bold">?</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Animação de hover - círculo pulsante */}
-              {isHovered && (
-                <motion.div
-                  className="absolute inset-0 rounded-full border-2 border-gray-300"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1.05, opacity: 0 }}
-                  transition={{ duration: 1, repeat: Infinity }}
+                <img 
+                  src={sector?.logo} 
+                  alt={sector?.name} 
+                  className="w-32 h-32 object-contain"
                 />
-              )}
-            </motion.div>
-          );
-        })}
+              </motion.div>
+            </div>
+            
+          </motion.div>
+        );
+      })}
+      
       </div>
 
       {/* Animação de transição da pétala para o modal */}
       {clickedPosition && (
         <motion.div
           className="fixed w-20 h-20 bg-gray-300 rounded-full shadow-2xl z-[10000]"
-          initial={{ 
-            left: clickedPosition.x - 40, // -40 = metade de 80px
-            top: clickedPosition.y - 40,  // -40 = metade de 80px
-            scale: 1, 
-            opacity: 1 
+          initial={{
+            left: clickedPosition.x - 40,
+            top: clickedPosition.y - 40,
+            scale: 1,
+            opacity: 1
           }}
-          animate={{ 
-            left: typeof window !== 'undefined' ? window.innerWidth - 100 : 0, 
-            top: 50, 
-            scale: 0, 
-            opacity: 0 
+          animate={{
+            left: typeof window !== 'undefined' ? window.innerWidth - 100 : 0,
+            top: 50,
+            scale: 0,
+            opacity: 0
           }}
           transition={{ duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
           onAnimationComplete={() => setClickedPosition(null)}
         />
       )}
 
-      {/* Drawer Lateral RESTAURADO */}
+      {/* Drawer Lateral */}
       <AnimatePresence>
         {selectedSector && (
           <>
-            {/* Overlay */}
+            {/* Background preto cobrindo TODA a tela */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.0, ease: "easeOut" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               onClick={handleClose}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999]"
-              style={{ zIndex: 9999 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9997]"
             />
 
             {/* Drawer Panel */}
@@ -232,63 +269,62 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
               initial={{ x: '100%', opacity: 0, scale: 0.9 }}
               animate={{ x: 0, opacity: 1, scale: 1 }}
               exit={{ x: '100%', opacity: 0, scale: 0.9 }}
-              transition={{ 
-                duration: 1.2,
+              transition={{
+                duration: 0.6,
                 ease: [0.4, 0, 0.2, 1],
-                opacity: { duration: 0.9 },
-                scale: { duration: 0.8 }
+                opacity: { duration: 0.4 },
+                scale: { duration: 0.5 }
               }}
-              className="fixed right-0 top-0 h-screen w-full sm:w-[90%] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] z-[9999] flex flex-col"
-              style={{ zIndex: 9999 }}
+              className="fixed right-0 top-0 h-screen w-full sm:w-[85%] md:w-[65%] lg:w-[55%] xl:w-[50%] z-[9999] flex flex-col"
               onClick={(e: React.MouseEvent) => e.stopPropagation()}
             >
-              <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl">
-                {/* Header Fixo RESTAURADO */}
-                <div className="relative bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 p-4 sm:p-6 text-white flex-shrink-0">
+              <div className="bg-white dark:bg-gray-900 h-full flex flex-col shadow-2xl border-l-2 md:border-l-4 border-primary dark:border-accent">
+                {/* Header Fixo */}
+                <div className="relative bg-gradient-to-br from-brand-600 via-brand-700 to-brand-900 dark:from-gray-800 dark:via-gray-900 dark:to-black p-3 sm:p-4 md:p-6 text-white flex-shrink-0">
                   <div className="absolute inset-0 opacity-10">
                     <div
                       className="absolute inset-0"
-                      style={{
+            style={{ 
                         backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
                         backgroundSize: '32px 32px',
                       }}
                     />
                   </div>
 
-                  <div className="relative flex items-start gap-4">
+                  <div className="relative flex items-start gap-3 md:gap-4">
                     {/* Logo */}
-                    <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg p-2">
-                      <Image
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-white rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg p-1.5 md:p-2">
+                      <img
                         src={selectedSector.logo}
                         alt={selectedSector.name}
                         width={48}
                         height={48}
                         className="object-contain"
-                      />
-                    </div>
+            />
+          </div>
 
-                    <div className="flex-1 min-w-0 pr-12">
+                    <div className="flex-1 min-w-0 pr-10 md:pr-12">
                       {/* Nome do setor */}
-                      <div className="text-xs font-semibold opacity-80 mb-1 uppercase tracking-wider">
+                      <div className="text-[10px] sm:text-xs font-semibold opacity-80 mb-0.5 md:mb-1 uppercase tracking-wider">
                         {selectedSector.name}
                       </div>
                       {/* Título */}
-                      <h2 className="text-xl sm:text-2xl font-bold leading-tight break-words whitespace-pre-line">{selectedSector.title}</h2>
+                      <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-tight break-words whitespace-pre-line">{selectedSector.title}</h2>
                     </div>
 
                     {/* Botão Fechar */}
                     <button
                       onClick={handleClose}
-                      className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all hover:scale-110 hover:rotate-90"
+                      className="absolute top-3 right-3 sm:top-4 sm:right-4 md:top-6 md:right-6 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all hover:scale-110 hover:rotate-90"
                       aria-label="Fechar"
                     >
-                      <X className="w-5 h-5" />
+                      <X className="w-4 h-4 md:w-5 md:h-5" />
                     </button>
                   </div>
                 </div>
 
                 {/* Conteúdo Scrollável */}
-                <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+                <div className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 bg-gray-50 dark:bg-gray-950">
                   {selectedSector.id === 'ia' ? (
                     /* Sistema de Abas para Simplex IA */
                     <Tabs defaultValue="VENDAS" className="w-full">
@@ -314,10 +350,10 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                                   <SectorIcon name={item.icon} className="w-10 h-10" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="text-[#0A62FF] font-bold uppercase text-sm mb-1">
+                                  <h4 className="text-primary dark:text-accent font-bold uppercase text-sm mb-1">
                                     {item.subtitle}
                                   </h4>
-                                  <p className="text-gray-600 uppercase text-xs leading-relaxed">
+                                  <p className="text-gray-600 dark:text-gray-300 uppercase text-xs leading-relaxed">
                                     {item.description}
                                   </p>
                                 </div>
@@ -338,7 +374,7 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                           transition={{ delay: sectionIndex * 0.1 }}
                           className="space-y-4"
                         >
-                          <h3 className="text-[#0A62FF] font-bold uppercase text-lg">
+                          <h3 className="text-primary dark:text-accent font-bold uppercase text-lg">
                             {section.title}
                           </h3>
                           <div className="space-y-3">
@@ -354,10 +390,10 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                                   <SectorIcon name={item.icon} className="w-10 h-10" />
                                 </div>
                                 <div className="flex-1">
-                                  <h4 className="text-[#0A62FF] font-bold uppercase text-sm mb-1">
+                                  <h4 className="text-primary dark:text-accent font-bold uppercase text-sm mb-1">
                                     {item.subtitle}
                                   </h4>
-                                  <p className="text-gray-600 uppercase text-xs leading-relaxed">
+                                  <p className="text-gray-600 dark:text-gray-300 uppercase text-xs leading-relaxed">
                                     {item.description}
                                   </p>
                                 </div>
@@ -371,14 +407,26 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
                 </div>
 
                 {/* Footer Fixo */}
-                <div className="p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
-                  <Button
-                    onClick={() => window.open('https://wa.me/5511999999999', '_blank')}
-                    className="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 text-white shadow-lg hover:shadow-xl transition-all duration-300 h-12"
+                <div className="p-3 sm:p-4 md:p-6 bg-white dark:bg-gray-800 border-t-2 border-gray-200 dark:border-gray-700 flex-shrink-0 shadow-lg dark:shadow-gray-900/50">
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="relative group"
                   >
-                    <MessageCircle className="w-5 h-5 mr-2" />
-                    {selectedSector.cta}
-                  </Button>
+                    {/* Glow Effect */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-accent/50 rounded-lg opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
+
+                    <Button
+                      onClick={() => window.open('https://wa.me/556696571379?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20um%20especialista', '_blank')}
+                      className="relative w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-900 dark:from-accent dark:to-primary dark:hover:from-primary dark:hover:to-accent text-white shadow-lg hover:shadow-xl transition-all duration-300 h-11 md:h-12 overflow-hidden group text-sm md:text-base"
+                    >
+                      {/* Shimmer Effect */}
+                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                      <MessageCircle className="w-4 h-4 md:w-5 md:h-5 mr-2 relative z-10 group-hover:scale-110 transition-transform" />
+                      <span className="relative z-10">{selectedSector.cta}</span>
+                    </Button>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
@@ -386,5 +434,6 @@ export const SimplexOrbit = memo(function SimplexOrbit({ sectors }: SimplexOrbit
         )}
       </AnimatePresence>
     </div>
+    </>
   );
-});
+}
