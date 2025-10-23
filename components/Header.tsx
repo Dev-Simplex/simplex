@@ -16,15 +16,19 @@ export const Header = memo(function Header() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Detecta se está no Hero (primeira seção)
-      const heroSection = document.querySelector('#hero');
-      if (heroSection) {
-        const heroBottom = heroSection.getBoundingClientRect().bottom;
-        setIsInHero(heroBottom > 100); // Se Hero ainda visível
+      // Detecta se está no Hero verificando a próxima seção
+      const solutionsSection = document.querySelector('#solucoes-servicos');
+      if (solutionsSection) {
+        const solutionsTop = solutionsSection.getBoundingClientRect().top;
+        // Header só aparece quando a seção Soluções chegar no topo
+        setIsInHero(solutionsTop > 0);
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Também executa na montagem inicial
+    handleScroll();
   }, []);
 
   const scrollToSection = useCallback((href: string) => {
