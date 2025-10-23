@@ -382,6 +382,143 @@ body.modal-open header {
   pointer-events: none !important;
 }
 
+/* Bloquear scroll do body quando modal estiver aberto */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* Garantir que modal de produtos tenha z-index máximo */
+.glass-modal {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+}
+
+/* Forçar modal acima de TUDO */
+[data-modal="product-modal"] {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+}
+
+/* CSS ULTRA DEFINITIVO - Força modal acima de TUDO */
+div[data-modal="product-modal"] {
+  z-index: 2147483647 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}
+
+/* Glassmorphism para imagens do modal */
+.glass-image-container {
+  background: linear-gradient(135deg, 
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(168, 85, 247, 0.1) 25%,
+    rgba(236, 72, 153, 0.1) 50%,
+    rgba(251, 146, 60, 0.1) 75%,
+    rgba(99, 102, 241, 0.1) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px 0 rgba(99, 102, 241, 0.2),
+    inset 0 0 80px rgba(168, 85, 247, 0.05);
+}
+
+/* Variante para Chat-SPX (tons de azul/roxo) */
+.glass-image-chat {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(99, 102, 241, 0.15) 50%,
+    rgba(139, 92, 246, 0.15) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  box-shadow: 
+    0 8px 32px 0 rgba(99, 102, 241, 0.3),
+    inset 0 0 100px rgba(99, 102, 241, 0.08);
+}
+
+/* Variante para Marketplace (tons de laranja/rosa) */
+.glass-image-marketplace {
+  background: linear-gradient(135deg, 
+    rgba(251, 146, 60, 0.15) 0%,
+    rgba(236, 72, 153, 0.15) 50%,
+    rgba(168, 85, 247, 0.15) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(236, 72, 153, 0.2);
+  box-shadow: 
+    0 8px 32px 0 rgba(236, 72, 153, 0.3),
+    inset 0 0 100px rgba(236, 72, 153, 0.08);
+}
+
+/* Fundo preto para vídeos */
+.glass-image-video {
+  background: #000000;
+}
+
+/* Animação shimmer para efeito de brilho */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.glass-image-container::before,
+.glass-image-chat::before,
+.glass-image-marketplace::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+/* Scrollbar customizada para o modal */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Firefox scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+}
+
 
 /* Mobile Touch Optimizations */
 @media (hover: none) and (pointer: coarse) {
