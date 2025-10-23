@@ -227,9 +227,9 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="flex flex-col lg:flex-row max-h-[90vh]">
-                {/* LADO ESQUERDO: Imagem */}
-                <div className={`w-full lg:w-1/2 flex-shrink-0 flex items-center justify-center p-4 relative ${
+              <div className="flex flex-col max-h-[90vh]">
+                {/* PARTE SUPERIOR: Imagem/Video */}
+                <div className={`w-full flex-shrink-0 flex items-center justify-center p-4 relative ${
                   product.id === 'mobile-app' ? 'glass-image-video' :
                   product.id === 'chat-spx' ? 'glass-image-chat' : 
                   product.id === 'marketplace' ? 'glass-image-marketplace' : 
@@ -245,13 +245,13 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
                       </div>
                     </div>
                   ) : product.isVideo ? (
-                    <div className="w-full h-full max-h-[40vh] md:max-h-[50vh] lg:max-h-[90vh] bg-black">
+                    <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] bg-black">
                       <video
                         autoPlay
                         loop
                         muted
                         playsInline
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-cover"
                       >
                         <source src={product.image} type="video/mp4" />
                       </video>
@@ -265,8 +265,8 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
                   )}
                 </div>
 
-                {/* LADO DIREITO: Conteúdo + Botões */}
-                <div className="w-full lg:w-1/2 flex flex-col min-h-0">
+                {/* PARTE INFERIOR: Conteúdo + Botões */}
+                <div className="w-full flex flex-col min-h-0">
                   {/* Área Scrollável */}
                   <div className="flex-1 overflow-y-auto p-5 md:p-6 lg:p-8 custom-scrollbar">
                     <div>

@@ -33,9 +33,10 @@ interface Sector {
 
 interface SimplexOrbitProps {
   sectors: Sector[];
+  isMobile?: boolean;
 }
 
-export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
+export function SimplexOrbit({ sectors, isMobile = false }: SimplexOrbitProps) {
   const [selectedSector, setSelectedSector] = useState<Sector | null>(null);
   const [hoveredSector, setHoveredSector] = useState<string | null>(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -88,45 +89,47 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
 
   // Calcular posição das logos baseado no ângulo
   const getLogoPosition = (angle: number) => {
-    const radius = 168; // raio ajustado para círculo perfeito (120 * 1.4)
+    const radius = isMobile ? 84 : 168; // raio proporcional para 350px  
+    const center = isMobile ? 175 : 350; // centro 50% do container 350px
     const radians = (angle * Math.PI) / 180;
     return {
-      x: 350 + Math.cos(radians) * radius,
-      y: 350 + Math.sin(radians) * radius,
+      x: center + Math.cos(radians) * radius,
+      y: center + Math.sin(radians) * radius,
     };
   };
 
   // Calcular posição das pétalas baseado no ângulo e dimensões do SVG
   const getPetalPosition = (angle: number, svgWidth: number, svgHeight: number) => {
-    const radius = 168; // raio ajustado para círculo perfeito (120 * 1.4)
+    const radius = isMobile ? 84 : 168; // raio proporcional para 350px
+    const center = isMobile ? 175 : 350; // centro 50% do container 350px
     const radians = (angle * Math.PI) / 180;
     return {
-      left: 350 + Math.cos(radians) * radius - svgWidth / 2,
-      top: 350 + Math.sin(radians) * radius - svgHeight / 2,
+      left: center + Math.cos(radians) * radius - svgWidth / 2,
+      top: center + Math.sin(radians) * radius - svgHeight / 2,
     };
   };
 
   // Estrutura das pétalas - todas idênticas (SVG da IA) - voltadas para o centro
   // Rotação = (angle + 180) para que o TOPO/BICO (parte vermelha) aponte para o centro
   const petals = [
-    { angle: 270, width: 227, height: 256, sector: 'ti', scale: 0.63 },
-    { angle: 90, width: 227, height: 256, sector: 'chat', scale: 0.63 },
-    { angle: 30, width: 227, height: 256, sector: 'ia', scale: 0.63 },
-    { angle: 210, width: 227, height: 256, sector: 'dev', scale: 0.63 },
-    { angle: 150, width: 227, height: 256, sector: 'ip', scale: 0.63 },
-    { angle: 330, width: 227, height: 256, sector: 'eagle', scale: 0.63 }
+    { angle: 270, width: 227, height: 256, sector: 'ti', scale: isMobile ? 0.35 : 0.63 },
+    { angle: 90, width: 227, height: 256, sector: 'chat', scale: isMobile ? 0.35 : 0.63 },
+    { angle: 30, width: 227, height: 256, sector: 'ia', scale: isMobile ? 0.35 : 0.63 },
+    { angle: 210, width: 227, height: 256, sector: 'dev', scale: isMobile ? 0.35 : 0.63 },
+    { angle: 150, width: 227, height: 256, sector: 'ip', scale: isMobile ? 0.35 : 0.63 },
+    { angle: 330, width: 227, height: 256, sector: 'eagle', scale: isMobile ? 0.35 : 0.63 }
   ];
 
   return (
     <>
       <style>{orbitAnimation}</style>
-    <div className="relative w-[700px] h-[700px]">
+    <div className={`relative ${isMobile ? 'w-[350px] h-[350px]' : 'w-[700px] h-[700px]'}`}>
       {/* Círculo Central (Ellipse 1) */}
       <div 
         className="absolute"
         style={{
-          width: 210,
-          height: 210,
+          width: isMobile ? 105 : 210,
+          height: isMobile ? 105 : 210,
           background: 'radial-gradient(circle, #0A1F44 0%, #000132 100%)',
           borderRadius: '9999px',
           left: '50%',
@@ -140,7 +143,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
         <img 
           src="/images/sectors/SIMPLEX BRANCA.svg"
           alt="Simplex"
-          className="w-28 h-28 object-contain"
+          className={`${isMobile ? 'w-[56px] h-[56px]' : 'w-28 h-28'} object-contain`}
         />
       </div>
 
@@ -148,7 +151,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
       <div 
         className="absolute inset-0"
         style={{
-          animation: 'orbit-rotation 60s linear infinite',
+          animation: `orbit-rotation ${isMobile ? '80s' : '60s'} linear infinite`,
           animationPlayState: isPaused ? 'paused' : 'running'
         }}
       >
@@ -170,7 +173,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
               transformOrigin: 'center center'
             }}
             initial={{ scale: petal.scale, rotate: petal.angle + 148 }}
-            whileHover={{ 
+            whileHover={isMobile ? {} : { 
               scale: petal.scale * 1.15,
               rotate: petal.angle + 148,
               filter: 'brightness(1.05) drop-shadow(0 4px 12px rgba(10, 98, 255, 0.2))',
@@ -181,11 +184,11 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
               }
             }}
             whileTap={{ scale: petal.scale * 0.95 }}
-            onMouseEnter={() => {
+            onMouseEnter={isMobile ? undefined : () => {
               setHoveredSector(petal.sector);
               setIsPaused(true);
             }}
-            onMouseLeave={() => {
+            onMouseLeave={isMobile ? undefined : () => {
               setHoveredSector(null);
               setIsPaused(false);
             }}
@@ -206,10 +209,10 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
             {/* Wrapper externo - compensa rotação do orbit */}
             <div
               className="absolute inset-0 pointer-events-none"
-              style={{
-                animation: 'orbit-rotation 60s linear infinite reverse',
-                animationPlayState: isPaused ? 'paused' : 'running',
-              }}
+                style={{
+                  animation: `orbit-rotation ${isMobile ? '80s' : '60s'} linear infinite reverse`,
+                  animationPlayState: isPaused ? 'paused' : 'running',
+                }}
             >
               {/* Logo interna - compensa rotação da pétala */}
               <motion.div
@@ -217,7 +220,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
                 style={{
                   transform: `rotate(${-(petal.angle + 148)}deg)`,
                 }}
-                whileHover={{ 
+                whileHover={isMobile ? {} : { 
                   scale: 1.3,
                   transition: { 
                     type: "spring",
@@ -229,7 +232,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
                 <img 
                   src={sector?.logo} 
                   alt={sector?.name} 
-                  className="w-36 h-36 object-contain"
+                  className={`${isMobile ? 'w-[125px] h-[125px]' : 'w-36 h-36'} object-contain`}
                 />
               </motion.div>
             </div>
@@ -319,7 +322,7 @@ export function SimplexOrbit({ sectors }: SimplexOrbitProps) {
             />
           </div>
 
-                    <div className="flex-1 min-w-0 pr-10 md:pr-12">
+                    <div className="flex-1 min-w-0 pr-12 sm:pr-14 md:pr-16">
                       {/* Nome do setor */}
                       <div className="text-[10px] sm:text-xs font-semibold opacity-80 mb-0.5 md:mb-1 uppercase tracking-wider">
                         {selectedSector.name}
