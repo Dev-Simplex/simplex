@@ -3,7 +3,8 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { useRef } from 'react';
-import { ProductsCarousel } from '@/components/ProductsCarousel';
+import { ProductCard } from '@/components/ProductCard';
+import { useTheme } from 'next-themes';
 
 interface Product {
   id: string;
@@ -34,22 +35,22 @@ export function Products({ products }: ProductsProps) {
     <section
       id="produtos"
       ref={sectionRef}
-      className="py-16 md:py-24 lg:py-32 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300"
+      className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 relative overflow-hidden transition-colors duration-300"
     >
-      {/* Subtle Gradient Orbs */}
+      {/* Glassmorphism Background Orbs */}
       <motion.div
         style={{
           y: useTransform(scrollYProgress, [0, 1], [0, 200]),
           opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.2, 0.1])
         }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
       />
       <motion.div
         style={{
           y: useTransform(scrollYProgress, [0, 1], [0, -150]),
           opacity: useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.2, 0.1])
         }}
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
       />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -65,10 +66,10 @@ export function Products({ products }: ProductsProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, type: "spring" }}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-4 md:px-5 py-2 md:py-2.5 rounded-full mb-6 md:mb-8"
+            className="inline-flex items-center gap-2 glass-card glass-gradient border border-primary/20 px-4 md:px-5 py-2 md:py-2.5 rounded-full mb-6 md:mb-8"
           >
-            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary dark:text-accent" />
-            <span className="text-foreground/80 dark:text-foreground/90 font-medium text-xs md:text-sm">Produtos Premium</span>
+            <Sparkles className="w-3 h-3 md:w-4 md:h-4 text-primary" />
+            <span className="text-foreground/80 font-medium text-xs md:text-sm">Produtos Premium</span>
           </motion.div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6">
@@ -82,13 +83,25 @@ export function Products({ products }: ProductsProps) {
           </p>
         </motion.div>
 
+        {/* Grid de Produtos com Glassmorphism */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
-          <ProductsCarousel products={products} />
+          {products.map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 * index, duration: 0.6 }}
+            >
+              <ProductCard product={product} />
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
