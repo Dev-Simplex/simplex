@@ -145,13 +145,13 @@ export function Hero() {
           transition={{ type: "spring", damping: 30, stiffness: 200 }}
         />
 
-        <div className="container mx-auto px-4 py-8 lg:py-2 relative z-10">
-          <div className="grid xl:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-4 pt-0 pb-2 md:pt-2 md:pb-4 lg:py-2 relative z-10">
+          <div className="grid xl:grid-cols-2 gap-6 md:gap-8 xl:gap-12 items-start xl:items-center">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-white xl:order-2"
+              className="text-white text-center xl:text-left xl:order-2"
             >
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -240,7 +240,7 @@ export function Hero() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative flex items-center justify-center h-[450px] lg:h-[500px] xl:h-[600px] xl:order-1"
+              className="relative flex items-center justify-center h-[350px] md:h-[400px] lg:h-[450px] xl:h-[600px] xl:order-1 mx-auto xl:mx-0 -mt-12 md:-mt-16 lg:-mt-20 xl:mt-0"
             >
               <div className="relative z-10 w-full h-full">
                 <SimplexOrbit sectors={sectorsData} />

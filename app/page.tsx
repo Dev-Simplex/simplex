@@ -8,8 +8,8 @@ import { Hero } from '@/components/sections/Hero';
 import productsData from '@/data/products.json';
 import solutionsData from '@/data/solutions.json';
 import servicesData from '@/data/services.json';
-import testimonialsData from '@/data/testimonials.json';
 import partnersData from '@/data/partners.json';
+import clientsData from '@/data/clients.json';
 import faqData from '@/data/faq.json';
 import { Product } from '@/types/products';
 
@@ -22,11 +22,7 @@ const Products = dynamic(() => import('@/components/sections/Products').then(mod
   ssr: true
 });
 
-const Testimonials = dynamic(() => import('@/components/sections/Testimonials').then(mod => ({ default: mod.Testimonials })), {
-  ssr: true
-});
-
-const Partners = dynamic(() => import('@/components/sections/Partners').then(mod => ({ default: mod.Partners })), {
+const PartnersClients = dynamic(() => import('@/components/sections/PartnersClients').then(mod => ({ default: mod.PartnersClients })), {
   ssr: true
 });
 
@@ -45,8 +41,7 @@ export default function Home() {
       <Hero />
       <SolutionsServices solutions={solutionsData} services={servicesData} />
       <Products products={productsData as Product[]} />
-      <Testimonials testimonials={testimonialsData} />
-      <Partners partners={partnersData} />
+      <PartnersClients technologies={partnersData} clients={clientsData} />
       <FAQ faqs={faqData} />
       <Contact />
       <Footer />

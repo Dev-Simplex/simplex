@@ -54,8 +54,7 @@ export const Header = memo(function Header() {
   const navItems = [
     { href: '#solucoes-servicos', label: 'Soluções' },
     { href: '#produtos', label: 'Produtos' },
-    { href: '#depoimentos', label: 'Depoimentos' },
-    { href: '#parceiros', label: 'Parceiros' },
+    { href: '#parceiros-clientes', label: 'Parceiros' },
     { href: '#faq', label: 'FAQ' },
     { href: '#contato', label: 'Contato' },
   ];

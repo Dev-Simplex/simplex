@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Tozi imóveis",
+    "logo": "/images/clients/tozi.webp"
+  },
+  {
+    "name": "Multiseg distribuidora",
+    "logo": "/images/clients/multiseg.png"
+  },
+  {
+    "name": "Fabrica dos óculos",
+    "logo": "/images/clients/logo-fabrica-light.png",
+    "logoDark": "/images/clients/logo-fabrica-dark.png"
+  },
+  {
+    "name": "Colegio Alternativo",
+    "logo": "/images/clients/colegio-alternativo.png"
+  },
+  {
+    "name": "Password Certificação",
+    "logo": "/images/clients/password.webp"
+  },
+  {
+    "name": "Realizare Imoniliária",
+    "logo": "/images/clients/realizare-dark.png",
+    "logoDark": "/images/clients/realizare-light.png"
+  },
+  {
+    "name": "Sentinela Monitoramento",
+    "logo": "/images/clients/sentinela.webp"
+},
+{
+  "name": "Balneário Plazza",
+  "logo": "/images/clients/balneario-plazza-dark.png",
+  "logoDark": "/images/clients/balneario-plazza-light.png"
+},
+{
+  "name": "Mercado Plazza",
+  "logo": "/images/clients/mercado-plazza-black.png",
+  "logoDark": "/images/clients/mercado-plazza-light.webp"
+},
+{
+    "name": "AGN Imobiliária",
+    "logo": "/images/clients/AGN-Imobiliaria.png"
+},
+{
+    "name": "DataNorte Sistemas",
+    "logo": "/images/clients/logo_datanorte-black.png",
+    "logoDark": "/images/clients/logo_datanorte.png"
+}
+]

@@ -16,6 +16,11 @@ const quickLinks = [
   { label: 'Contato', href: '#contato' },
 ];
 
+const legalLinks = [
+  { label: 'Política de Privacidade', href: '/privacidade' },
+  { label: 'Termos de Uso', href: '/termos' },
+];
+
 const socialLinks = [
   { icon: Linkedin, href: 'https://www.linkedin.com/company/simplex-solu%C3%A7%C3%B5es-tecnol%C3%B3gicas', label: 'LinkedIn' },
   { icon: Instagram, href: 'https://www.instagram.com/simplexsolucoes/', label: 'Instagram' },
@@ -51,7 +56,7 @@ export const Footer = memo(function Footer() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
 
       <div className="container mx-auto px-4 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Logo e Descrição */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -142,12 +147,39 @@ export const Footer = memo(function Footer() {
             </ul>
           </motion.div>
 
-          {/* Redes Sociais */}
+          {/* Links Legais */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <h4 className="font-bold mb-6 text-white text-lg bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+              Legal
+            </h4>
+            <ul className="space-y-3">
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-white/60 hover:text-white text-sm transition-all duration-300 hover:translate-x-1 inline-block group"
+                  >
+                    <span className="relative">
+                      {link.label}
+                      <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-accent to-primary group-hover:w-full transition-all duration-300" />
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Redes Sociais */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
             <h4 className="font-bold mb-6 text-white text-lg bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
               Redes Sociais
@@ -178,11 +210,14 @@ export const Footer = memo(function Footer() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="border-t border-white/10 pt-8 text-center"
         >
           <p className="text-sm text-white/50">
             © {new Date().getFullYear()} Simplex Soluções Tecnológicas. Todos os direitos reservados.
+          </p>
+          <p className="text-sm text-white/40 mt-1">
+            CNPJ: 27.304.891/0001-26
           </p>
         </motion.div>
       </div>
