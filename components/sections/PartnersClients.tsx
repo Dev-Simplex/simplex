@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, useAnimation, useMotionValue } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Sparkles, Building2, Cpu, ChevronDown, ChevronUp } from 'lucide-react';
 import Image from 'next/image';
@@ -25,6 +25,18 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
   const [hoveredTechIndex, setHoveredTechIndex] = useState<number | null>(null);
   const [hoveredClientIndex, setHoveredClientIndex] = useState<number | null>(null);
   const [isDark, setIsDark] = useState(false);
+  const [isClientsPaused, setIsClientsPaused] = useState(false);
+  const [isTechPaused, setIsTechPaused] = useState(false);
+  const [hoveredClientName, setHoveredClientName] = useState<string | null>(null);
+  const [hoveredTechName, setHoveredTechName] = useState<string | null>(null);
+
+  // Controles de animação para os carrosséis
+  const clientsControls = useAnimation();
+  const techControls = useAnimation();
+  
+  // Motion values para rastrear posições atuais
+  const clientsX = useMotionValue(0);
+  const techsX = useMotionValue(0);
 
   useEffect(() => {
     const checkTheme = () => {
@@ -41,6 +53,46 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
     
     return () => observer.disconnect();
   }, []);
+
+  // Controle de animação do carrossel de clientes (movendo para a direita)
+  useEffect(() => {
+    if (!isClientsPaused) {
+      // Inicia animação contínua da posição atual - movendo para a direita
+      const currentX = clientsX.get();
+      clientsControls.start({
+        x: [currentX - (clients.length * (160 + 64)), currentX],
+        transition: {
+          duration: clients.length * 4,
+          repeat: Infinity,
+          repeatType: 'loop',
+          ease: 'linear',
+        }
+      });
+    } else {
+      // Para a animação mantendo a posição atual
+      clientsControls.stop();
+    }
+  }, [isClientsPaused, clientsControls, clients.length, clientsX]);
+
+  // Controle de animação do carrossel de tecnologias (movendo para a esquerda)
+  useEffect(() => {
+    if (!isTechPaused) {
+      // Inicia animação contínua da posição atual - movendo para a esquerda
+      const currentX = techsX.get();
+      techControls.start({
+        x: [currentX, currentX - (technologies.length * (160 + 64))],
+        transition: {
+          duration: technologies.length * 4,
+          repeat: Infinity,
+          repeatType: 'loop',
+          ease: 'linear',
+        }
+      });
+    } else {
+      // Para a animação mantendo a posição atual
+      techControls.stop();
+    }
+  }, [isTechPaused, techControls, technologies.length, techsX]);
   
   // Duplicar arrays para looping infinito
   const duplicatedTechnologies = [...technologies, ...technologies, ...technologies];
@@ -138,28 +190,30 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
             </motion.div>
 
             {/* Clients Carousel - Moving Right */}
-            <div className="flex overflow-hidden py-6 md:py-8">
+            <div className="relative">
+              <div className="flex overflow-hidden py-12 md:py-16">
               <motion.div
                 className="flex gap-8 md:gap-12 lg:gap-16"
-                animate={{
-                  x: [-(clients.length * (160 + 64)), 0],
+                animate={clientsControls}
+                style={{ 
+                  willChange: 'transform',
+                  x: clientsX
                 }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: 'loop',
-                    duration: clients.length * 4,
-                    ease: 'linear',
-                  },
-                }}
-                style={{ willChange: 'transform' }}
               >
                 {duplicatedClients.map((client, index) => (
                   <motion.div
                     key={`client-${client.name}-${index}`}
                     className="flex-shrink-0 group relative"
-                    onHoverStart={() => setHoveredClientIndex(index)}
-                    onHoverEnd={() => setHoveredClientIndex(null)}
+                    onHoverStart={() => {
+                      setIsClientsPaused(true);
+                      setHoveredClientName(client.name);
+                      setHoveredClientIndex(index);
+                    }}
+                    onHoverEnd={() => {
+                      setIsClientsPaused(false);
+                      setHoveredClientName(null);
+                      setHoveredClientIndex(null);
+                    }}
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -193,6 +247,8 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                                ? 'max-h-12 md:max-h-16 lg:max-h-20' // Logo do Colégio Alternativo - tamanho bem maior
                                : client.name.toLowerCase().includes('mercado')
                                ? 'max-h-14 md:max-h-18 lg:max-h-24' // Logo do Mercado Plazza - tamanho extra grande
+                               : client.name.toLowerCase().includes('guaporé') || client.name.toLowerCase().includes('guapore')
+                               ? 'max-h-20 md:max-h-24 lg:max-h-32' // Logo do Guaporé - tamanho super grande
                                : client.name.toLowerCase().includes('sentinela')
                                ? 'max-h-10 md:max-h-12 lg:max-h-14' // Logo da Sentinela - tamanho um pouco maior
                                : client.name.toLowerCase().includes('balneário') || client.name.toLowerCase().includes('balneario')
@@ -223,9 +279,37 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                         </motion.div>
                       </div>
                     </motion.div>
+
+                    {/* Tooltip para Clientes - Dentro do card */}
+                    <AnimatePresence>
+                      {hoveredClientIndex === index && hoveredClientName && (
+                        <div className="absolute top-full left-0 right-0 flex justify-center mt-4 pointer-events-none">
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.2 }}
+                            className="z-[9999]"
+                          >
+                            <div className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-md 
+                                            border border-white/20 dark:border-gray-700/20 
+                                            shadow-xl rounded-xl px-4 py-2 whitespace-nowrap">
+                              <p className="text-sm font-medium bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                                {hoveredClientName}
+                              </p>
+                              <div className="absolute -top-2 left-1/2 -translate-x-1/2 
+                                              w-3 h-3 bg-white/70 dark:bg-gray-900/70 
+                                              border-l border-t border-white/20 dark:border-gray-700/20 
+                                              rotate-45 backdrop-blur-md"></div>
+                            </div>
+                          </motion.div>
+                        </div>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
                 ))}
               </motion.div>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -259,28 +343,30 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
             </motion.div>
 
             {/* Technologies Carousel - Moving Left */}
-            <div className="flex overflow-hidden py-6 md:py-8">
+            <div className="relative">
+              <div className="flex overflow-hidden py-12 md:py-16">
               <motion.div
                 className="flex gap-8 md:gap-12 lg:gap-16"
-                animate={{
-                  x: [0, -((technologies.length * (160 + 64)))],
+                animate={techControls}
+                style={{ 
+                  willChange: 'transform',
+                  x: techsX
                 }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: 'loop',
-                    duration: technologies.length * 4,
-                    ease: 'linear',
-                  },
-                }}
-                style={{ willChange: 'transform' }}
               >
                 {duplicatedTechnologies.map((tech, index) => (
                   <motion.div
                     key={`tech-${tech.name}-${index}`}
                     className="flex-shrink-0 group relative"
-                    onHoverStart={() => setHoveredTechIndex(index)}
-                    onHoverEnd={() => setHoveredTechIndex(null)}
+                    onHoverStart={() => {
+                      setIsTechPaused(true);
+                      setHoveredTechName(tech.name);
+                      setHoveredTechIndex(index);
+                    }}
+                    onHoverEnd={() => {
+                      setIsTechPaused(false);
+                      setHoveredTechName(null);
+                      setHoveredTechIndex(null);
+                    }}
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   >
@@ -330,10 +416,38 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                         </motion.div>
                       </div>
                     </motion.div>
+
+                    {/* Tooltip para Tecnologias - Dentro do card */}
+                    <AnimatePresence>
+                      {hoveredTechIndex === index && hoveredTechName && (
+                        <div className="absolute top-full left-0 right-0 flex justify-center mt-4 pointer-events-none">
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.2 }}
+                            className="z-[9999]"
+                          >
+                            <div className="bg-white/70 dark:bg-gray-900/70 backdrop-blur-md 
+                                            border border-white/20 dark:border-gray-700/20 
+                                            shadow-xl rounded-xl px-4 py-2 whitespace-nowrap">
+                              <p className="text-sm font-medium bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                                {hoveredTechName}
+                              </p>
+                              <div className="absolute -top-2 left-1/2 -translate-x-1/2 
+                                              w-3 h-3 bg-white/70 dark:bg-gray-900/70 
+                                              border-l border-t border-white/20 dark:border-gray-700/20 
+                                              rotate-45 backdrop-blur-md"></div>
+                            </div>
+                          </motion.div>
+                        </div>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
                 ))}
               </motion.div>
             </div>
+          </div>
           </div>
 
           {/* Título Centralizado com Seta */}

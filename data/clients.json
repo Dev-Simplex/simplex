@@ -47,5 +47,65 @@
     "name": "DataNorte Sistemas",
     "logo": "/images/clients/logo_datanorte-black.png",
     "logoDark": "/images/clients/logo_datanorte.png"
+},
+{
+  "name": "Guaporé Vidros",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
+},
+{
+  "name": "Jtesta",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
+},
+{
+  "name": "farma e farma",
+  "logo": "/images/clients/farma-e-farma.png"
+},
+{
+  "name": "farmacia ultrapopular",
+  "logo": "/images/clients/ultrapopular-dark.png",
+  "logoDark": "/images/clients/utrapopular-light.png"
+},
+{
+  "name": "hmx",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
+},
+{
+  "name": "Rota Oeste Veículos Scania",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
+},
+{
+  "name": "Rota Oeste maquinas",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
+},
+{
+  "name": "gvn telecom",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
+},
+{
+  "name": "d7 marcas e patentes",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
+},
+{
+  "name": "gvn telecom",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
+},
+{
+  "name": "diaria contabilidade",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
+},
+{
+  "name": "previ sinop",
+  "logo": "/images/clients/Guapore-azul.png",
+  "logoDark": "/images/clients/Guapore-branco.png"
 }
+
 ]

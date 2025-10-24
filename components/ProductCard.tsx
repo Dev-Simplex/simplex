@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { X, ExternalLink, CheckCircle2, ZoomIn, ZoomOut } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -29,6 +29,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product, isDark = false }: ProductCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isImageZoomed, setIsImageZoomed] = useState(false);
   const [mounted, setMounted] = useState(false);
   const scrollPositionRef = useRef(0);
 
@@ -38,10 +39,13 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
 
   const getImageSrc = (product: Product, isModal: boolean) => {
     if (product.id === 'chat-spx') {
-      return isModal ? '/chatspx_mobile.png' : '/chatspx.png';
+      return isModal ? '/chatspx-modal.png' : '/chatspx.png';
     }
     if (product.id === 'marketplace') {
-      return isModal ? '/marketplace_celular.png' : '/marketplace.png';
+      return isModal ? '/marketplace-modal.png' : '/marketplace.png';
+    }
+    if (product.id === 'mobile-app') {
+      return isModal ? '/mobile.mp4' : '/mobile.png';
     }
     return product.image; // default
   };
@@ -126,7 +130,7 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
         `}
       >
         {/* Imagem de Preview */}
-        <div className="relative h-[240px] overflow-hidden">
+        <div className="relative h-[240px] w-full overflow-hidden">
           {product.showQR ? (
             <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-200 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center">
               <div className="scale-75">
@@ -136,7 +140,7 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
                 </div>
               </div>
             </div>
-          ) : product.isVideo ? (
+          ) : product.isVideo && product.id !== 'mobile-app' ? (
             <div className="absolute inset-0 bg-black">
               <video
                 autoPlay
@@ -150,9 +154,18 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
             </div>
           ) : (
             <img
-              src={product.image}
+              src={getImageSrc(product, false)}
               alt={product.title}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+              style={{ 
+                objectFit: 'cover',
+                objectPosition: 'center',
+                width: '150%',
+                height: '150%',
+                left: '50%',
+                top: '110%',
+                transform: 'translate(-50%, -75%) scale(1.1)'
+              }}
             />
           )}
           
@@ -229,7 +242,7 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
 
               <div className={`flex ${product.isVideo ? 'flex-col lg:flex-row' : 'flex-col'} max-h-[90vh]`}>
                 {/* PARTE SUPERIOR: Imagem/Video */}
-                <div className={`${product.isVideo ? 'w-full lg:w-1/2' : 'w-full'} flex-shrink-0 flex items-center justify-center p-4 relative ${
+                <div className={`${product.isVideo ? 'w-full lg:w-1/2' : 'w-full'} flex-shrink-0 flex items-center justify-center ${product.id === 'marketplace' ? '' : 'p-4'} relative ${
                   product.id === 'mobile-app' ? 'glass-image-video' :
                   product.id === 'chat-spx' ? 'glass-image-chat' : 
                   product.id === 'marketplace' ? 'glass-image-marketplace' : 
@@ -257,11 +270,30 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
                       </video>
                     </div>
                   ) : (
-                    <img
-                      src={getImageSrc(product, true)}
-                      alt={product.title}
-                       className="w-full h-auto max-h-[40vh] md:max-h-[50vh] lg:max-h-[90vh] object-contain"
-                    />
+                    <div className={`relative w-full flex items-center justify-center ${
+                      (product.id === 'marketplace' || product.id === 'chat-spx') ? 'h-[25vh] min-h-[200px]' : ''
+                    }`}>
+                      <img
+                        src={getImageSrc(product, true)}
+                        alt={product.title}
+                        className={`transition-all duration-300 ${
+                          (product.id === 'marketplace' || product.id === 'chat-spx')
+                            ? 'w-full h-full object-cover rounded-lg' 
+                            : 'w-full h-auto max-h-[40vh] md:max-h-[50vh] lg:max-h-[90vh] object-cover'
+                        }`}
+                      />
+                      {(product.id === 'marketplace' || product.id === 'chat-spx') && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsImageZoomed(true);
+                          }}
+                          className="absolute bottom-4 left-4 z-10 w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/30 transition-colors"
+                        >
+                          <ZoomIn className="w-5 h-5" />
+                        </button>
+                      )}
+                    </div>
                   )}
                 </div>
 
@@ -337,6 +369,39 @@ export function ProductCard({ product, isDark = false }: ProductCardProps) {
                 </div>
               </div>
             </motion.div>
+        </div>,
+        document.body
+      )}
+
+      {/* Overlay de tela cheia para zoom da imagem */}
+      {isImageZoomed && mounted && createPortal(
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 2147483648,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)'
+          }}
+          onClick={() => setIsImageZoomed(false)}
+        >
+          <button
+            onClick={() => setIsImageZoomed(false)}
+            className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/20 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-black/30 transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <img
+            src={getImageSrc(product, true)}
+            alt={product.title}
+            className="max-w-[90vw] max-h-[90vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
         </div>,
         document.body
       )}
