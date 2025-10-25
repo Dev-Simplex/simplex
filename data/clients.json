@@ -73,38 +73,22 @@
 },
 {
   "name": "Rota Oeste Veículos Scania",
-  "logo": "/images/clients/Guapore-azul.png",
-  "logoDark": "/images/clients/Guapore-branco.png"
+  "logo": "/images/clients/Logo-Rota-Oeste-Azul.png",
+  "logoDark": "/images/clients/Logo-Rota-Oeste-Branco.png"
 },
 {
-  "name": "Rota Oeste maquinas",
-  "logo": "/images/clients/Guapore-azul.png",
-  "logoDark": "/images/clients/Guapore-branco.png"
-},
-{
-  "name": "gvn telecom",
-  "logo": "/images/clients/Guapore-azul.png",
-  "logoDark": "/images/clients/Guapore-branco.png"
+  "name": "GVN Telecom",
+  "logo": "/images/clients/gvn-black.png",
+  "logoDark": "/images/clients/gvn-roxo.png"
 },
 {
   "name": "d7 marcas e patentes",
-  "logo": "/images/clients/Guapore-azul.png",
-  "logoDark": "/images/clients/Guapore-branco.png"
+  "logo": "/images/clients/d7.png",
+  "logoDark": "/images/clients/d7.png"
 },
 {
-  "name": "gvn telecom",
-  "logo": "/images/clients/Guapore-azul.png",
-  "logoDark": "/images/clients/Guapore-branco.png"
-},
-{
-  "name": "diaria contabilidade",
-  "logo": "/images/clients/Guapore-azul.png",
-  "logoDark": "/images/clients/Guapore-branco.png"
-},
-{
-  "name": "previ sinop",
-  "logo": "/images/clients/Guapore-azul.png",
-  "logoDark": "/images/clients/Guapore-branco.png"
+  "name": "Previ Sinop",
+  "logo": "/images/clients/previ-sinop.png"
 }
 
 ]

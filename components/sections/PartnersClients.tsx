@@ -258,12 +258,20 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                                ? 'max-h-10 md:max-h-12 lg:max-h-14' // Logo da Sentinela - tamanho um pouco maior
                                : client.name.toLowerCase().includes('balneário') || client.name.toLowerCase().includes('balneario')
                                ? 'max-h-10 md:max-h-12 lg:max-h-14' // Logo do Balneário Plazza - tamanho um pouco maior
+                               : client.name.toLowerCase().includes('hmx')
+                               ? 'max-h-24 md:max-h-32 lg:max-h-40' // Logo da HMX - tamanho extra grande
+                               : client.name.toLowerCase().includes('jtesta')
+                               ? 'max-h-24 md:max-h-32 lg:max-h-40' // Logo da Jtesta - tamanho extra grande
+                               : client.name.toLowerCase().includes('gvn')
+                               ? 'max-h-20 md:max-h-24 lg:max-h-32' // Logo da GVN Telecom - tamanho grande
                                : 'max-h-8 md:max-h-10 lg:max-h-12' // Tamanho padrão para outras logos
                            } ${
                              client.logoDark
                                ? 'filter-none' // Logos com versão dark/light - sem filtros, usa logo específica para tema
                                : client.name.toLowerCase().includes('multiseg')
                                ? 'invert-0 dark:invert' // Logo preta - inverter no modo escuro
+                               : client.name.toLowerCase().includes('d7')
+                               ? 'invert dark:invert-0' // Logo branca - inverter no modo claro para ficar preta
                                : 'filter-none' // Logo normal
                            }`}
                          />
