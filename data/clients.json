@@ -55,8 +55,8 @@
 },
 {
   "name": "Jtesta",
-  "logo": "/images/clients/Guapore-azul.png",
-  "logoDark": "/images/clients/Guapore-branco.png"
+  "logo": "/images/clients/jtesta-black.png",
+  "logoDark": "/images/clients/jtesta-branco.png"
 },
 {
   "name": "farma e farma",
@@ -68,9 +68,8 @@
   "logoDark": "/images/clients/utrapopular-light.png"
 },
 {
-  "name": "hmx",
-  "logo": "/images/clients/Guapore-azul.png",
-  "logoDark": "/images/clients/Guapore-branco.png"
+  "name": "HMX",
+  "logo": "/images/clients/hmx-logo.png"
 },
 {
   "name": "Rota Oeste Veículos Scania",

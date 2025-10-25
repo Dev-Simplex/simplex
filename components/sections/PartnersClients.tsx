@@ -57,57 +57,48 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
   // Controle de animação do carrossel de clientes (movendo para a direita)
   useEffect(() => {
     if (!isClientsPaused) {
-      // Animação com reset invisível para loop infinito real
+      // Animação contínua com reset automático para loop infinito real
       const currentX = clientsX.get();
-      const offset = clients.length * (160 + 64);
+      const offset = clients.length * (160 + 64); // Apenas 1 ciclo
       
       clientsControls.start({
         x: [currentX, currentX + offset], // Positivo = direita
         transition: {
-          duration: clients.length * 4,
+          duration: clients.length * 4, // Apenas 1 ciclo
           repeat: Infinity,
           ease: 'linear',
-          onComplete: () => {
-            // Reset invisível quando chegar no fim
-            clientsX.set(currentX - offset);
-          }
         }
       });
     } else {
       // Para a animação mantendo a posição atual
       clientsControls.stop();
     }
-  }, [isClientsPaused, clientsControls, clients.length, clientsX]);
+  }, [isClientsPaused, clientsControls, clients.length]);
 
   // Controle de animação do carrossel de tecnologias (movendo para a esquerda)
   useEffect(() => {
     if (!isTechPaused) {
-      // Animação com reset invisível para loop infinito real
+      // Animação contínua com reset automático para loop infinito real
       const currentX = techsX.get();
-      const offset = technologies.length * (160 + 64);
+      const offset = technologies.length * (160 + 64); // Apenas 1 ciclo
       
       techControls.start({
         x: [currentX, currentX - offset], // Negativo = esquerda
         transition: {
-          duration: technologies.length * 4,
+          duration: technologies.length * 4, // Apenas 1 ciclo
           repeat: Infinity,
           ease: 'linear',
-          onComplete: () => {
-            // Reset invisível quando chegar no fim
-            techsX.set(currentX + offset);
-          }
         }
       });
     } else {
       // Para a animação mantendo a posição atual
       techControls.stop();
     }
-  }, [isTechPaused, techControls, technologies.length, techsX]);
+  }, [isTechPaused, techControls, technologies.length]);
   
-  // Clonagem inteligente para loop infinito sem buffer grande
-  // Apenas duplicar o necessário para transição suave
-  const duplicatedTechnologies = [...technologies, ...technologies, ...technologies];
-  const duplicatedClients = [...clients, ...clients, ...clients];
+  // Duplicação suficiente para loop infinito real
+  const duplicatedTechnologies = Array(10).fill(technologies).flat(); // 10x para tecnologias
+  const duplicatedClients = Array(20).fill(clients).flat(); // 20x para clientes (mais itens)
 
   return (
     <section 
@@ -210,7 +201,7 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                   willChange: 'transform',
                   x: clientsX
                 }}
-                initial={{ x: -(clients.length * (160 + 64)) }} // Começa de posição negativa
+                initial={{ x: -(clients.length * 10 * (160 + 64)) }} // Começa já no meio do array
               >
                 {duplicatedClients.map((client, index) => (
                   <motion.div
@@ -256,7 +247,7 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                            height={60}
                            className={`object-contain transition-all duration-300 group-hover:brightness-110 group-hover:scale-110 ${
                              client.name.toLowerCase().includes('ultrapopular') || client.name.toLowerCase().includes('farmacia ultrapopular')
-                               ? 'max-h-32 md:max-h-40 lg:max-h-48' // Logo da Farmácia Ultrapopular - tamanho super grande
+                               ? 'max-h-60 md:max-h-72 lg:max-h-80' // Logo da Farmácia Ultrapopular - tamanho extra grande
                                : client.name.toLowerCase().includes('colegio') || client.name.toLowerCase().includes('colégio')
                                ? 'max-h-12 md:max-h-16 lg:max-h-20' // Logo do Colégio Alternativo - tamanho bem maior
                                : client.name.toLowerCase().includes('mercado')
