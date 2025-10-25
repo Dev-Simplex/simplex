@@ -57,45 +57,57 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
   // Controle de animação do carrossel de clientes (movendo para a direita)
   useEffect(() => {
     if (!isClientsPaused) {
-      // Copiar EXATAMENTE a lógica de tecnologias, mudando apenas o sinal
+      // Animação com reset invisível para loop infinito real
       const currentX = clientsX.get();
+      const offset = clients.length * (160 + 64);
+      
       clientsControls.start({
-        x: [currentX, currentX + (clients.length * (160 + 64))], // Positivo = direita
+        x: [currentX, currentX + offset], // Positivo = direita
         transition: {
           duration: clients.length * 4,
           repeat: Infinity,
           ease: 'linear',
+          onComplete: () => {
+            // Reset invisível quando chegar no fim
+            clientsX.set(currentX - offset);
+          }
         }
       });
     } else {
       // Para a animação mantendo a posição atual
       clientsControls.stop();
     }
-  }, [isClientsPaused, clientsControls, clients.length]);
+  }, [isClientsPaused, clientsControls, clients.length, clientsX]);
 
   // Controle de animação do carrossel de tecnologias (movendo para a esquerda)
   useEffect(() => {
     if (!isTechPaused) {
-      // Inicia animação contínua da posição atual - movendo para a esquerda
+      // Animação com reset invisível para loop infinito real
       const currentX = techsX.get();
+      const offset = technologies.length * (160 + 64);
+      
       techControls.start({
-        x: [currentX, currentX - ((technologies.length * 10) * (160 + 64))],
+        x: [currentX, currentX - offset], // Negativo = esquerda
         transition: {
-          duration: (technologies.length * 10) * 4,
+          duration: technologies.length * 4,
           repeat: Infinity,
           ease: 'linear',
+          onComplete: () => {
+            // Reset invisível quando chegar no fim
+            techsX.set(currentX + offset);
+          }
         }
       });
     } else {
       // Para a animação mantendo a posição atual
       techControls.stop();
     }
-  }, [isTechPaused, techControls, technologies.length]);
+  }, [isTechPaused, techControls, technologies.length, techsX]);
   
-  // Duplicar arrays para looping infinito
-  // Tecnologias: 10x (poucos itens), Clientes: 5x (muitos itens)
-  const duplicatedTechnologies = Array(10).fill(technologies).flat();
-  const duplicatedClients = [...clients, ...clients, ...clients]; // 3x como tecnologias
+  // Clonagem inteligente para loop infinito sem buffer grande
+  // Apenas duplicar o necessário para transição suave
+  const duplicatedTechnologies = [...technologies, ...technologies, ...technologies];
+  const duplicatedClients = [...clients, ...clients, ...clients];
 
   return (
     <section 
