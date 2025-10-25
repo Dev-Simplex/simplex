@@ -57,14 +57,13 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
   // Controle de animação do carrossel de clientes (movendo para a direita)
   useEffect(() => {
     if (!isClientsPaused) {
-      // Inicia animação contínua da posição atual - movendo para a direita
+      // Copiar EXATAMENTE a lógica de tecnologias, mudando apenas o sinal
       const currentX = clientsX.get();
       clientsControls.start({
-        x: [currentX - (clients.length * (160 + 64)), currentX],
+        x: [currentX, currentX + (clients.length * (160 + 64))], // Positivo = direita
         transition: {
           duration: clients.length * 4,
           repeat: Infinity,
-          repeatType: 'loop',
           ease: 'linear',
         }
       });
@@ -72,7 +71,7 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
       // Para a animação mantendo a posição atual
       clientsControls.stop();
     }
-  }, [isClientsPaused, clientsControls, clients.length, clientsX]);
+  }, [isClientsPaused, clientsControls, clients.length]);
 
   // Controle de animação do carrossel de tecnologias (movendo para a esquerda)
   useEffect(() => {
@@ -80,11 +79,10 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
       // Inicia animação contínua da posição atual - movendo para a esquerda
       const currentX = techsX.get();
       techControls.start({
-        x: [currentX, currentX - (technologies.length * (160 + 64))],
+        x: [currentX, currentX - ((technologies.length * 10) * (160 + 64))],
         transition: {
-          duration: technologies.length * 4,
+          duration: (technologies.length * 10) * 4,
           repeat: Infinity,
-          repeatType: 'loop',
           ease: 'linear',
         }
       });
@@ -92,11 +90,12 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
       // Para a animação mantendo a posição atual
       techControls.stop();
     }
-  }, [isTechPaused, techControls, technologies.length, techsX]);
+  }, [isTechPaused, techControls, technologies.length]);
   
   // Duplicar arrays para looping infinito
-  const duplicatedTechnologies = [...technologies, ...technologies, ...technologies];
-  const duplicatedClients = [...clients, ...clients, ...clients];
+  // Tecnologias: 10x (poucos itens), Clientes: 5x (muitos itens)
+  const duplicatedTechnologies = Array(10).fill(technologies).flat();
+  const duplicatedClients = [...clients, ...clients, ...clients]; // 3x como tecnologias
 
   return (
     <section 
@@ -199,6 +198,7 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                   willChange: 'transform',
                   x: clientsX
                 }}
+                initial={{ x: -(clients.length * (160 + 64)) }} // Começa de posição negativa
               >
                 {duplicatedClients.map((client, index) => (
                   <motion.div
@@ -243,7 +243,9 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                            width={120}
                            height={60}
                            className={`object-contain transition-all duration-300 group-hover:brightness-110 group-hover:scale-110 ${
-                             client.name.toLowerCase().includes('colegio') || client.name.toLowerCase().includes('colégio')
+                             client.name.toLowerCase().includes('ultrapopular') || client.name.toLowerCase().includes('farmacia ultrapopular')
+                               ? 'max-h-32 md:max-h-40 lg:max-h-48' // Logo da Farmácia Ultrapopular - tamanho super grande
+                               : client.name.toLowerCase().includes('colegio') || client.name.toLowerCase().includes('colégio')
                                ? 'max-h-12 md:max-h-16 lg:max-h-20' // Logo do Colégio Alternativo - tamanho bem maior
                                : client.name.toLowerCase().includes('mercado')
                                ? 'max-h-14 md:max-h-18 lg:max-h-24' // Logo do Mercado Plazza - tamanho extra grande
