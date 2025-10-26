@@ -2,10 +2,9 @@
 
 import { Card } from '@/components/ui/card';
 import { motion, AnimatePresence } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { LucideIcon } from 'lucide-react';
 import { useState, useRef } from 'react';
 import { Lightbulb, Wrench } from 'lucide-react';
+import { iconMap } from '@/components/CustomIcons';
 
 interface Solution {
   id: string;
@@ -154,7 +153,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto"
             >
               {solutions.map((solution, index) => {
-                const Icon = (Icons[solution.icon as keyof typeof Icons] || Icons.Box) as LucideIcon;
+                const IconComponent = iconMap[solution.icon] || iconMap['GlobeAlt'];
 
                 return (
                   <motion.div
@@ -194,7 +193,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                           <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
                           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
                           <div className="relative w-full h-full bg-gradient-to-br from-primary/10 to-accent/10 border border-accent/20 group-hover:border-accent/40 rounded-2xl flex items-center justify-center transition-all duration-300">
-                            <Icon className="w-8 h-8 text-accent group-hover:text-primary transition-colors duration-300" />
+                            <IconComponent className="w-8 h-8 text-accent group-hover:text-primary transition-colors duration-300" />
                           </div>
                         </motion.div>
 
@@ -252,7 +251,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
               className="grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto"
             >
               {services.map((service, index) => {
-                const Icon = (Icons[service.icon as keyof typeof Icons] || Icons.Box) as LucideIcon;
+                const IconComponent = iconMap[service.icon] || iconMap['Lifebuoy'];
 
                 return (
                   <motion.div
@@ -292,7 +291,7 @@ export function SolutionsServices({ solutions, services }: SolutionsServicesProp
                           <div className="absolute inset-0 bg-gradient-to-br from-accent to-primary rounded-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
                           <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/20 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
                           <div className="relative w-full h-full bg-gradient-to-br from-accent/10 to-primary/10 border border-accent/20 group-hover:border-accent/40 rounded-2xl flex items-center justify-center transition-all duration-300">
-                            <Icon className="w-10 h-10 text-primary group-hover:text-accent transition-colors duration-300" />
+                            <IconComponent className="w-10 h-10 text-primary group-hover:text-accent transition-colors duration-300" />
                           </div>
                         </motion.div>
 

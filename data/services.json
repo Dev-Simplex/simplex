@@ -2,7 +2,7 @@
   {
     "id": "suporte-tecnico",
     "title": "Suporte Técnico",
-    "icon": "Headphones",
+    "icon": "Lifebuoy",
     "points": [
       "Atendimento especializado para equipe e datacenter",
       "Gestão completa do ambiente tecnológico",
@@ -12,7 +12,7 @@
   {
     "id": "infraestrutura",
     "title": "Infraestrutura",
-    "icon": "Server",
+    "icon": "ServerStack",
     "points": [
       "Estruturação e gestão de servidores e workstations",
       "Manutenção de ativos de rede e datacenter",
@@ -22,7 +22,7 @@
   {
     "id": "projetos",
     "title": "Projetos",
-    "icon": "Briefcase",
+    "icon": "RectangleStack",
     "points": [
       "Planejamento e execução de projetos tecnológicos",
       "Análise de requisitos e implementação customizada",
@@ -42,7 +42,7 @@
   {
     "id": "integracao",
     "title": "Integração",
-    "icon": "Workflow",
+    "icon": "PuzzlePiece",
     "points": [
       "APIs REST, SOAP, JSON, XML e WSDL",
       "Integração de bancos relacionais e não-relacionais",
@@ -52,7 +52,7 @@
   {
     "id": "gestao-backup",
     "title": "Gestão de Backup",
-    "icon": "HardDrive",
+    "icon": "CircleStack",
     "points": [
       "Backup local, em fita (DAT) e na nuvem",
       "Integração com AWS e Microsoft Azure",
@@ -62,7 +62,7 @@
   {
     "id": "seguranca",
     "title": "Segurança",
-    "icon": "ShieldCheck",
+    "icon": "LockClosed",
     "points": [
       "Firewall corporativo e antivírus empresarial",
       "Proteção contra ameaças e ataques cibernéticos",
@@ -82,7 +82,7 @@
   {
     "id": "virtualizacao",
     "title": "Virtualização",
-    "icon": "Box",
+    "icon": "CubeTransparent",
     "points": [
       "VMware ESXi, Hyper-V e Proxmox",
       "Virtualização privada em servidores próprios",
@@ -92,7 +92,7 @@
   {
     "id": "video-monitoramento-ia",
     "title": "Vídeo Monitoramento com Inteligência Artificial",
-    "icon": "Camera",
+    "icon": "VideoCamera",
     "points": [
       "Monitoramento em tempo real com IA",
       "Detecção automática de atividades suspeitas",
@@ -102,7 +102,7 @@
   {
     "id": "seguranca-eletronica",
     "title": "Segurança Eletrônica",
-    "icon": "Video",
+    "icon": "Eye",
     "points": [
       "Câmeras IP e analógicas de alta resolução",
       "Projeto completo de CFTV e monitoramento",
@@ -112,7 +112,7 @@
   {
     "id": "organizacao-estrategica",
     "title": "Organização Estratégica",
-    "icon": "Folders",
+    "icon": "FolderOpen",
     "points": [
       "Active Directory e GPO (Group Policy)",
       "Administração centralizada de infraestrutura",
