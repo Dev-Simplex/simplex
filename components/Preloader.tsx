@@ -11,11 +11,11 @@ export function Preloader() {
     let minTimeReached = false;
     let pageLoaded = false;
 
-    // Timer para garantir tempo mínimo de 1 segundo (reduzido para melhor UX)
+    // Timer para garantir tempo mínimo de 4 segundos
     const minTimer = setTimeout(() => {
       minTimeReached = true;
       checkIfCanHide();
-    }, 1000);
+    }, 4000);
 
     // Verificar se a página já carregou
     const checkPageLoad = () => {
