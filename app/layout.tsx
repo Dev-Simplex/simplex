@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   description: 'Soluções completas em infraestrutura de rede, segurança, automação, desenvolvimento de software e atendimento omnichannel. Transforme seu negócio com a Simplex.',
   keywords: ['tecnologia', 'infraestrutura', 'segurança', 'automação', 'software', 'omnichannel', 'Simplex', 'TI', 'desenvolvimento', 'redes', 'whatsapp'],
   authors: [{ name: 'Simplex Soluções Tecnológicas' }],
+  icons: {
+    icon: '/logo-favicon.png',
+    shortcut: '/logo-favicon.png',
+    apple: '/logo-favicon.png',
+  },
   openGraph: {
     title: 'Simplex Soluções Tecnológicas | Tecnologia que Conecta, Protege e Escala',
     description: 'Soluções completas em infraestrutura de rede, segurança, automação, desenvolvimento de software e atendimento omnichannel. Transforme seu negócio com a Simplex.',
