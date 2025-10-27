@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { ChatwootWidget } from '@/components/ChatwootWidget';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { ModalProvider } from '@/components/providers/ModalProvider';
+import { Preloader } from '@/components/Preloader';
 
 const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
 
@@ -48,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className}>
+        <Preloader />
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
