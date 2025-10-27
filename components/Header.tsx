@@ -131,6 +131,8 @@ export const Header = memo(function Header() {
                 scrolled || !isInHero ? 'brightness-0 dark:brightness-100' : ''
               }`}
               priority
+              loading="eager"
+              decoding="async"
             />
           </motion.div>
 
@@ -203,6 +205,8 @@ export const Header = memo(function Header() {
                     width={120}
                     height={40}
                     className="h-8 w-auto brightness-0 dark:brightness-100"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <Button
                     variant="ghost"

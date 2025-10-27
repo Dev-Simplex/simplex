@@ -35,7 +35,8 @@ export function Products({ products }: ProductsProps) {
     <section
       id="produtos"
       ref={sectionRef}
-      className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 relative overflow-hidden transition-colors duration-300"
+      className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 relative overflow-hidden transition-colors duration-300 section-container"
+      style={{ touchAction: 'pan-y' }}
     >
       {/* Glassmorphism Background Orbs */}
       <motion.div
@@ -57,14 +58,14 @@ export function Products({ products }: ProductsProps) {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.8 }}
           className="text-center mb-12 md:mb-16 lg:mb-20"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "50px" }}
             transition={{ delay: 0.2, type: "spring" }}
             className="inline-flex items-center gap-2 glass-card glass-gradient border border-primary/20 px-4 md:px-5 py-2 md:py-2.5 rounded-full mb-6 md:mb-8"
           >
@@ -87,7 +88,7 @@ export function Products({ products }: ProductsProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ delay: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
         >
@@ -96,7 +97,7 @@ export function Products({ products }: ProductsProps) {
               key={product.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "50px" }}
               transition={{ delay: 0.1 * index, duration: 0.6 }}
             >
               <ProductCard product={product} />

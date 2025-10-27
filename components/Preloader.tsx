@@ -11,11 +11,11 @@ export function Preloader() {
     let minTimeReached = false;
     let pageLoaded = false;
 
-    // Timer para garantir tempo mínimo de 2 segundos
+    // Timer para garantir tempo mínimo de 1 segundo (reduzido para melhor UX)
     const minTimer = setTimeout(() => {
       minTimeReached = true;
       checkIfCanHide();
-    }, 2000);
+    }, 1000);
 
     // Verificar se a página já carregou
     const checkPageLoad = () => {
@@ -75,12 +75,12 @@ export function Preloader() {
           id="preloader"
         >
           <div className="flex flex-col items-center justify-center">
-            {/* SVG do Loading Goes Off Track */}
+            {/* SVG do Loading Goes Off Track - Simplificado */}
             <svg 
               className="pl" 
               viewBox="0 0 128 128" 
-              width="128px" 
-              height="128px" 
+              width="96px" 
+              height="96px" 
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
@@ -91,12 +91,12 @@ export function Preloader() {
               </defs>
               <circle 
                 className="pl__ring" 
-                r="56" 
+                r="48" 
                 cx="64" 
                 cy="64" 
                 fill="none" 
                 stroke="hsla(0,10%,10%,0.1)" 
-                strokeWidth="16" 
+                strokeWidth="12" 
                 strokeLinecap="round" 
               />
               <path 
@@ -104,7 +104,7 @@ export function Preloader() {
                 d="M92,15.492S78.194,4.967,66.743,16.887c-17.231,17.938-28.26,96.974-28.26,96.974L119.85,59.892l-99-31.588,57.528,89.832L97.8,19.349,13.636,88.51l89.012,16.015S81.908,38.332,66.1,22.337C50.114,6.156,36,15.492,36,15.492a56,56,0,1,0,56,0Z" 
                 fill="none" 
                 stroke="url(#pl-grad)" 
-                strokeWidth="16" 
+                strokeWidth="12" 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
                 strokeDasharray="44 1111" 

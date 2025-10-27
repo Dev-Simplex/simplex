@@ -96,14 +96,15 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
     }
   }, [isTechPaused, techControls, technologies.length]);
   
-  // Duplicação suficiente para loop infinito real
-  const duplicatedTechnologies = Array(10).fill(technologies).flat(); // 10x para tecnologias
-  const duplicatedClients = Array(20).fill(clients).flat(); // 20x para clientes (mais itens)
+  // Reduzir duplicação drasticamente para melhor performance
+  const duplicatedTechnologies = Array(3).fill(technologies).flat(); // Reduzido de 10x para 3x
+  const duplicatedClients = Array(3).fill(clients).flat(); // Reduzido de 20x para 3x
 
   return (
     <section 
       id="parceiros-clientes" 
-      className="py-16 md:py-20 lg:py-24 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300"
+      className="py-16 md:py-20 lg:py-24 bg-white dark:bg-gray-950 relative overflow-hidden transition-colors duration-300 section-container"
+      style={{ touchAction: 'pan-y' }}
     >
       {/* Top Shadow */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-700 to-transparent" />
@@ -119,14 +120,14 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "50px" }}
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10 border border-primary/10 dark:border-primary/20 px-3 md:px-4 py-1.5 md:py-2 rounded-full mb-4 md:mb-6"
           >
@@ -150,7 +151,7 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ delay: 0.3 }}
           className="mb-16 md:mb-20"
         >
@@ -199,9 +200,10 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                 animate={clientsControls}
                 style={{ 
                   willChange: 'transform',
-                  x: clientsX
+                  x: clientsX,
+                  transform: 'translateZ(0)', // GPU acceleration
                 }}
-                initial={{ x: -(clients.length * 10 * (160 + 64)) }} // Começa já no meio do array
+                initial={{ x: -(clients.length * 3 * (160 + 64)) }} // Ajustado para 3x duplicação
               >
                 {duplicatedClients.map((client, index) => (
                   <motion.div
@@ -245,6 +247,8 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                            alt={client.name}
                            width={120}
                            height={60}
+                           loading="lazy"
+                           decoding="async"
                            className={`object-contain transition-all duration-300 group-hover:brightness-110 group-hover:scale-110 ${
                              client.name.toLowerCase().includes('ultrapopular') || client.name.toLowerCase().includes('farmacia ultrapopular')
                                ? 'max-h-60 md:max-h-72 lg:max-h-80' // Logo da Farmácia Ultrapopular - tamanho extra grande
@@ -331,7 +335,7 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ delay: 0.5 }}
           className="mb-8 md:mb-12"
         >
@@ -363,7 +367,8 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                 animate={techControls}
                 style={{ 
                   willChange: 'transform',
-                  x: techsX
+                  x: techsX,
+                  transform: 'translateZ(0)', // GPU acceleration
                 }}
               >
                 {duplicatedTechnologies.map((tech, index) => (
@@ -406,6 +411,8 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
                            alt={tech.name}
                            width={120}
                            height={60}
+                           loading="lazy"
+                           decoding="async"
                            className={`object-contain transition-all duration-300 max-h-8 md:max-h-10 lg:max-h-12 group-hover:brightness-110 group-hover:scale-110 ${
                              tech.name.toLowerCase().includes('fábrica') || tech.name.toLowerCase().includes('fabrica')
                                ? 'mix-blend-multiply dark:mix-blend-screen' // Logo com fundo preto
@@ -485,7 +492,7 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px" }}
           transition={{ delay: 0.7 }}
           className="text-center mt-8 md:mt-12 px-4"
         >
@@ -501,7 +508,7 @@ export function PartnersClients({ technologies, clients }: PartnersClientsProps)
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "50px" }}
             transition={{ delay: 0.9 }}
             className="flex items-center justify-center gap-4 md:gap-8 mt-4 md:mt-6 flex-wrap"
           >

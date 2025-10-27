@@ -520,12 +520,22 @@ div[data-modal="product-modal"] {
 }
 
 
+/* CSS Containment para melhor performance */
+.section-container {
+  contain: layout style paint;
+}
+
+.carousel-container {
+  contain: layout style;
+}
+
 /* Mobile Touch Optimizations */
 @media (hover: none) and (pointer: coarse) {
   /* Melhor scroll momentum em dispositivos touch */
   * {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
+    touch-action: pan-y; /* Otimização específica para scroll vertical */
   }
   
   /* Área de toque mínima de 44px para acessibilidade */
@@ -540,6 +550,13 @@ div[data-modal="product-modal"] {
   button:active,
   a:active {
     opacity: 0.7;
+  }
+  
+  /* Reduzir animações complexas em mobile */
+  .star-layer-1,
+  .star-layer-2,
+  .star-layer-3 {
+    animation-duration: 15s !important; /* Mais lento em mobile */
   }
 }
 
@@ -622,6 +639,18 @@ div[data-modal="product-modal"] {
 @media (prefers-reduced-motion: no-preference) {
   * {
     scroll-behavior: smooth;
+  }
+}
+
+/* Desabilitar animações para usuários que preferem movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

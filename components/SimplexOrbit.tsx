@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -87,38 +87,41 @@ export function SimplexOrbit({ sectors, isMobile = false }: SimplexOrbitProps) {
     }
   `;
 
-  // Calcular posição das logos baseado no ângulo
-  const getLogoPosition = (angle: number) => {
-    const radius = isMobile ? 84 : 168; // raio proporcional para 350px  
-    const center = isMobile ? 175 : 350; // centro 50% do container 350px
-    const radians = (angle * Math.PI) / 180;
-    return {
-      x: center + Math.cos(radians) * radius,
-      y: center + Math.sin(radians) * radius,
-    };
-  };
-
-  // Calcular posição das pétalas baseado no ângulo e dimensões do SVG
-  const getPetalPosition = (angle: number, svgWidth: number, svgHeight: number) => {
-    const radius = isMobile ? 84 : 168; // raio proporcional para 350px
-    const center = isMobile ? 175 : 350; // centro 50% do container 350px
-    const radians = (angle * Math.PI) / 180;
-    return {
-      left: center + Math.cos(radians) * radius - svgWidth / 2,
-      top: center + Math.sin(radians) * radius - svgHeight / 2,
-    };
-  };
-
   // Estrutura das pétalas - todas idênticas (SVG da IA) - voltadas para o centro
   // Rotação = (angle + 180) para que o TOPO/BICO (parte vermelha) aponte para o centro
-  const petals = [
+  const petals = useMemo(() => [
     { angle: 270, width: 227, height: 256, sector: 'ti', scale: isMobile ? 0.35 : 0.63 },
     { angle: 90, width: 227, height: 256, sector: 'chat', scale: isMobile ? 0.35 : 0.63 },
     { angle: 30, width: 227, height: 256, sector: 'ia', scale: isMobile ? 0.35 : 0.63 },
     { angle: 210, width: 227, height: 256, sector: 'dev', scale: isMobile ? 0.35 : 0.63 },
     { angle: 150, width: 227, height: 256, sector: 'ip', scale: isMobile ? 0.35 : 0.63 },
     { angle: 330, width: 227, height: 256, sector: 'eagle', scale: isMobile ? 0.35 : 0.63 }
-  ];
+  ], [isMobile]);
+
+  // Memoizar cálculos de posição para evitar recálculos desnecessários
+  const logoPositions = useMemo(() => {
+    const radius = isMobile ? 84 : 168;
+    const center = isMobile ? 175 : 350;
+    return petals.map(petal => {
+      const radians = (petal.angle * Math.PI) / 180;
+      return {
+        x: center + Math.cos(radians) * radius,
+        y: center + Math.sin(radians) * radius,
+      };
+    });
+  }, [isMobile, petals]);
+
+  const petalPositions = useMemo(() => {
+    const radius = isMobile ? 84 : 168;
+    const center = isMobile ? 175 : 350;
+    return petals.map(petal => {
+      const radians = (petal.angle * Math.PI) / 180;
+      return {
+        left: center + Math.cos(radians) * radius - petal.width / 2,
+        top: center + Math.sin(radians) * radius - petal.height / 2,
+      };
+    });
+  }, [isMobile, petals]);
 
   return (
     <>
@@ -147,17 +150,19 @@ export function SimplexOrbit({ sectors, isMobile = false }: SimplexOrbitProps) {
         />
       </div>
 
-      {/* Container com animação de rotação */}
+      {/* Container com animação de rotação otimizada */}
       <div 
         className="absolute inset-0"
         style={{
           animation: `orbit-rotation ${isMobile ? '80s' : '60s'} linear infinite`,
-          animationPlayState: isPaused ? 'paused' : 'running'
+          animationPlayState: isPaused ? 'paused' : 'running',
+          willChange: 'transform',
+          transform: 'translateZ(0)', // GPU acceleration
         }}
       >
       {/* Pétalas posicionadas com trigonometria - todas idênticas (SVG da IA) voltadas para o centro */}
-      {petals.map((petal) => {
-        const position = getPetalPosition(petal.angle, petal.width, petal.height);
+      {petals.map((petal, index) => {
+        const position = petalPositions[index];
         const sector = sectors.find(s => s.id === petal.sector);
         const isHovered = hoveredSector === petal.sector;
         
@@ -170,7 +175,9 @@ export function SimplexOrbit({ sectors, isMobile = false }: SimplexOrbitProps) {
               top: position.top,
               width: petal.width,
               height: petal.height,
-              transformOrigin: 'center center'
+              transformOrigin: 'center center',
+              willChange: 'transform',
+              transform: 'translateZ(0)', // GPU acceleration
             }}
             initial={{ scale: petal.scale, rotate: petal.angle + 148 }}
             whileHover={isMobile ? {} : { 
@@ -212,6 +219,8 @@ export function SimplexOrbit({ sectors, isMobile = false }: SimplexOrbitProps) {
                 style={{
                   animation: `orbit-rotation ${isMobile ? '80s' : '60s'} linear infinite reverse`,
                   animationPlayState: isPaused ? 'paused' : 'running',
+                  willChange: 'transform',
+                  transform: 'translateZ(0)', // GPU acceleration
                 }}
             >
               {/* Logo interna - compensa rotação da pétala */}
@@ -219,6 +228,7 @@ export function SimplexOrbit({ sectors, isMobile = false }: SimplexOrbitProps) {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{
                   transform: `rotate(${-(petal.angle + 148)}deg)`,
+                  willChange: 'transform',
                 }}
                 whileHover={isMobile ? {} : { 
                   scale: 1.3,
@@ -233,6 +243,8 @@ export function SimplexOrbit({ sectors, isMobile = false }: SimplexOrbitProps) {
                   src={sector?.logo} 
                   alt={sector?.name} 
                   className={`${isMobile ? 'w-[100px] h-[100px]' : 'w-28 h-28'} object-contain`}
+                  loading="lazy"
+                  decoding="async"
                 />
               </motion.div>
             </div>

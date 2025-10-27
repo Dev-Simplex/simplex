@@ -32,9 +32,9 @@ export const ProductsCarousel = memo(function ProductsCarousel({ products }: Pro
   const [isDragging, setIsDragging] = useState(false);
   const controls = useAnimation();
 
-  // Memoizar produtos duplicados para evitar re-criação em cada render
+  // Reduzir duplicação de 4x para 2x para melhor performance
   const duplicatedProducts = useMemo(() =>
-    [...products, ...products, ...products, ...products],
+    [...products, ...products],
     [products]
   );
 
@@ -59,10 +59,10 @@ export const ProductsCarousel = memo(function ProductsCarousel({ products }: Pro
 
   const handleDragEnd = useCallback(() => {
     setIsDragging(false);
-    // Pequeno delay antes de retomar
+    // Pequeno delay antes de retomar com debounce
     setTimeout(() => {
       setIsPaused(false);
-    }, 300);
+    }, 150); // Reduzido de 300ms para 150ms
   }, []);
 
   // Controle de animação com useAnimation
@@ -107,7 +107,7 @@ export const ProductsCarousel = memo(function ProductsCarousel({ products }: Pro
   };
 
   return (
-    <div className="relative touch-pan-y">
+    <div className="relative touch-pan-y carousel-container" style={{ touchAction: 'pan-x' }}>
       {/* Gradientes Fade nas Bordas - Mais Estreito */}
       <div className="absolute left-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-r from-white dark:from-gray-950 via-white/80 dark:via-gray-950/80 to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 lg:w-32 bg-gradient-to-l from-white dark:from-gray-950 via-white/80 dark:via-gray-950/80 to-transparent z-10 pointer-events-none" />
@@ -141,7 +141,8 @@ export const ProductsCarousel = memo(function ProductsCarousel({ products }: Pro
           style={{
             willChange: 'transform',
             cursor: isDragging ? 'grabbing' : 'grab',
-            touchAction: 'pan-x'
+            touchAction: 'pan-x',
+            transform: 'translateZ(0)', // GPU acceleration
           }}
         >
           {duplicatedProducts.map((product, index) => {
@@ -191,6 +192,8 @@ export const ProductsCarousel = memo(function ProductsCarousel({ products }: Pro
                     <img
                       src={getImageSrc(product, isActive)}
                       alt={product.title}
+                      loading="lazy"
+                      decoding="async"
                       className={`w-full h-full transition-all duration-400 ease-in-out ${isActive ? 'object-contain' : 'object-cover'
                         }`}
                     />

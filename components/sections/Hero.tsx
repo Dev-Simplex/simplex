@@ -3,31 +3,37 @@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { SimplexOrbit } from '@/components/SimplexOrbit';
 import { GalaxyBackground } from '@/components/GalaxyBackground';
 import sectorsData from '@/data/sectors.json';
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback, useMemo } from 'react';
 
 export function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement>(null);
+  
+  // Usar motion values para melhor performance ao invés de state
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Transformar motion values para spotlight position
+  const spotlightX = useTransform(mouseX, (value) => value - 192);
+  const spotlightY = useTransform(mouseY, (value) => value - 192);
 
-  const scrollToSection = (href: string) => {
+  const scrollToSection = useCallback((href: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
-  };
+  }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  // Throttle mousemove para melhor performance
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!sectionRef.current) return;
     const rect = sectionRef.current.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  }, [mouseX, mouseY]);
 
   return (
     <>
@@ -134,13 +140,15 @@ export function Hero() {
       >
         <GalaxyBackground />
 
-        {/* Spotlight Effect */}
+        {/* Spotlight Effect otimizado */}
         <motion.div
           className="absolute w-96 h-96 rounded-full pointer-events-none z-[1]"
           style={{
             background: 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
-            left: mousePosition.x - 192,
-            top: mousePosition.y - 192,
+            left: spotlightX,
+            top: spotlightY,
+            willChange: 'transform',
+            transform: 'translateZ(0)', // GPU acceleration
           }}
           transition={{ type: "spring", damping: 30, stiffness: 200 }}
         />
