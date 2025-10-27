@@ -119,7 +119,7 @@ export function Preloader() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.3 }}
             >
-              Carregando...
+              Pensando...
             </motion.div>
           </div>
         </motion.div>
