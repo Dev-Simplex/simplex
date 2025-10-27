@@ -88,6 +88,11 @@
 {
   "name": "Previ Sinop",
   "logo": "/images/clients/previ-sinop.png"
+},
+{
+  "name": "Rayzen",
+  "logo": "/images/clients/logo-rayzen.svg",
+  "logoDark": "/images/clients/logo-rayzen-white.png"
 }
 
 ]
