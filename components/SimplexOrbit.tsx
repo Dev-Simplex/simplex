@@ -232,7 +232,7 @@ export function SimplexOrbit({ sectors, isMobile = false }: SimplexOrbitProps) {
                 <img 
                   src={sector?.logo} 
                   alt={sector?.name} 
-                  className={`${isMobile ? 'w-[125px] h-[125px]' : 'w-36 h-36'} object-contain`}
+                  className={`${isMobile ? 'w-[100px] h-[100px]' : 'w-28 h-28'} object-contain`}
                 />
               </motion.div>
             </div>
