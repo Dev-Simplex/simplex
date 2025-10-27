@@ -2,9 +2,10 @@
 
 import { memo, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Linkedin, Instagram, Facebook } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Instagram, Facebook, Cookie } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import Image from 'next/image';
+import { useCookieConsent } from '@/components/providers/CookieConsentProvider';
 
 const quickLinks = [
   { label: 'Início', href: '#hero' },
@@ -28,6 +29,8 @@ const socialLinks = [
 ];
 
 export const Footer = memo(function Footer() {
+  const { showSettingsModal } = useCookieConsent();
+  
   const scrollToSection = useCallback((href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -171,6 +174,18 @@ export const Footer = memo(function Footer() {
                   </a>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={showSettingsModal}
+                  className="text-white/60 hover:text-white text-sm transition-all duration-300 hover:translate-x-1 inline-block group"
+                >
+                  <span className="relative flex items-center gap-2">
+                    <Cookie className="w-3 h-3" />
+                    Configurações de Cookies
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-accent to-primary group-hover:w-full transition-all duration-300" />
+                  </span>
+                </button>
+              </li>
             </ul>
           </motion.div>
 

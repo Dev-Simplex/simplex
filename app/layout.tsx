@@ -4,6 +4,9 @@ import { Inter } from 'next/font/google';
 import { ChatwootWidget } from '@/components/ChatwootWidget';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { ModalProvider } from '@/components/providers/ModalProvider';
+import { CookieConsentProvider } from '@/components/providers/CookieConsentProvider';
+import { CookieBanner } from '@/components/CookieBanner';
+import { CookieSettings } from '@/components/CookieSettings';
 import { Preloader } from '@/components/Preloader';
 
 const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
@@ -56,10 +59,14 @@ export default function RootLayout({
           enableSystem={false}
           storageKey="simplex-theme"
         >
-          <ModalProvider>
-            {children}
-            <ChatwootWidget />
-          </ModalProvider>
+          <CookieConsentProvider>
+            <ModalProvider>
+              {children}
+              <ChatwootWidget />
+              <CookieBanner />
+              <CookieSettings />
+            </ModalProvider>
+          </CookieConsentProvider>
         </ThemeProvider>
       </body>
     </html>

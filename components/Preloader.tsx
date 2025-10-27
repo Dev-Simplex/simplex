@@ -15,7 +15,7 @@ export function Preloader() {
     const minTimer = setTimeout(() => {
       minTimeReached = true;
       checkIfCanHide();
-    }, 4000);
+    }, 2000);
 
     // Verificar se a página já carregou
     const checkPageLoad = () => {

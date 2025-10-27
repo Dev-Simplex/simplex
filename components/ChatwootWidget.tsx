@@ -2,11 +2,18 @@
 
 import { useEffect } from 'react';
 import { useModal } from '@/components/providers/ModalProvider';
+import { useCookieCategory } from '@/components/providers/CookieConsentProvider';
 
 export function ChatwootWidget() {
   const { isModalOpen } = useModal();
+  const marketingCookiesAccepted = useCookieCategory('marketing');
 
   useEffect(() => {
+    // Só carrega o Chatwoot se os cookies de marketing estiverem aceitos
+    if (!marketingCookiesAccepted) {
+      return;
+    }
+
     // Configurações do Chatwoot
     (window as any).chatwootSettings = {
       position: 'right',
@@ -37,7 +44,7 @@ export function ChatwootWidget() {
         document.body.removeChild(script);
       }
     };
-  }, []);
+  }, [marketingCookiesAccepted]);
 
   // Esconder/Mostrar widget baseado no estado do modal
   useEffect(() => {
