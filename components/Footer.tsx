@@ -2,7 +2,7 @@
 
 import { memo, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Linkedin, Instagram, Facebook, Cookie } from 'lucide-react';
+import { Mail, MapPin, Linkedin, Instagram, Facebook, Cookie, Phone } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import Image from 'next/image';
 import { useCookieConsent } from '@/components/providers/CookieConsentProvider';
@@ -119,6 +119,17 @@ export const Footer = memo(function Footer() {
               Contato
             </h4>
             <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3 text-white/60 hover:text-white transition-colors group">
+                <div className="w-9 h-9 rounded-lg bg-white/5 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:bg-white/10 transition-colors">
+                  <Phone className="w-4 h-4 text-accent" />
+                </div>
+                <a 
+                  href="tel:+556620180686" 
+                  className="hover:text-white transition-colors pt-1.5"
+                >
+                  (66) 2018-0686
+                </a>
+              </li>
               <li className="flex items-start gap-3 text-white/60 hover:text-white transition-colors group">
                 <div className="w-9 h-9 rounded-lg bg-white/5 backdrop-blur-sm flex items-center justify-center flex-shrink-0 group-hover:bg-white/10 transition-colors">
                   <FaWhatsapp className="w-4 h-4 text-accent" />
