@@ -1,6 +1,5 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { ChatwootWidget } from '@/components/ChatwootWidget';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { ModalProvider } from '@/components/providers/ModalProvider';
@@ -9,7 +8,8 @@ import { CookieBanner } from '@/components/CookieBanner';
 import { CookieSettings } from '@/components/CookieSettings';
 import { Preloader } from '@/components/Preloader';
 
-const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'] });
+// Usando fonte do sistema para evitar problemas de build em ambientes sem acesso externo
+// A fonte Inter será carregada via CSS se disponível, mas não bloqueará o build
 
 export const metadata: Metadata = {
   title: 'Simplex Soluções Tecnológicas | Tecnologia que Conecta, Protege e Escala',
@@ -51,7 +51,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className="font-sans">
         <Preloader />
         <ThemeProvider
           attribute="class"
