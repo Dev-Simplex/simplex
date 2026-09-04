@@ -126,9 +126,88 @@ export default function Privacidade() {
             </p>
           </section>
 
+          {/* Exigida pelas lojas: o formulário de Segurança dos Dados (Google Play) e o
+              App Privacy (Apple) só são aceitos se a política publicada cobrir os dados
+              tratados PELO APLICATIVO. O restante desta página fala apenas do site. */}
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-              6. Compartilhamento de Dados
+              6. Aplicativo Chat SPX
+            </h2>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Esta seção descreve o tratamento de dados realizado pelo aplicativo móvel{' '}
+              <strong>Chat SPX</strong> (Android e iOS). O Chat SPX é uma ferramenta profissional
+              de atendimento ao cliente, destinada a equipes de empresas contratantes da nossa
+              plataforma. O uso do aplicativo requer credenciais corporativas fornecidas pela
+              empresa contratante.
+            </p>
+
+            <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
+              6.1 Dados tratados pelo aplicativo
+            </h3>
+            <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300 space-y-2">
+              <li>
+                <strong>Dados de conta:</strong> nome, e-mail corporativo e credenciais de acesso,
+                usados exclusivamente para autenticação na plataforma de atendimento
+              </li>
+              <li>
+                <strong>Conteúdo de atendimento:</strong> mensagens de texto, imagens, vídeos,
+                documentos e gravações de áudio enviados ou recebidos nas conversas
+              </li>
+              <li>
+                <strong>Contatos:</strong> a agenda do dispositivo é acessada somente quando o
+                usuário opta por anexar um contato a uma conversa — não há varredura, cópia ou
+                envio da agenda em segundo plano
+              </li>
+              <li>
+                <strong>Identificadores de dispositivo:</strong> token de notificação push,
+                utilizado apenas para entrega de notificações
+              </li>
+              <li>
+                <strong>Dados de diagnóstico:</strong> registros de falhas e desempenho, para
+                correção de erros e estabilidade
+              </li>
+            </ul>
+
+            <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
+              6.2 Permissões do dispositivo
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              O aplicativo solicita permissões sob demanda e as utiliza apenas para a função
+              correspondente: <strong>câmera</strong> (enviar fotos e vídeos),{' '}
+              <strong>microfone</strong> (gravar mensagens de áudio),{' '}
+              <strong>galeria</strong> (anexar mídia), <strong>contatos</strong> (anexar contato,
+              quando solicitado) e <strong>notificações</strong> (alertas de novas mensagens).
+              Nenhuma permissão é utilizada fora do contexto da funcionalidade, e todas podem ser
+              revogadas nas configurações do aparelho.
+            </p>
+
+            <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
+              6.3 Compartilhamento e segurança
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Não vendemos dados pessoais e não compartilhamos dados do aplicativo com terceiros
+              para fins de publicidade. O aplicativo utiliza como suboperadores o{' '}
+              <strong>Google Firebase</strong> (entrega de notificações push) e a infraestrutura de
+              servidores da plataforma de atendimento contratada pela empresa. Todo o tráfego entre
+              o aplicativo e os servidores é criptografado (TLS/HTTPS).
+            </p>
+
+            <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
+              6.4 Retenção, exclusão e público
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Os dados de conta e o conteúdo de atendimento permanecem armazenados enquanto durar a
+              relação contratual com a empresa contratante. O usuário pode solicitar acesso,
+              correção ou exclusão de seus dados pelo e-mail de contato desta política, e a exclusão
+              da conta também pode ser solicitada ao administrador da empresa contratante. O Chat
+              SPX é destinado a uso profissional por maiores de 18 anos e não coleta
+              intencionalmente dados de menores.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
+              7. Compartilhamento de Dados
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Seus dados pessoais podem ser compartilhados apenas nas seguintes situações:
@@ -143,7 +222,7 @@ export default function Privacidade() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-              7. Segurança da Informação
+              8. Segurança da Informação
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Implementamos medidas técnicas e organizacionais adequadas para proteger seus dados pessoais:
@@ -159,7 +238,7 @@ export default function Privacidade() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-              8. Seus Direitos
+              9. Seus Direitos
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Conforme a LGPD, você possui os seguintes direitos:
@@ -176,7 +255,7 @@ export default function Privacidade() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-              9. Retenção de Dados
+              10. Retenção de Dados
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Mantemos seus dados pessoais pelo tempo necessário para cumprir as finalidades descritas nesta política, 
@@ -186,7 +265,7 @@ export default function Privacidade() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-              10. Alterações nesta Política
+              11. Alterações nesta Política
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Esta Política de Privacidade pode ser atualizada periodicamente. Recomendamos que você revise 
@@ -196,7 +275,7 @@ export default function Privacidade() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
-              11. Contato
+              12. Contato
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Para exercer seus direitos ou esclarecer dúvidas sobre esta Política de Privacidade, entre em contato conosco:
