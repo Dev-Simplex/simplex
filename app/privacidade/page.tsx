@@ -128,7 +128,12 @@ export default function Privacidade() {
 
           {/* Exigida pelas lojas: o formulário de Segurança dos Dados (Google Play) e o
               App Privacy (Apple) só são aceitos se a política publicada cobrir os dados
-              tratados PELO APLICATIVO. O restante desta página fala apenas do site. */}
+              tratados PELO APLICATIVO. O restante desta página fala apenas do site.
+              A diretriz 5.1.1(i) da Apple exige, textualmente: forma de coleta e todos os
+              usos de cada dado, confirmação de que os terceiros dão proteção igual ou
+              equivalente, retenção e como revogar consentimento e pedir exclusão. O item 6.6
+              (âncora #exclusao-de-dados) também serve de URL de exclusão de dados do Google
+              Play, que exige os passos e o que é excluído x mantido. */}
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
               6. Aplicativo Chat SPX
@@ -142,31 +147,49 @@ export default function Privacidade() {
             </p>
 
             <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
-              6.1 Dados tratados pelo aplicativo
+              6.1 Dados tratados, forma de coleta e finalidades
             </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Os dados abaixo são coletados diretamente do usuário, quando ele os informa ou envia
+              pelo aplicativo, ou automaticamente durante o uso, e são utilizados somente para as
+              finalidades indicadas em cada item:
+            </p>
             <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300 space-y-2">
               <li>
-                <strong>Dados de conta:</strong> nome, e-mail corporativo e credenciais de acesso,
-                usados exclusivamente para autenticação na plataforma de atendimento
+                <strong>Dados de conta:</strong> nome, e-mail corporativo, credenciais de acesso e
+                identificadores de usuário e de conta, informados pelo usuário no login ou recebidos
+                da plataforma de atendimento. São utilizados para autenticar o usuário, manter a
+                sessão ativa e identificá-lo nas conversas da plataforma de atendimento
               </li>
               <li>
-                <strong>Conteúdo de atendimento:</strong> mensagens de texto, imagens, vídeos,
-                documentos e gravações de áudio enviados ou recebidos nas conversas
+                <strong>Conteúdo de atendimento:</strong> mensagens de texto, fotos, vídeos,
+                gravações de áudio e arquivos enviados ou recebidos nas conversas, fornecidos pelo
+                usuário ao utilizar o aplicativo. São utilizados exclusivamente para prestar o
+                atendimento: enviar, receber, exibir e manter o histórico das conversas
               </li>
               <li>
                 <strong>Contatos:</strong> a agenda do dispositivo é acessada somente quando o
-                usuário opta por anexar um contato a uma conversa — não há varredura, cópia ou
-                envio da agenda em segundo plano
+                usuário opta por anexar um contato a uma conversa, e apenas o contato escolhido é
+                enviado, com a única finalidade de compartilhá-lo naquela conversa — não há
+                varredura, cópia ou envio da agenda em segundo plano
               </li>
               <li>
-                <strong>Identificadores de dispositivo:</strong> token de notificação push,
-                utilizado apenas para entrega de notificações
+                <strong>Token de notificação push:</strong> identificador gerado pelo sistema do
+                aparelho quando o usuário autoriza notificações e registrado na plataforma de
+                atendimento, utilizado apenas para entregar alertas de novas mensagens
               </li>
               <li>
-                <strong>Dados de diagnóstico:</strong> registros de falhas e desempenho, para
-                correção de erros e estabilidade
+                <strong>Registros de falhas e diagnósticos:</strong> informações técnicas coletadas
+                automaticamente quando ocorre um erro ou falha (como modelo do aparelho, versões do
+                sistema e do aplicativo e detalhes do erro), com filtragem de dados pessoais antes
+                do envio, utilizadas apenas para identificar e corrigir falhas e manter a
+                estabilidade e o desempenho do aplicativo
               </li>
             </ul>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              O aplicativo não exibe anúncios, não rastreia o usuário em aplicativos ou sites de
+              terceiros e não utiliza nenhum dos dados acima para publicidade.
+            </p>
 
             <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
               6.2 Permissões do dispositivo
@@ -182,25 +205,150 @@ export default function Privacidade() {
             </p>
 
             <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
-              6.3 Compartilhamento e segurança
+              6.3 Compartilhamento com terceiros e segurança
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
               Não vendemos dados pessoais e não compartilhamos dados do aplicativo com terceiros
-              para fins de publicidade. O aplicativo utiliza como suboperadores o{' '}
-              <strong>Google Firebase</strong> (entrega de notificações push) e a infraestrutura de
-              servidores da plataforma de atendimento contratada pela empresa. Todo o tráfego entre
-              o aplicativo e os servidores é criptografado (TLS/HTTPS).
+              para fins de publicidade. O aplicativo não integra redes de anúncios nem SDKs de
+              rastreamento. Os dados do aplicativo são compartilhados apenas com os seguintes
+              suboperadores, na medida necessária para cada finalidade:
+            </p>
+            <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300 space-y-2">
+              <li>
+                <strong>Infraestrutura de servidores da plataforma de atendimento</strong> contratada
+                pela empresa: armazenamento e processamento dos dados de conta e do conteúdo de
+                atendimento
+              </li>
+              <li>
+                <strong>Google Firebase</strong> (Firebase Cloud Messaging): token de notificação
+                push e dados necessários à entrega das notificações
+              </li>
+              <li>
+                <strong>Sentry</strong>: registros de falhas e diagnósticos, para relatório de erros
+                e análise de estabilidade do aplicativo
+              </li>
+            </ul>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Os suboperadores tratam os dados somente para as finalidades acima e estão obrigados,
+              por contrato e por seus termos de proteção de dados, a oferecer aos dados pessoais
+              proteção igual ou equivalente à descrita nesta Política de Privacidade e exigida pela
+              LGPD. Os serviços do Google Firebase e do Sentry podem tratar dados em servidores
+              localizados fora do Brasil, hipótese em que a transferência internacional observa os
+              requisitos da LGPD. Fora dessas hipóteses, dados do aplicativo só são compartilhados
+              para cumprimento de obrigação legal ou determinação de autoridade competente. Todo o
+              tráfego entre o aplicativo e os servidores é criptografado (TLS/HTTPS).
             </p>
 
             <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
-              6.4 Retenção, exclusão e público
+              6.4 Consentimento e revogação
             </h3>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Os dados de conta e o conteúdo de atendimento permanecem armazenados enquanto durar a
-              relação contratual com a empresa contratante. O usuário pode solicitar acesso,
-              correção ou exclusão de seus dados pelo e-mail de contato desta política, e a exclusão
-              da conta também pode ser solicitada ao administrador da empresa contratante. O Chat
-              SPX é destinado a uso profissional por maiores de 18 anos e não coleta
+              O acesso a câmera, microfone, galeria e contatos e o envio de notificações dependem de
+              autorização do usuário, que pode revogá-la a qualquer momento nas configurações do
+              aparelho; a revogação desativa apenas a função correspondente. Ao sair da conta (opção
+              “Sair” nas configurações do aplicativo), o token de notificação é desvinculado do
+              servidor e os dados de sessão armazenados no aparelho são apagados, e a desinstalação
+              do aplicativo remove os dados locais restantes. O usuário também pode revogar o
+              consentimento, opor-se ao tratamento ou pedir a exclusão de seus dados a qualquer
+              momento, conforme o item 6.6.
+            </p>
+
+            <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
+              6.5 Retenção dos dados
+            </h3>
+            <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300 space-y-2">
+              <li>
+                <strong>Dados de conta e conteúdo de atendimento:</strong> mantidos enquanto durar a
+                relação contratual com a empresa contratante ou até a exclusão da conta
+              </li>
+              <li>
+                <strong>Token de notificação push:</strong> mantido enquanto o usuário estiver
+                conectado no aparelho e desvinculado ao sair da conta
+              </li>
+              <li>
+                <strong>Registros de falhas e diagnósticos:</strong> mantidos por período limitado e
+                excluídos automaticamente ao fim do prazo de retenção do serviço de diagnóstico
+              </li>
+              <li>
+                <strong>Dados armazenados no aparelho:</strong> apagados ao sair da conta ou ao
+                desinstalar o aplicativo
+              </li>
+            </ul>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Encerrado o tratamento, os dados são eliminados, ressalvadas as hipóteses de
+              conservação previstas no art. 16 da LGPD, como o cumprimento de obrigação legal ou
+              regulatória.
+            </p>
+
+            <h3
+              id="exclusao-de-dados"
+              className="text-xl font-medium mb-3 text-gray-900 dark:text-white scroll-mt-24"
+            >
+              6.6 Como solicitar a exclusão dos dados
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              Para solicitar a exclusão da sua conta e dos dados pessoais tratados pelo Chat SPX, ou
+              para exercer os demais direitos previstos na LGPD (acesso, correção, portabilidade,
+              revogação do consentimento e oposição), siga os passos abaixo:
+            </p>
+            <ol className="list-decimal pl-6 mb-4 text-gray-700 dark:text-gray-300 space-y-2">
+              <li>
+                Envie um e-mail para{' '}
+                <a href="mailto:sup@simplexsolucoes.com.br" className="text-primary hover:underline">sup@simplexsolucoes.com.br</a>{' '}
+                com o assunto “Exclusão de dados – Chat SPX”, preferencialmente a partir do e-mail
+                da conta utilizada no aplicativo
+              </li>
+              <li>
+                Informe seu nome, o e-mail da conta e a empresa à qual a conta está vinculada
+              </li>
+              <li>
+                Se necessário, solicitaremos uma confirmação adicional para verificar a identidade do
+                titular antes de excluir os dados
+              </li>
+              <li>
+                Confirmada a identidade, a exclusão é realizada nos prazos previstos na LGPD e a
+                conclusão é comunicada por e-mail
+              </li>
+            </ol>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              A exclusão da conta também pode ser solicitada ao administrador da empresa contratante,
+              que pode removê-la diretamente na plataforma de atendimento.
+            </p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-2">
+              <strong>Dados excluídos:</strong>
+            </p>
+            <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300 space-y-2">
+              <li>
+                Nome, e-mail, credenciais de acesso e identificadores de usuário vinculados à conta
+              </li>
+              <li>Tokens de notificação push associados à conta</li>
+            </ul>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-2">
+              <strong>Dados que podem ser mantidos:</strong>
+            </p>
+            <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300 space-y-2">
+              <li>
+                Mensagens, arquivos e demais conteúdos trocados em conversas com clientes, que
+                integram o histórico de atendimento da empresa contratante e permanecem armazenados
+                enquanto durar a relação contratual com ela; a exclusão desse conteúdo pode ser
+                solicitada pela própria empresa contratante
+              </li>
+              <li>
+                Registros de falhas e diagnósticos, até a exclusão automática ao fim do prazo de
+                retenção do serviço de diagnóstico
+              </li>
+              <li>
+                Dados cuja conservação seja exigida por lei ou regulamento, como registros de acesso a
+                aplicações de internet (art. 15 da Lei nº 12.965/2014 — Marco Civil da Internet),
+                somente pelo prazo legal
+              </li>
+            </ul>
+
+            <h3 className="text-xl font-medium mb-3 text-gray-900 dark:text-white">
+              6.7 Público
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+              O Chat SPX é destinado a uso profissional por maiores de 18 anos e não coleta
               intencionalmente dados de menores.
             </p>
           </section>
